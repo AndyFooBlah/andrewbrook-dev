@@ -5,6 +5,7 @@ export const SITE = {
   author: 'Andrew Brook',
   url: 'https://andrewbrook.dev',
   github: 'https://github.com/AndyFooBlah',
+  linkedin: 'https://www.linkedin.com/in/andrewbrook/',
 };
 
 /** Repo metadata: `repos:` slugs in post frontmatter resolve through this. */
