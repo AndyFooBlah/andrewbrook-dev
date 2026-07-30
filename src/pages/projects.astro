@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { REPOS } from '../consts';
+
+const posts = await getCollection('posts', ({ data }) => !data.draft);
+
+// Each project lists the posts that reference it, so the site is navigable
+// either by article or by repo.
+const projects = Object.entries(REPOS).map(([slug, repo]) => ({
+  slug,
+  ...repo,
+  posts: posts
+    .filter((p) => p.data.repos.includes(slug))
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()),
+}));
+---
+
+<Base title="Projects" description="Open-source projects and the posts about them.">
+  <h1>Projects</h1>
+  <p>Things I've built in the open. Each links to its repo and any write-ups.</p>
+
+  {
+    projects.map((project) => (
+      <section>
+        <h2><a href={project.url}>{project.name}</a></h2>
+        <p>{project.blurb}</p>
+        {project.posts.length > 0 && (
+          <ul>
+            {project.posts.map((post) => (
+              <li><a href={`/writing/${post.id}/`}>{post.data.title}</a></li>
+            ))}
+          </ul>
+        )}
+      </section>
+    ))
+  }
+</Base>

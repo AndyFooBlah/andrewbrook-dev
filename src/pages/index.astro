@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import { getCollection } from 'astro:content';
+import { SITE } from '../consts';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<Base>
+  <section>
+    <h1>Andrew Brook</h1>
+    <p>
+      I build software and write about what the data actually said. Lately: deterministic
+      libraries for the things LLMs get wrong, benchmarks that test agents the way they're
+      really used, and voice-first applications.
+    </p>
+    <p class="meta">
+      <a href={SITE.github}>GitHub</a> · <a href="/rss.xml">RSS</a>
+    </p>
+  </section>
+
+  <h2>Writing</h2>
+  <PostList posts={posts} />
+</Base>

@@ -1,0 +1,56 @@
+---
+import Base from './Base.astro';
+import { REPOS } from '../consts';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const { title, description, date, updated, repos, tags } = post.data;
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+---
+
+<Base title={title} description={description} article={{ published: date, modified: updated }}>
+  <article>
+    <header class="post-header">
+      <h1>{title}</h1>
+      <span class="meta">
+        <time datetime={date.toISOString()}>{fmt(date)}</time>
+        {updated && <> · updated <time datetime={updated.toISOString()}>{fmt(updated)}</time></>}
+      </span>
+      {
+        repos.length > 0 && (
+          <p class="repo-links">
+            Code:{' '}
+            {repos.map((slug, i) => {
+              const repo = REPOS[slug];
+              return (
+                <>
+                  {i > 0 && ' · '}
+                  {repo ? <a href={repo.url}>{repo.name}</a> : slug}
+                </>
+              );
+            })}
+          </p>
+        )
+      }
+      {
+        tags.length > 0 && (
+          <ul class="tags">
+            {tags.map((tag) => (
+              <li class="tag">{tag}</li>
+            ))}
+          </ul>
+        )
+      }
+    </header>
+
+    <slot />
+  </article>
+
+  <hr />
+  <p class="meta"><a href="/writing/">← All writing</a></p>
+</Base>

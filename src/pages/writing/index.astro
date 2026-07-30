@@ -1,0 +1,14 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<Base title="Writing" description="Posts on libraries, agents, benchmarks, and results.">
+  <h1>Writing</h1>
+  <PostList posts={posts} />
+</Base>
