@@ -16,3 +16,10 @@ Astro static site, deployed to GitHub Pages by `.github/workflows/deploy.yml`.
 - Dev server: `npm run dev` (port 4321). Verify posts render before committing —
   especially charts and tables (wide content must scroll inside its own box, and
   the page body must never scroll horizontally).
+- **Custom domain**: Actions-based Pages deploys do NOT pick up `public/CNAME`
+  as the custom-domain setting (legacy branch deploys did). The domain lives in
+  the repo's Pages config; if HTTPS ever shows a `*.github.io` certificate for
+  andrewbrook.dev, that setting was cleared — restore with
+  `gh api -X PUT repos/AndyFooBlah/andrewbrook-dev/pages -f cname=andrewbrook.dev`,
+  wait for `.https_certificate.state == "approved"`, then re-enable
+  `https_enforced`.

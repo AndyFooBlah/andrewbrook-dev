@@ -56,3 +56,16 @@ dark mode deliberately. Always write real alt text.
 `public/CNAME` holds `andrewbrook.dev`. DNS: four `A` records for the apex to
 GitHub Pages (185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153)
 plus a `CNAME` for `www` → `andyfooblah.github.io`.
+
+> **Gotcha:** with Actions-based Pages deploys, the `CNAME` file in the build
+> artifact does **not** register the custom domain — unlike legacy branch
+> deploys. The domain must be set in the repo's Pages settings (or via
+> `gh api -X PUT repos/<owner>/<repo>/pages -f cname=andrewbrook.dev`).
+> Without it, Pages serves the `*.github.io` certificate for the custom
+> domain and browsers show a security warning. Verify with:
+>
+> ```bash
+> gh api repos/AndyFooBlah/andrewbrook-dev/pages --jq '{cname, cert: .https_certificate.state, https_enforced}'
+> ```
+>
+> Expect `cname: andrewbrook.dev`, `cert: approved`, `https_enforced: true`.
