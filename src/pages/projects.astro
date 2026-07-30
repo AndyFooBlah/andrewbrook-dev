@@ -1,38 +1,110 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
-import { REPOS } from '../consts';
+import { REPOS, THEMES, CONTRIBUTIONS, SITE } from '../consts';
 
 const posts = await getCollection('posts', ({ data }) => !data.draft);
 
-// Each project lists the posts that reference it, so the site is navigable
-// either by article or by repo.
-const projects = Object.entries(REPOS).map(([slug, repo]) => ({
-  slug,
-  ...repo,
-  posts: posts
-    .filter((p) => p.data.repos.includes(slug))
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()),
-}));
+// Group projects by theme, keeping THEMES order. Each project lists the posts
+// that reference it, so the site is navigable by article or by project.
+const grouped = THEMES.map((theme) => ({
+  ...theme,
+  projects: Object.entries(REPOS)
+    .filter(([, project]) => project.theme === theme.id)
+    .map(([slug, project]) => ({
+      slug,
+      ...project,
+      posts: posts
+        .filter((p) => p.data.repos.includes(slug))
+        .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()),
+    })),
+})).filter((theme) => theme.projects.length > 0);
 ---
 
-<Base title="Projects" description="Open-source projects and the posts about them.">
+<Base title="Projects" description="Open-source projects, grouped by theme, and the write-ups about them.">
   <h1>Projects</h1>
-  <p>Things I've built in the open. Each links to its repo and any write-ups.</p>
+  <p>
+    Things I've built in the open. Everything here is public on <a href={SITE.github}>GitHub</a>;
+    write-ups link through to the code.
+  </p>
 
   {
-    projects.map((project) => (
-      <section>
-        <h2><a href={project.url}>{project.name}</a></h2>
-        <p>{project.blurb}</p>
-        {project.posts.length > 0 && (
-          <ul>
-            {project.posts.map((post) => (
-              <li><a href={`/writing/${post.id}/`}>{post.data.title}</a></li>
-            ))}
-          </ul>
-        )}
+    grouped.map((theme) => (
+      <section class="theme">
+        <h2>{theme.title}</h2>
+        {theme.blurb && <p class="theme-blurb">{theme.blurb}</p>}
+        <ul class="project-list">
+          {theme.projects.map((project) => (
+            <li>
+              <h3>
+                <a href={project.url}>{project.name}</a>
+                {project.lang && <span class="lang">{project.lang}</span>}
+              </h3>
+              <p>{project.blurb}</p>
+              {project.links && project.links.length > 0 && (
+                <p class="project-links">
+                  {project.links.map((link, i) => (
+                    <>
+                      {i > 0 && ' · '}
+                      <a href={link.url}>{link.label}</a>
+                    </>
+                  ))}
+                </p>
+              )}
+              {project.posts.length > 0 && (
+                <p class="project-links">
+                  Read:{' '}
+                  {project.posts.map((post, i) => (
+                    <>
+                      {i > 0 && ' · '}
+                      <a href={`/writing/${post.id}/`}>{post.data.title}</a>
+                    </>
+                  ))}
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
       </section>
     ))
   }
+
+  {
+    CONTRIBUTIONS.length > 0 && (
+      <section class="theme">
+        <h2>Contributing to</h2>
+        <ul class="project-list">
+          {CONTRIBUTIONS.map((project) => (
+            <li>
+              <h3><a href={project.url}>{project.name}</a></h3>
+              <p>{project.blurb}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
 </Base>
+
+<style>
+  .theme { margin-bottom: 2.5rem; }
+  .theme-blurb { color: var(--ink-2); margin: -0.25rem 0 1rem; }
+
+  .project-list { list-style: none; padding: 0; margin: 0; }
+  .project-list > li { margin-bottom: 1.75rem; }
+
+  .project-list h3 {
+    margin: 0 0 0.3rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .project-list h3 a { color: var(--ink); text-decoration: none; }
+  .project-list h3 a:hover { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 3px; }
+
+  .lang { font-size: 0.75rem; font-weight: 400; color: var(--ink-3); }
+
+  .project-list p { margin: 0 0 0.3rem; color: var(--ink-2); }
+  .project-links { font-size: 0.875rem; }
+</style>
