@@ -8,14 +8,16 @@ date: 2026-07-28
 repos:
   - agent-time-bench
   - nl2time
-draft: true
+draft: false
 tags:
   - benchmarks
   - agents
   - date/time
 ---
 
-Andy's note: While working on other agents (most notably 
+## Preface - a Note from Andy
+
+While working on other agents (most notably 
 [weatherbot](https://github.com/AndyFooBlah/weatherbot) ) I noticed that agents 
 were messing up dates and times pretty regularly.  I'm familiar with the 
 complexity of dates/times (it comes up a lot in capital markets) so I wasn't
@@ -41,7 +43,7 @@ please go ahead but I would encourage you to review it first.
 
 Anyway... on to Claude's write-up, very lightly edited:
 
----
+## Agents and Time
 
 Ask an AI assistant "what time did I buy Starbucks last week?" and three
 things have to go right that have nothing to do with coffee. The agent has to
