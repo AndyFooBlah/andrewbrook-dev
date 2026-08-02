@@ -1,5 +1,5 @@
 ---
-title: 'What time is "last week"? Teaching AI agents to stop fumbling dates'
+title: 'What time is "last week"? Tools for AI agents to stop fumbling dates'
 description: >-
   A benchmark for how well LLM agents handle date/time in the tool calls they make
   and the answers they give — and what happened across seven models when I gave them
@@ -15,13 +15,41 @@ tags:
   - date/time
 ---
 
-Ask an AI assistant "how many times did I buy Starbucks last week?" and three
+Andy's note: While working on other agents (most notably 
+[weatherbot](https://github.com/AndyFooBlah/weatherbot) ) I noticed that agents 
+were messing up dates and times pretty regularly.  I'm familiar with the 
+complexity of dates/times (it comes up a lot in capital markets) so I wasn't
+too surprised that it was hard to solve just with prompting and context.  I was
+also experimenting with the new Claude 5 Fable so I asked Claude to research
+approaches for translating natural language to dates/times and the reverse.
+It found a number of useful papers and open source projects but no existing
+library for what I wanted.  So I asked Claude to design and create a 
+library and also create a benchmark to test it - and gave only very high-level
+guidance along the way.  Roughly 1-2 hours of my time in aggregate spread over 
+two weekends where I would occasionally read what Claude wrote, offer an opinion
+and then let it cook for an hour or two while I did other stuff.  I consumed
+around $100 of tokens for Claude to build the library and benchmark and another 
+$100 in tokens for OpenAI, Google, Anthropic and OpenRouter to run the full 
+benchmark.
+
+It seems to have improved several of my agents (mostly voice agents based on 
+Gemini Live) but I have not yet done a thorough review of either the code or 
+the benchmarks.  So if you want to use 
+[nl2time](https://github.com/AndyFooBlah/nl2time) or 
+[agent-time-bench](https://github.com/AndyFooBlah/agent-time-bench)
+please go ahead but I would encourage you to review it first.
+
+Anyway... on to Claude's write-up, very lightly edited:
+
+---
+
+Ask an AI assistant "what time did I buy Starbucks last week?" and three
 things have to go right that have nothing to do with coffee. The agent has to
 turn *last week* into exact search bounds — in your timezone, with your week
 convention. It has to pass those bounds to a search API in UTC without
 smearing them across a midnight that isn't yours. And when the results come
-back stamped `2026-07-15T13:40:00Z`, it has to tell you about *Wednesday
-morning*, not some UTC fiction.
+back `2026-07-15T13:40:00Z`, it has to tell you about *Wednesday
+morning*, not some UTC timestamp.
 
 LLMs are famously bad at this. There's a small literature on it (Test of
 Time, DateLogicQA, PRIMETIME) — but it mostly measures date *arithmetic* in
