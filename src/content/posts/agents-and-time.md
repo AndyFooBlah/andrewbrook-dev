@@ -200,8 +200,3 @@ Everything is open: the [benchmark](https://github.com/AndyFooBlah/agent-time-be
 [nl2time](https://github.com/AndyFooBlah/nl2time) (`npm install nl2time` /
 `pip install nl2time`). If you maintain a different time library, the
 treatment slot is pluggable — I'd genuinely like to see other entries.
-
-*Tooling disclosure: the benchmark harness, corpus authoring, and analysis
-were built with heavy use of Claude (Anthropic) as a coding agent; all
-goldens are validated by the deterministic chain described above, which is
-designed so you don't have to trust the authors — or their tools.*
