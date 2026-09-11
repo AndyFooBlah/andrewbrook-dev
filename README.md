@@ -69,3 +69,11 @@ plus a `CNAME` for `www` → `andyfooblah.github.io`.
 > ```
 >
 > Expect `cname: andrewbrook.dev`, `cert: approved`, `https_enforced: true`.
+
+## Licensing
+
+- **Code** (everything except the paths below) — Apache License 2.0, see [`LICENSE`](LICENSE).
+- **Content** — the posts in `src/content/**`, images in `public/images/**`, and
+  charts in `public/charts/**` — Creative Commons Attribution 4.0 International,
+  see [`LICENSE-CONTENT`](LICENSE-CONTENT). Attribute as "Andrew Brook,
+  andrewbrook.dev" with a link to the post.
