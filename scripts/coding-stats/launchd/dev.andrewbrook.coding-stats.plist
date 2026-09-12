@@ -7,7 +7,7 @@
   <array>
     <string>/bin/bash</string>
     <string>-c</string>
-    <string>R="$HOME/.local/share/coding-stats/andrewbrook-dev"; [ -d "$R/.git" ] || { mkdir -p "$(dirname "$R")" &amp;&amp; /usr/bin/git clone -q https://github.com/AndyFooBlah/andrewbrook-dev.git "$R"; }; exec /bin/bash "$R/scripts/coding-stats/refresh.sh"</string>
+    <string>R="$HOME/.local/share/coding-stats/andrewbrook-dev"; [ -d "$R/.git" ] || { mkdir -p "$(dirname "$R")" &amp;&amp; /usr/bin/git clone -q https://github.com/AndyFooBlah/andrewbrook-dev.git "$R"; }; /usr/bin/git -C "$R" fetch -q origin main &amp;&amp; /usr/bin/git -C "$R" checkout -q -B main origin/main; exec /bin/bash "$R/scripts/coding-stats/refresh.sh"</string>
   </array>
   <key>StartCalendarInterval</key>
   <dict><key>Hour</key><integer>21</integer><key>Minute</key><integer>30</integer></dict>
