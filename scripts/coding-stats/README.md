@@ -32,6 +32,7 @@ Config keys (all optional except `repos`; defaults in `collect.py`):
 | `authors` | author emails to count; empty = every author. |
 | `exclude` | glob patterns of paths to ignore, added to the built-in list (lockfiles, images, `dist/**`, `vendor/**`, …). Use it for generated or vendored data that is not really code. |
 | `ai_repos` | glob patterns of checkouts where every commit counts as AI-written, for repos only ever worked on through agents that left no attribution. |
+| `unattributed_ai_until` | ISO date. Commits before it with no attribution still count as AI-written (for history from before you started leaving trailers on every hand commit); from that date on they count as by hand. |
 | `exclude_repos` | glob patterns of checkouts to skip (e.g. `*/private-notes`). Second clones of the same remote are skipped automatically; the newest checkout wins. |
 | `all_branches` | count every branch, not just `HEAD` (default false). |
 | `ai_trailer_pattern` | regex matched against `Co-Authored-By` trailers and author emails; a match means AI-written. |
@@ -110,9 +111,10 @@ Precision is not the point; the page says so.
   its author email matches the pattern (claude.ai/code commits are authored
   by `noreply@anthropic.com`; these count as yours even with `authors` set),
   or a line in its message matches `ai_body_pattern` (`Assisted by Claude.`
-  on repos whose CLA bot rejects agent co-authors), or the checkout is
-  listed in `ai_repos`. Everything else is **by hand**, including agent
-  commits that carry no attribution at all, so "by hand" is generous. Squash merges must keep trailers or those commits
+  on repos whose CLA bot rejects agent co-authors), the checkout is listed
+  in `ai_repos`, or the commit predates `unattributed_ai_until`. Everything
+  else is **by hand**, including agent commits that carry no attribution at
+  all, so "by hand" is generous. Squash merges must keep trailers or those commits
   count as hand-written.
 - **Hours**: timestamps of user and assistant messages from every local
   transcript are merged (so parallel sessions are not double counted) and

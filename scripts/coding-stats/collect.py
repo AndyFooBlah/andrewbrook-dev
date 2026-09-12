@@ -54,6 +54,7 @@ DEFAULTS = {
     ],
     "exclude_repos": [],           # glob patterns of checkouts to skip
     "ai_repos": [],                # checkouts where every commit is AI-written
+    "unattributed_ai_until": None, # ISO date; unattributed commits before it are AI
     "authors": [],                 # author emails to count; [] = everyone
     "all_branches": False,
     "ai_trailer_pattern": r"claude|anthropic",
@@ -163,6 +164,8 @@ def collect_git(cfg: dict, weeks: dict) -> tuple[int, set[str]]:
     body_re = re.compile(cfg["ai_body_pattern"], re.I | re.M)
     authors = {a.lower() for a in cfg["authors"]}
     web_sessions: set[str] = set()
+    cutoff = cfg["unattributed_ai_until"]
+    ai_until = dt.date.fromisoformat(cutoff) if cutoff else None
     fmt = ("%x1e%H%x1f%aI%x1f%ae%x1f"
            "%(trailers:key=Co-Authored-By,valueonly,separator=|)%x1f"
            "%(trailers:key=Claude-Session,valueonly,separator=|)%x1f%B%x1f")
@@ -186,9 +189,11 @@ def collect_git(cfg: dict, weeks: dict) -> tuple[int, set[str]]:
             ai_author = bool(ai_re.search(email))
             if authors and email.lower() not in authors and not ai_author:
                 continue
+            day = parse_ts(date).date()
             is_ai = (repo_ai or ai_author or bool(ai_re.search(coauth))
-                     or bool(body_re.search(message)))
-            wk = weeks[week_key(parse_ts(date).date())]
+                     or bool(body_re.search(message))
+                     or (ai_until is not None and day < ai_until))
+            wk = weeks[week_key(day)]
             added = deleted = 0
             for line in body.splitlines():
                 parts = line.split("\t")
