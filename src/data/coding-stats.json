@@ -1795,7 +1795,7 @@
    },
    "chore_minutes": 25,
    "spend": {
-    "claude": 57.87,
+    "claude": 57.38,
     "cloud": 0.0,
     "other": 0.0
    }
@@ -1822,20 +1822,20 @@
    },
    "chore_minutes": 25,
    "spend": {
-    "claude": 37.56,
+    "claude": 36.86,
     "cloud": 0.0,
     "other": 0.0
    }
   },
   {
    "week": "2026-09-07",
-   "ai_added": 33774,
-   "ai_deleted": 7357,
+   "ai_added": 34174,
+   "ai_deleted": 7417,
    "hand_added": 0,
    "hand_deleted": 0,
-   "ai_commits": 76,
+   "ai_commits": 78,
    "hand_commits": 0,
-   "claude_minutes": 673,
+   "claude_minutes": 702,
    "sessions": 9,
    "web_sessions": 1,
    "chores": {
@@ -1844,12 +1844,12 @@
     "secrets-auth": 6,
     "accounts-billing": 4,
     "dns-deploy": 1,
-    "manual-testing": 2,
+    "manual-testing": 3,
     "other": 0
    },
-   "chore_minutes": 230,
+   "chore_minutes": 240,
    "spend": {
-    "claude": 52.62,
+    "claude": 53.8,
     "cloud": 0.0,
     "other": 0.0
    }
