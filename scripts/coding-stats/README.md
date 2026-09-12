@@ -41,6 +41,8 @@ Config keys (all optional except `repos`; defaults in `collect.py`):
 | `idle_gap_minutes` | a gap between messages longer than this is not counted as active time. |
 | `web_session_minutes` | estimated length of a claude.ai/code session (they leave no transcript). |
 | `ledger`, `spend` | paths of the two JSONL ledgers below. |
+| `auto_ledger` | chores found in transcripts by `detect_chores.py` (default `~/.config/coding-stats/chores-auto.jsonl`). |
+| `chore_detector` | `{"project": "...", "location": "global", "model": "gemini-3.5-flash-lite"}`: the Vertex AI project and model `detect_chores.py` classifies with. |
 | `subscriptions` | flat-rate plans, charged automatically each billing cycle: `[{"category": "claude", "amount": 200, "since": "2026-01-26", "until": null, "note": "Claude Max 20x"}]`. Charges land on the day-of-month of `since`. |
 | `gcp_billing_export` | `{"project": "...", "dataset": "..."}` of a BigQuery dataset holding Cloud Billing `gcp_billing_export_v1_*` tables; net daily cost (credits applied) is booked as `cloud` spend. Needs the `bq` CLI and an account that can query the dataset. |
 
@@ -56,10 +58,26 @@ git commit -am "Refresh coding stats" && git push
 Python 3.9+ and `git`, nothing else. Takes a few seconds. `--out` defaults
 to this checkout's data file, so the script can be run from any directory.
 
-## Logging manual chores
+## Chores
 
-Whenever an agent hands a task back to you (click something in a cloud
-console, paste a secret, approve an OAuth screen…), log it:
+Most chores are found automatically. `detect_chores.py` takes the last
+assistant message of every turn in the local transcripts and asks a small
+Gemini model on Vertex AI (in your own project; run
+`gcloud auth application-default login` once and enable the Vertex AI API)
+whether the agent handed a task back to you: run this in your terminal,
+click through a console, paste a secret, test it on your phone. Each hit is
+appended to the auto ledger with an estimated duration and the message uuid,
+so nothing is classified twice. Run it before the collector:
+
+```sh
+python3 scripts/coding-stats/detect_chores.py     # --dry-run to preview, --limit N to sample
+python3 scripts/coding-stats/collect.py
+```
+
+Sessions run on claude.ai/code or the phone leave no local transcript, so
+their chores are missed. For those, or anything else, log by hand: whenever
+an agent hands a task back to you (click something in a cloud console, paste
+a secret, approve an OAuth screen…), run:
 
 ```sh
 path/to/andrewbrook-dev/scripts/coding-stats/chore.sh cloud-infra 15 "enabled the Vertex API"
@@ -71,7 +89,7 @@ Symlink it somewhere on your PATH so it is just `chore`:
 ln -s "$PWD/scripts/coding-stats/chore.sh" ~/bin/chore
 ```
 
-Categories: `cloud-infra`, `secrets-auth`, `accounts-billing`,
+Categories: `terminal`, `cloud-infra`, `secrets-auth`, `accounts-billing`,
 `dns-deploy`, `manual-testing`, `other`. The note is private.
 
 To have Claude Code prompt you, add to `~/.claude/CLAUDE.md`:
@@ -80,7 +98,7 @@ To have Claude Code prompt you, add to `~/.claude/CLAUDE.md`:
 > (console clicks, secrets, account setup, DNS, testing on a device), end
 > the message with a ready-to-run line
 > `chore <category> <minutes> "<short note>"`
-> using the closest category from cloud-infra, secrets-auth,
+> using the closest category from terminal, cloud-infra, secrets-auth,
 > accounts-billing, dns-deploy, manual-testing, other.
 
 Ledger format (`~/.config/coding-stats/chores.jsonl`), one object per line:

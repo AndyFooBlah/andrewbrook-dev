@@ -7,6 +7,8 @@ Sources (all read locally, nothing leaves the machine except the output):
                  "Co-Authored-By: Claude" trailer that Claude Code writes.
   transcripts    ~/.claude/projects/**/*.jsonl -> active minutes with Claude.
   chores.jsonl   manual tasks you logged (scripts/coding-stats/chore.sh).
+  chores-auto.jsonl  tasks the agent handed back to you, found in the
+                 transcripts by scripts/coding-stats/detect_chores.py.
   spend.jsonl    subscription, top-ups, cloud bills -> dollars per week.
 
 The output contains ONLY weekly totals. No repo names, paths, session ids,
@@ -34,6 +36,7 @@ import sys
 from collections import defaultdict
 
 CHORE_CATEGORIES = [
+    "terminal",         # a command to run in your own terminal
     "cloud-infra",      # console/CLI changes in GCP, AWS, etc.
     "secrets-auth",     # keys, OAuth consent screens, tokens, 2FA
     "accounts-billing", # sign-ups, billing, quotas, plan changes
@@ -65,6 +68,7 @@ DEFAULTS = {
     "idle_gap_minutes": 15,
     "web_session_minutes": 30,     # estimate per remote (claude.ai/code) session
     "ledger": "~/.config/coding-stats/chores.jsonl",
+    "auto_ledger": "~/.config/coding-stats/chores-auto.jsonl",  # written by detect_chores.py
     "spend": "~/.config/coding-stats/spend.jsonl",
     # Automatic spend sources; see README. Each is optional.
     "subscriptions": [],           # [{"category","amount","since","until","note"}]
@@ -288,7 +292,12 @@ def read_jsonl(path: str) -> list[dict]:
 
 
 def collect_chores(cfg: dict, weeks: dict) -> int:
-    rows = read_jsonl(cfg["ledger"])
+    rows = [r for r in read_jsonl(cfg["ledger"]) + read_jsonl(cfg["auto_ledger"])
+            if not r.get("none")]   # the auto ledger marks chore-free messages too
+    # The same hand-back restated in consecutive messages should count once.
+    seen: set[tuple] = set()
+    rows = [r for r in rows
+            if (k := (r["date"], r.get("category"), r.get("note", ""))) not in seen and not seen.add(k)]
     for r in rows:
         cat = r.get("category", "other")
         if cat not in CHORE_CATEGORIES:

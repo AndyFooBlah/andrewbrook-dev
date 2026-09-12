@@ -133,8 +133,10 @@ const updated = new Date(stats.generated + 'T00:00:00Z').toLocaleDateString('en-
       {stats.web_session_minutes} minutes.
     </li>
     <li>
-      <b>Chores.</b> Things the agent could not do and handed back to me, logged by category as they
-      happen. Mostly clicking through a cloud console.
+      <b>Chores.</b> Things the agent could not do and handed back to me: run this in your terminal,
+      click through a console, paste a secret, try it on your phone. A small model reads the last message
+      of every local session turn and flags them, with an estimated duration; sessions from the web or
+      phone leave no transcript, so those are missed.
     </li>
   </ul>
   <p class="meta">
