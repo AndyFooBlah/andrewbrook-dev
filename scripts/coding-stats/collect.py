@@ -66,6 +66,9 @@ DEFAULTS = {
     "web_session_minutes": 30,     # estimate per remote (claude.ai/code) session
     "ledger": "~/.config/coding-stats/chores.jsonl",
     "spend": "~/.config/coding-stats/spend.jsonl",
+    # Automatic spend sources; see README. Each is optional.
+    "subscriptions": [],           # [{"category","amount","since","until","note"}]
+    "gcp_billing_export": None,    # {"project","dataset"} holding gcp_billing_export_v1_* tables
 }
 
 
@@ -296,35 +299,111 @@ def collect_chores(cfg: dict, weeks: dict) -> int:
     return len(rows)
 
 
-def month_weeks(period: str) -> list[tuple[str, int]]:
-    """(week_key, days-of-that-week-inside-month) for a YYYY-MM period."""
+def month_range(period: str) -> tuple[dt.date, dt.date]:
     y, m = (int(x) for x in period.split("-"))
-    first = dt.date(y, m, 1)
-    nxt = dt.date(y + (m == 12), (m % 12) + 1, 1)
+    return dt.date(y, m, 1), dt.date(y + (m == 12), (m % 12) + 1, 1) - dt.timedelta(days=1)
+
+
+def range_weeks(first: dt.date, last: dt.date) -> list[tuple[str, int]]:
+    """(week_key, days-of-that-week-inside-range) for an inclusive day range."""
     counts: dict[str, int] = defaultdict(int)
     d = first
-    while d < nxt:
+    while d <= last:
         counts[week_key(d)] += 1
         d += dt.timedelta(days=1)
     return list(counts.items())
 
 
-def collect_spend(cfg: dict, weeks: dict) -> int:
+def subscription_rows(cfg: dict, today: dt.date) -> list[dict]:
+    """One charge per billing cycle for each flat-rate subscription.
+
+    Charges land on the day-of-month of `since` (clamped to the month's
+    length) from `since` until `until` or today, and each covers the days
+    from that charge to the day before the next one.
+    """
+    rows = []
+    floor = dt.date.fromisoformat(cfg["since"])
+    for sub in cfg["subscriptions"]:
+        start = dt.date.fromisoformat(sub["since"])
+        end = dt.date.fromisoformat(sub["until"]) if sub.get("until") else today
+        y, m = start.year, start.month
+        while True:
+            last = (dt.date(y + (m == 12), (m % 12) + 1, 1) - dt.timedelta(days=1)).day
+            charge = dt.date(y, m, min(start.day, last))
+            if charge > end:
+                break
+            y, m = (y + (m == 12), (m % 12) + 1)
+            last = (dt.date(y + (m == 12), (m % 12) + 1, 1) - dt.timedelta(days=1)).day
+            cycle_end = dt.date(y, m, min(start.day, last)) - dt.timedelta(days=1)
+            if sub.get("until"):
+                cycle_end = min(cycle_end, end)
+            if charge >= floor:
+                rows.append({"date": charge.isoformat(), "start": charge.isoformat(),
+                             "end": cycle_end.isoformat(),
+                             "amount": sub["amount"], "category": sub.get("category", "other")})
+    return rows
+
+
+def collect_gcp_billing(cfg: dict, weeks: dict) -> int:
+    """Net daily cost from a Cloud Billing BigQuery export, via the bq CLI.
+
+    Reads every gcp_billing_export_v1_* table in the dataset (one per
+    billing account), nets out credits, and books each day's cost to its
+    week as "cloud" spend. Returns the number of days read.
+    """
+    src = cfg["gcp_billing_export"]
+    if not src:
+        return 0
+    table = f"`{src['project']}.{src['dataset']}.gcp_billing_export_v1_*`"
+    sql = f"""
+        SELECT DATE(usage_start_time) AS day, currency,
+               SUM(cost) + SUM(IFNULL((SELECT SUM(c.amount) FROM UNNEST(credits) c), 0)) AS net
+        FROM {table}
+        WHERE usage_start_time >= TIMESTAMP('{cfg["since"]}')
+        GROUP BY day, currency ORDER BY day"""
+    r = subprocess.run(["bq", "--project_id", src["project"], "--format=json", "--headless",
+                        "query", "--use_legacy_sql=false", "--nouse_cache", "--max_rows=100000", sql],
+                       capture_output=True, text=True)
+    if r.returncode != 0:
+        print("warning: GCP billing export query failed; cloud spend not updated:\n"
+              + (r.stderr.strip() or r.stdout.strip()), file=sys.stderr)
+        return 0
+    rows = json.loads(r.stdout or "[]")
+    for row in rows:
+        if row["currency"] != "USD":
+            sys.exit(f"gcp billing: unexpected currency {row['currency']}; the page assumes USD")
+        weeks[week_key(dt.date.fromisoformat(row["day"]))]["spend"]["cloud"] += float(row["net"])
+    return len(rows)
+
+
+def collect_spend(cfg: dict, weeks: dict, today: dt.date) -> int:
     """Spread each spend row across the weeks of its period.
 
-    "claude" spend is spread in proportion to Claude activity (transcript
-    minutes plus the web-session estimate) so idle weeks cost nothing;
-    everything else (cloud bills etc.) is spread evenly by calendar day.
+    Rows come from the manual ledger plus generated subscription charges.
+    A row covers its `period` month, or the `start`..`end` day range if
+    given. Days after today are dropped and the amount pro-rated, so a
+    half-elapsed billing cycle books half its charge. "claude" spend is
+    spread in proportion to Claude activity (transcript minutes plus the
+    web-session estimate) so idle weeks cost nothing; everything else
+    (cloud bills etc.) is spread evenly by calendar day.
     """
-    rows = read_jsonl(cfg["spend"])
+    rows = read_jsonl(cfg["spend"]) + subscription_rows(cfg, today)
     est = cfg["web_session_minutes"]
     for r in rows:
         cat = r.get("category", "other")
         if cat not in SPEND_CATEGORIES:
             sys.exit(f"spend: unknown category {cat!r}; use one of {SPEND_CATEGORIES}")
         amount = float(r["amount"])
-        period = r.get("period") or r["date"][:7]
-        mw = month_weeks(period)
+        if "start" in r:
+            first, last = dt.date.fromisoformat(r["start"]), dt.date.fromisoformat(r["end"])
+        else:
+            first, last = month_range(r.get("period") or r["date"][:7])
+        if first > today:
+            continue
+        if last > today:
+            amount *= ((today - first).days + 1) / ((last - first).days + 1)
+            last = today
+        mw = range_weeks(first, last)
         if cat == "claude":
             act = {wk: weeks[wk]["claude_minutes"] + est * weeks[wk]["web_sessions"]
                    for wk, _ in mw}
@@ -359,11 +438,12 @@ def main() -> None:
     nrepos, web = collect_git(cfg, weeks)
     nfiles = collect_transcripts(cfg, weeks)
     nchores = collect_chores(cfg, weeks)
-    nspend = collect_spend(cfg, weeks)
+    today = dt.date.today()
+    nspend = collect_spend(cfg, weeks, today)
+    ndays = collect_gcp_billing(cfg, weeks)
 
     # Fill every week from `since` to today so charts have a continuous axis.
     start = dt.date.fromisoformat(week_key(dt.date.fromisoformat(cfg["since"])))
-    today = dt.date.today()
     d = start
     while d <= today:
         weeks[d.isoformat()]  # touch
@@ -371,7 +451,7 @@ def main() -> None:
 
     rows = []
     for wk in sorted(weeks):
-        if wk < start.isoformat():
+        if wk < start.isoformat() or wk > week_key(today):
             continue
         w = weeks[wk]
         w["claude_minutes"] = round(w["claude_minutes"])
@@ -393,7 +473,7 @@ def main() -> None:
         fh.write("\n")
     print(f"wrote {args.out}: {len(rows)} weeks from {nrepos} repos, "
           f"{nfiles} transcript files, {len(web)} web sessions, "
-          f"{nchores} chores, {nspend} spend rows", file=sys.stderr)
+          f"{nchores} chores, {nspend} spend rows, {ndays} GCP billing days", file=sys.stderr)
 
 
 def est_or(cfg: dict) -> int:

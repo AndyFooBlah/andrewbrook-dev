@@ -150,9 +150,10 @@ const updated = new Date(stats.generated + 'T00:00:00Z').toLocaleDateString('en-
       {stats.web_session_minutes} minutes.
     </li>
     <li>
-      <b>Spend.</b> Subscription, top-ups, and cloud bills. Claude spend is spread across weeks in
-      proportion to activity; cloud and other bills are spread evenly across their billing month. This is
-      an estimate of what building this way costs, not an invoice.
+      <b>Spend.</b> The Claude subscription is spread across each billing cycle in proportion to
+      activity, so idle weeks cost nothing; Google Cloud comes from its billing export, per day, with
+      credits applied; anything else is spread evenly across its billing month. This is an estimate of
+      what building this way costs, not an invoice.
     </li>
     <li>
       <b>Chores.</b> Things the agent could not do and handed back to me, logged by category as they

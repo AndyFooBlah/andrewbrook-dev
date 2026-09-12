@@ -41,6 +41,8 @@ Config keys (all optional except `repos`; defaults in `collect.py`):
 | `idle_gap_minutes` | a gap between messages longer than this is not counted as active time. |
 | `web_session_minutes` | estimated length of a claude.ai/code session (they leave no transcript). |
 | `ledger`, `spend` | paths of the two JSONL ledgers below. |
+| `subscriptions` | flat-rate plans, charged automatically each billing cycle: `[{"category": "claude", "amount": 200, "since": "2026-01-26", "until": null, "note": "Claude Max 20x"}]`. Charges land on the day-of-month of `since`. |
+| `gcp_billing_export` | `{"project": "...", "dataset": "..."}` of a BigQuery dataset holding Cloud Billing `gcp_billing_export_v1_*` tables; net daily cost (credits applied) is booked as `cloud` spend. Needs the `bq` CLI and an account that can query the dataset. |
 
 ## Refreshing the site
 
@@ -87,9 +89,21 @@ Ledger format (`~/.config/coding-stats/chores.jsonl`), one object per line:
 {"date": "2026-09-12", "category": "cloud-infra", "minutes": 15, "note": "enabled the Vertex API"}
 ```
 
-## Logging spend
+## Spend
 
-`~/.config/coding-stats/spend.jsonl`, one object per line:
+Most spend is collected automatically:
+
+- **Claude subscription**: list it under `subscriptions` in the config; the
+  collector books one charge per billing cycle. Usage credits bought on top
+  of the plan are not visible to any API, so log those by hand (below).
+- **Google Cloud**: enable Cloud Billing export to BigQuery once per billing
+  account (console only: Billing → Billing export → BigQuery export →
+  *Standard usage cost* → pick the project/dataset) and point
+  `gcp_billing_export` at the dataset. Data starts flowing from the day it
+  is enabled, plus the current and previous month when the dataset is in a
+  multi-region location; older invoices are not backfilled.
+
+Anything else goes in `~/.config/coding-stats/spend.jsonl`, one object per line:
 
 ```json
 {"date": "2026-09-01", "amount": 200, "category": "claude", "note": "Max subscription"}
