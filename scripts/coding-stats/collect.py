@@ -49,11 +49,16 @@ DEFAULTS = {
         "package-lock.json", "yarn.lock", "pnpm-lock.yaml", "Cargo.lock",
         "poetry.lock", "uv.lock", "go.sum", "*.svg", "*.png", "*.jpg",
         "*.min.js", "*.min.css", "dist/**", "build/**", "node_modules/**",
-        "public/charts/**",
+        "public/charts/**", "vendor/**", "third_party/**", "*.pbxproj",
+        "gradlew", "gradlew.bat",
     ],
+    "exclude_repos": [],           # glob patterns of checkouts to skip
     "authors": [],                 # author emails to count; [] = everyone
     "all_branches": False,
     "ai_trailer_pattern": r"claude|anthropic",
+    # Matched (multiline, case-insensitive) against the whole commit message
+    # for agents that leave a body line instead of a trailer.
+    "ai_body_pattern": r"^\s*(assisted by|generated with|🤖 generated with)\b.*\b(claude|gemini|codex|copilot)\b",
     "transcripts": ["~/.claude/projects"],
     "idle_gap_minutes": 15,
     "web_session_minutes": 30,     # estimate per remote (claude.ai/code) session
@@ -102,30 +107,66 @@ def new_week() -> dict:
 
 # ------------------------------------------------------------------- git
 
-def repo_dirs(patterns: list[str]) -> list[str]:
-    """Expand config 'repos' entries (paths or globs like ~/dev/*) to git repos."""
-    out: list[str] = []
+def git_out(repo: str, *args: str) -> str | None:
+    r = subprocess.run(["git", "-C", repo, *args], capture_output=True, text=True)
+    return r.stdout.strip() if r.returncode == 0 else None
+
+
+def remote_key(repo: str) -> str:
+    """Identify a checkout by its origin remote so duplicate clones count once."""
+    url = git_out(repo, "remote", "get-url", "origin") or ""
+    m = re.search(r"([^/:]+/[^/]+?)(?:\.git)?/?$", url)
+    return m.group(1).lower() if m else repo
+
+
+def repo_dirs(patterns: list[str], skip: list[str] = ()) -> list[str]:
+    """Expand config 'repos' entries (paths or globs like ~/dev/*) to git repos.
+
+    Checkouts matching a `skip` glob or with no commits are skipped, and two checkouts of the same
+    remote count once (the one whose HEAD is newest wins), so a stray second
+    clone does not double count.
+    """
+    found: dict[str, tuple[int, str]] = {}   # remote key -> (head time, path)
+    order: list[str] = []
     for pat in patterns:
         matches = sorted(glob.glob(expand(pat))) or [expand(pat)]
         for path in matches:
-            if os.path.isdir(os.path.join(path, ".git")):
-                if path not in out:
-                    out.append(path)
-            elif not any(ch in pat for ch in "*?["):
-                print(f"skip (not a git repo): {path}", file=sys.stderr)
-    return out
+            if any(fnmatch.fnmatch(path, expand(x)) for x in skip):
+                continue
+            if not os.path.isdir(os.path.join(path, ".git")):
+                if not any(ch in pat for ch in "*?["):
+                    print(f"skip (not a git repo): {path}", file=sys.stderr)
+                continue
+            head = git_out(path, "log", "-1", "--format=%ct")
+            if not head:
+                print(f"skip (no commits): {path}", file=sys.stderr)
+                continue
+            key = remote_key(path)
+            if key in found:
+                if found[key][1] == path:
+                    continue
+                if int(head) > found[key][0]:
+                    print(f"skip (same remote as {path}): {found[key][1]}", file=sys.stderr)
+                    found[key] = (int(head), path)
+                else:
+                    print(f"skip (same remote as {found[key][1]}): {path}", file=sys.stderr)
+                continue
+            found[key] = (int(head), path)
+            order.append(key)
+    return [found[k][1] for k in order]
 
 
 def collect_git(cfg: dict, weeks: dict) -> tuple[int, set[str]]:
     """Fill lines/commits per week. Returns (repo count, web session urls)."""
     ai_re = re.compile(cfg["ai_trailer_pattern"], re.I)
+    body_re = re.compile(cfg["ai_body_pattern"], re.I | re.M)
     authors = {a.lower() for a in cfg["authors"]}
     web_sessions: set[str] = set()
     fmt = ("%x1e%H%x1f%aI%x1f%ae%x1f"
            "%(trailers:key=Co-Authored-By,valueonly,separator=|)%x1f"
-           "%(trailers:key=Claude-Session,valueonly,separator=|)")
+           "%(trailers:key=Claude-Session,valueonly,separator=|)%x1f%B%x1f")
     n = 0
-    for repo in repo_dirs(cfg["repos"]):
+    for repo in repo_dirs(cfg["repos"], cfg["exclude_repos"]):
         n += 1
         cmd = ["git", "-C", repo, "log", "--no-merges", "--numstat",
                f"--since={cfg['since']}", f"--format={fmt}"]
@@ -135,11 +176,14 @@ def collect_git(cfg: dict, weeks: dict) -> tuple[int, set[str]]:
         for rec in out.split("\x1e"):
             if not rec.strip():
                 continue
-            header, _, body = rec.partition("\n")
-            sha, date, email, coauth, session = header.split("\x1f")
-            if authors and email.lower() not in authors:
+            header, _, body = rec.rpartition("\x1f")
+            sha, date, email, coauth, session, message = header.split("\x1f")
+            # Commits the agent authored itself (claude.ai/code commits carry
+            # author noreply@anthropic.com) are yours even with `authors` set.
+            ai_author = bool(ai_re.search(email))
+            if authors and email.lower() not in authors and not ai_author:
                 continue
-            is_ai = bool(ai_re.search(coauth))
+            is_ai = ai_author or bool(ai_re.search(coauth)) or bool(body_re.search(message))
             wk = weeks[week_key(parse_ts(date).date())]
             added = deleted = 0
             for line in body.splitlines():
@@ -296,7 +340,9 @@ def main() -> None:
     args = ap.parse_args()
 
     with open(expand(args.config), encoding="utf-8") as fh:
-        cfg = {**DEFAULTS, **json.load(fh)}
+        user = json.load(fh)
+        cfg = {**DEFAULTS, **user}
+        cfg["exclude"] = DEFAULTS["exclude"] + list(user.get("exclude", []))
     if not cfg.get("repos"):
         sys.exit("config: 'repos' must list at least one local checkout")
 

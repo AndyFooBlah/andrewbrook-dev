@@ -30,9 +30,11 @@ Config keys (all optional except `repos`; defaults in `collect.py`):
 | `repos` | local checkouts to read; paths or globs (`~/dev/*` takes every git repo in that directory). Private repos are fine; they never appear in the output. |
 | `since` | first date to count (ISO). |
 | `authors` | author emails to count; empty = every author. |
-| `exclude` | glob patterns of paths to ignore (lockfiles, images, `dist/**`, …). |
+| `exclude` | glob patterns of paths to ignore, added to the built-in list (lockfiles, images, `dist/**`, `vendor/**`, …). Use it for generated or vendored data that is not really code. |
+| `exclude_repos` | glob patterns of checkouts to skip (e.g. `*/private-notes`). Second clones of the same remote are skipped automatically; the newest checkout wins. |
 | `all_branches` | count every branch, not just `HEAD` (default false). |
-| `ai_trailer_pattern` | regex matched against `Co-Authored-By` trailers; a match means AI-written. |
+| `ai_trailer_pattern` | regex matched against `Co-Authored-By` trailers and author emails; a match means AI-written. |
+| `ai_body_pattern` | regex matched against the whole commit message (multiline) for agents that leave a body line instead of a trailer, e.g. `Assisted by Claude.` |
 | `transcripts` | dirs to scan for Claude Code `*.jsonl` transcripts (default `~/.claude/projects`). |
 | `idle_gap_minutes` | a gap between messages longer than this is not counted as active time. |
 | `web_session_minutes` | estimated length of a claude.ai/code session (they leave no transcript). |
@@ -103,9 +105,14 @@ Precision is not the point; the page says so.
 ## How the split is decided
 
 - **AI-written**: the commit has a `Co-Authored-By` trailer matching
-  `ai_trailer_pattern` (Claude Code adds one on every commit it makes).
-  Everything else is **by hand**. Squash merges must keep trailers or those
-  commits count as hand-written.
+  `ai_trailer_pattern` (Claude Code adds one on every commit it makes), or
+  its author email matches the pattern (claude.ai/code commits are authored
+  by `noreply@anthropic.com`; these count as yours even with `authors` set),
+  or a line in its message matches `ai_body_pattern` (`Assisted by Claude.`
+  on repos whose CLA bot rejects agent co-authors). Everything else is
+  **by hand**, including agent commits that carry no attribution at all, so
+  "by hand" is generous. Squash merges must keep trailers or those commits
+  count as hand-written.
 - **Hours**: timestamps of user and assistant messages from every local
   transcript are merged (so parallel sessions are not double counted) and
   each gap contributes `min(gap, idle_gap_minutes)`.
