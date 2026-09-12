@@ -10,6 +10,11 @@ Astro static site, deployed to GitHub Pages by `.github/workflows/deploy.yml`.
 - **Charts are generated artifacts owned by the project repo.** Never hand-edit
   `public/charts/**` — regenerate in the project (e.g.
   `agent-time-bench/scripts/make_charts.py`) then run `./scripts/sync-charts.sh`.
+- **Coding stats** (`/stats/` and the front-page chart) read
+  `src/data/coding-stats.json`, which is generated on Andy's MacBook by
+  `scripts/coding-stats/collect.py` from local repos, Claude Code transcripts
+  and two private ledgers (see `scripts/coding-stats/README.md`). Never
+  hand-edit the JSON; it must contain only weekly totals, never repo names.
 - Styling is one file: `src/styles/global.css`. Light and dark are both
   explicitly specified; the toggle stamps `data-theme` on `<html>` and must win
   over the OS preference in both directions.

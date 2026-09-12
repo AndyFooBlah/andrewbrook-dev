@@ -1,0 +1,106 @@
+# coding-stats
+
+Builds `src/data/coding-stats.json`, the anonymised weekly data behind
+`/stats/` and the chart on the front page. Everything runs locally on the
+machine that has the repos and the Claude Code transcripts (the MacBook);
+only weekly totals end up in the JSON. No repo names, paths, session ids,
+commit messages or chore notes are written to it.
+
+## One-time setup
+
+```sh
+mkdir -p ~/.config/coding-stats
+cat > ~/.config/coding-stats/config.json <<'JSON'
+{
+  "repos": [
+    "~/src/andrewbrook-dev",
+    "~/src/some-other-project"
+  ],
+  "since": "2025-06-01",
+  "authors": ["you@example.com", "12345+you@users.noreply.github.com"]
+}
+JSON
+```
+
+Config keys (all optional except `repos`; defaults in `collect.py`):
+
+| key | meaning |
+|---|---|
+| `repos` | local checkouts to read. Private repos are fine; they never appear in the output. |
+| `since` | first date to count (ISO). |
+| `authors` | author emails to count; empty = every author. |
+| `exclude` | glob patterns of paths to ignore (lockfiles, images, `dist/**`, …). |
+| `all_branches` | count every branch, not just `HEAD` (default false). |
+| `ai_trailer_pattern` | regex matched against `Co-Authored-By` trailers; a match means AI-written. |
+| `transcripts` | dirs to scan for Claude Code `*.jsonl` transcripts (default `~/.claude/projects`). |
+| `idle_gap_minutes` | a gap between messages longer than this is not counted as active time. |
+| `web_session_minutes` | estimated length of a claude.ai/code session (they leave no transcript). |
+| `ledger`, `spend` | paths of the two JSONL ledgers below. |
+
+## Refreshing the site
+
+```sh
+cd ~/src/andrewbrook-dev
+python3 scripts/coding-stats/collect.py --out src/data/coding-stats.json
+git commit -am "Refresh coding stats" && git push
+```
+
+Python 3.9+ and `git`, nothing else. Takes a few seconds.
+
+## Logging manual chores
+
+Whenever an agent hands a task back to you (click something in a cloud
+console, paste a secret, approve an OAuth screen…), log it:
+
+```sh
+scripts/coding-stats/chore.sh cloud-infra 15 "enabled the Vertex API"
+```
+
+Categories: `cloud-infra`, `secrets-auth`, `accounts-billing`,
+`dns-deploy`, `manual-testing`, `other`. The note is private.
+
+To have Claude Code prompt you, add to `~/.claude/CLAUDE.md`:
+
+> When you ask me to do something manually that you cannot do yourself
+> (console clicks, secrets, account setup, DNS, testing on a device), end
+> the message with a ready-to-run line
+> `~/src/andrewbrook-dev/scripts/coding-stats/chore.sh <category> <minutes> "<short note>"`
+> using the closest category from cloud-infra, secrets-auth,
+> accounts-billing, dns-deploy, manual-testing, other.
+
+Ledger format (`~/.config/coding-stats/chores.jsonl`), one object per line:
+
+```json
+{"date": "2026-09-12", "category": "cloud-infra", "minutes": 15, "note": "enabled the Vertex API"}
+```
+
+## Logging spend
+
+`~/.config/coding-stats/spend.jsonl`, one object per line:
+
+```json
+{"date": "2026-09-01", "amount": 200, "category": "claude", "note": "Max subscription"}
+{"date": "2026-09-14", "amount": 50, "category": "claude", "note": "top-up"}
+{"date": "2026-09-30", "period": "2026-09", "amount": 23.40, "category": "cloud", "note": "GCP invoice"}
+{"date": "2026-09-30", "period": "2026-09", "amount": 12, "category": "other", "note": "domain renewal"}
+```
+
+Categories: `claude`, `cloud`, `other`. `period` (YYYY-MM) is the month the
+charge covers; it defaults to the month of `date`. `claude` spend is spread
+across the weeks of that month in proportion to Claude activity, so idle
+weeks cost nothing; `cloud` and `other` are spread evenly by calendar day.
+Precision is not the point; the page says so.
+
+## How the split is decided
+
+- **AI-written**: the commit has a `Co-Authored-By` trailer matching
+  `ai_trailer_pattern` (Claude Code adds one on every commit it makes).
+  Everything else is **by hand**. Squash merges must keep trailers or those
+  commits count as hand-written.
+- **Hours**: timestamps of user and assistant messages from every local
+  transcript are merged (so parallel sessions are not double counted) and
+  each gap contributes `min(gap, idle_gap_minutes)`.
+- **Web sessions**: commits carrying a `Claude-Session:` trailer are from
+  claude.ai/code; each distinct URL counts as one session of
+  `web_session_minutes`. Older web commits without the trailer are counted as
+  AI-written but not as sessions.

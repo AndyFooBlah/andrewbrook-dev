@@ -1,0 +1,203 @@
+{
+ "generated": "2026-09-12",
+ "since": "2026-07-27",
+ "web_session_minutes": 30,
+ "idle_gap_minutes": 15,
+ "chore_categories": [
+  "cloud-infra",
+  "secrets-auth",
+  "accounts-billing",
+  "dns-deploy",
+  "manual-testing",
+  "other"
+ ],
+ "spend_categories": [
+  "claude",
+  "cloud",
+  "other"
+ ],
+ "weeks": [
+  {
+   "week": "2026-07-27",
+   "ai_added": 1202,
+   "ai_deleted": 32,
+   "hand_added": 57,
+   "hand_deleted": 15,
+   "ai_commits": 5,
+   "hand_commits": 5,
+   "claude_minutes": 0,
+   "sessions": 0,
+   "web_sessions": 0,
+   "chores": {
+    "cloud-infra": 0,
+    "secrets-auth": 0,
+    "accounts-billing": 0,
+    "dns-deploy": 0,
+    "manual-testing": 0,
+    "other": 0
+   },
+   "chore_minutes": 0,
+   "spend": {
+    "claude": 0.0,
+    "cloud": 0.0,
+    "other": 0.0
+   }
+  },
+  {
+   "week": "2026-08-03",
+   "ai_added": 0,
+   "ai_deleted": 0,
+   "hand_added": 0,
+   "hand_deleted": 0,
+   "ai_commits": 0,
+   "hand_commits": 0,
+   "claude_minutes": 0,
+   "sessions": 0,
+   "web_sessions": 0,
+   "chores": {
+    "cloud-infra": 0,
+    "secrets-auth": 0,
+    "accounts-billing": 0,
+    "dns-deploy": 0,
+    "manual-testing": 0,
+    "other": 0
+   },
+   "chore_minutes": 0,
+   "spend": {
+    "claude": 0.0,
+    "cloud": 0.0,
+    "other": 0.0
+   }
+  },
+  {
+   "week": "2026-08-10",
+   "ai_added": 0,
+   "ai_deleted": 0,
+   "hand_added": 0,
+   "hand_deleted": 0,
+   "ai_commits": 0,
+   "hand_commits": 0,
+   "claude_minutes": 0,
+   "sessions": 0,
+   "web_sessions": 0,
+   "chores": {
+    "cloud-infra": 0,
+    "secrets-auth": 0,
+    "accounts-billing": 0,
+    "dns-deploy": 0,
+    "manual-testing": 0,
+    "other": 0
+   },
+   "chore_minutes": 0,
+   "spend": {
+    "claude": 0.0,
+    "cloud": 0.0,
+    "other": 0.0
+   }
+  },
+  {
+   "week": "2026-08-17",
+   "ai_added": 0,
+   "ai_deleted": 0,
+   "hand_added": 0,
+   "hand_deleted": 0,
+   "ai_commits": 0,
+   "hand_commits": 0,
+   "claude_minutes": 0,
+   "sessions": 0,
+   "web_sessions": 0,
+   "chores": {
+    "cloud-infra": 0,
+    "secrets-auth": 0,
+    "accounts-billing": 0,
+    "dns-deploy": 0,
+    "manual-testing": 0,
+    "other": 0
+   },
+   "chore_minutes": 0,
+   "spend": {
+    "claude": 0.0,
+    "cloud": 0.0,
+    "other": 0.0
+   }
+  },
+  {
+   "week": "2026-08-24",
+   "ai_added": 0,
+   "ai_deleted": 5,
+   "hand_added": 0,
+   "hand_deleted": 0,
+   "ai_commits": 1,
+   "hand_commits": 0,
+   "claude_minutes": 0,
+   "sessions": 0,
+   "web_sessions": 0,
+   "chores": {
+    "cloud-infra": 0,
+    "secrets-auth": 0,
+    "accounts-billing": 0,
+    "dns-deploy": 0,
+    "manual-testing": 0,
+    "other": 0
+   },
+   "chore_minutes": 0,
+   "spend": {
+    "claude": 0.0,
+    "cloud": 0.0,
+    "other": 0.0
+   }
+  },
+  {
+   "week": "2026-08-31",
+   "ai_added": 0,
+   "ai_deleted": 0,
+   "hand_added": 0,
+   "hand_deleted": 0,
+   "ai_commits": 0,
+   "hand_commits": 0,
+   "claude_minutes": 0,
+   "sessions": 0,
+   "web_sessions": 0,
+   "chores": {
+    "cloud-infra": 0,
+    "secrets-auth": 0,
+    "accounts-billing": 0,
+    "dns-deploy": 0,
+    "manual-testing": 0,
+    "other": 0
+   },
+   "chore_minutes": 0,
+   "spend": {
+    "claude": 0.0,
+    "cloud": 0.0,
+    "other": 0.0
+   }
+  },
+  {
+   "week": "2026-09-07",
+   "ai_added": 783,
+   "ai_deleted": 0,
+   "hand_added": 0,
+   "hand_deleted": 0,
+   "ai_commits": 4,
+   "hand_commits": 0,
+   "claude_minutes": 0,
+   "sessions": 0,
+   "web_sessions": 0,
+   "chores": {
+    "cloud-infra": 0,
+    "secrets-auth": 0,
+    "accounts-billing": 0,
+    "dns-deploy": 0,
+    "manual-testing": 0,
+    "other": 0
+   },
+   "chore_minutes": 0,
+   "spend": {
+    "claude": 0.0,
+    "cloud": 0.0,
+    "other": 0.0
+   }
+  }
+ ]
+}

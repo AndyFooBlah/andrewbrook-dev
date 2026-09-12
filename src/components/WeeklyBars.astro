@@ -1,0 +1,114 @@
+---
+/**
+ * Stacked weekly column chart in plain HTML/CSS (no client-side chart lib).
+ * One column per week; each series is a segment. Hover/focus shows every
+ * series for that week. Values are also in the table view on /stats/.
+ */
+import { niceTicks, monthLabels, weekRange, type Week } from '../lib/stats';
+
+interface Series {
+  name: string;
+  /** CSS custom property name, e.g. --series-1 */
+  color: string;
+  value: (w: Week) => number;
+}
+interface Props {
+  title: string;
+  /** Unit line under the title, e.g. "Lines added and deleted, per week". */
+  subtitle?: string;
+  source?: string;
+  weeks: Week[];
+  series: Series[];
+  format?: (n: number) => string;
+  height?: number;
+}
+
+const { title, subtitle, source, weeks, series, format = (n) => n.toLocaleString('en-US'), height = 180 } = Astro.props;
+const totals = weeks.map((w) => series.reduce((a, s) => a + s.value(w), 0));
+const ticks = niceTicks(Math.max(...totals));
+const max = ticks[ticks.length - 1];
+const labels = monthLabels(weeks);
+const id = `wb-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<figure class="viz keyline" aria-labelledby={`${id}-t`}>
+  <figcaption class="viz-head">
+    <span id={`${id}-t`} class="viz-title">{title}</span>
+    {subtitle && <span class="viz-sub">{subtitle}</span>}
+    {series.length > 1 && (
+      <ul class="viz-legend">
+        {series.map((s) => (
+          <li><i class="swatch" style={`background: var(${s.color})`}></i>{s.name}</li>
+        ))}
+      </ul>
+    )}
+  </figcaption>
+  <div class="wb" style={`--h: ${height}px`}>
+    <div class="wb-y" aria-hidden="true">
+      {ticks.slice().reverse().map((t) => <span style={`bottom: ${(t / max) * 100}%`}>{format(t)}</span>)}
+    </div>
+    <div class="wb-plot">
+      {ticks.map((t) => <i class="wb-grid" style={`bottom: ${(t / max) * 100}%`}></i>)}
+      <div class="wb-cols">
+        {weeks.map((w, i) => {
+          const vals = series.map((s) => s.value(w));
+          const tip = [weekRange(w), ...series.map((s, j) => `${format(vals[j])} ${s.name}`)].join('\n');
+          return (
+            <div class="wb-col" tabindex="0" data-tip={tip} aria-label={tip.replace(/\n/g, ', ')}>
+              <div class="wb-bar">
+                {vals.map((v, j) =>
+                  v > 0 ? (
+                    <i
+                      class="wb-seg"
+                      style={`height: ${(v / max) * 100}%; background: var(${series[j].color})`}
+                    ></i>
+                  ) : null,
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+    <div class="wb-x" aria-hidden="true">
+      {labels.map((l) => <span>{l}</span>)}
+    </div>
+  </div>
+  {source && <span class="viz-source">Source: {source}</span>}
+</figure>
+
+<script>
+  // One floating tooltip shared by every chart on the page. Labels come from
+  // build-time data but still go in via textContent.
+  let tip: HTMLDivElement | null = null;
+  function show(el: HTMLElement) {
+    if (!tip) {
+      tip = document.createElement('div');
+      tip.className = 'viz-tip';
+      document.body.appendChild(tip);
+    }
+    tip.replaceChildren();
+    (el.dataset.tip ?? '').split('\n').forEach((line, i) => {
+      const row = document.createElement('div');
+      row.textContent = line;
+      if (i === 0) row.className = 'viz-tip-head';
+      tip!.appendChild(row);
+    });
+    const r = el.getBoundingClientRect();
+    tip.hidden = false;
+    const tw = tip.offsetWidth;
+    let left = r.left + r.width / 2 - tw / 2 + window.scrollX;
+    left = Math.max(8, Math.min(left, window.scrollX + document.documentElement.clientWidth - tw - 8));
+    tip.style.left = `${left}px`;
+    tip.style.top = `${r.top + window.scrollY - tip.offsetHeight - 8}px`;
+  }
+  function hide() {
+    if (tip) tip.hidden = true;
+  }
+  document.querySelectorAll<HTMLElement>('.wb-col').forEach((el) => {
+    el.addEventListener('pointerenter', () => show(el));
+    el.addEventListener('focus', () => show(el));
+    el.addEventListener('pointerleave', hide);
+    el.addEventListener('blur', hide);
+  });
+</script>

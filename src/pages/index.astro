@@ -1,12 +1,18 @@
 ---
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
+import StatTiles from '../components/StatTiles.astro';
+import WeeklyBars from '../components/WeeklyBars.astro';
+import { recentWeeks, totals, lines, compact, usd, pct } from '../lib/stats';
 import { getCollection } from 'astro:content';
 import { SITE } from '../consts';
 
 const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+
 );
+const weeks = recentWeeks(16);
+const t = totals(weeks);
 ---
 
 <Base>
@@ -33,6 +39,31 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
       <a href={SITE.github}>GitHub</a> · <a href={SITE.linkedin}>LinkedIn</a> · <a href="/rss.xml">RSS</a>
     </p>
   </section>
+
+  <h2>How much of this is AI?</h2>
+  <p class="meta">
+    Last 16 weeks across all my projects. <a href="/stats/">Full breakdown and methodology →</a>
+  </p>
+  <StatTiles
+    tiles={[
+      { label: 'of lines AI-written', value: pct(t.aiShare) },
+      { label: 'hours with Claude', value: compact(t.hours) },
+      { label: 'spent', value: usd(t.spend) },
+      { label: 'chores by hand', value: t.chores.toLocaleString('en-US') },
+    ]}
+  />
+  <WeeklyBars
+    title="Who wrote the code"
+    subtitle="Lines added and deleted, per week"
+    source="git history of my repos"
+    weeks={weeks}
+    height={140}
+    format={compact}
+    series={[
+      { name: 'AI-written', color: '--series-1', value: (w) => lines(w, 'ai') },
+      { name: 'By hand', color: '--series-2', value: (w) => lines(w, 'hand') },
+    ]}
+  />
 
   <h2>Writing</h2>
   <PostList posts={posts} />
