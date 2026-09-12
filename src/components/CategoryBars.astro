@@ -1,0 +1,32 @@
+---
+/** Horizontal single-series bars: one row per category, sorted by value. */
+import { niceMax } from '../lib/stats';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  source?: string;
+  rows: { label: string; value: number }[];
+  format?: (n: number) => string;
+}
+const { title, subtitle, source, rows, format = (n) => n.toLocaleString('en-US') } = Astro.props;
+const sorted = rows.slice().sort((a, b) => b.value - a.value);
+const max = niceMax(Math.max(...sorted.map((r) => r.value)));
+---
+
+<figure class="viz keyline">
+  <figcaption class="viz-head">
+    <span class="viz-title">{title}</span>
+    {subtitle && <span class="viz-sub">{subtitle}</span>}
+  </figcaption>
+  <ul class="cb">
+    {sorted.map((r) => (
+      <li>
+        <span class="cb-label">{r.label}</span>
+        <span class="cb-track"><i style={`width: ${(r.value / max) * 100}%`}></i></span>
+        <span class="cb-value">{format(r.value)}</span>
+      </li>
+    ))}
+  </ul>
+  {source && <span class="viz-source">Source: {source}</span>}
+</figure>

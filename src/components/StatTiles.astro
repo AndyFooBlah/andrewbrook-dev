@@ -1,0 +1,16 @@
+---
+interface Props {
+  tiles: { label: string; value: string; note?: string }[];
+}
+const { tiles } = Astro.props;
+---
+
+<ul class="tiles">
+  {tiles.map((t) => (
+    <li class="keyline">
+      <span class="tile-value">{t.value}</span>
+      <span class="tile-label">{t.label}</span>
+      {t.note && <span class="tile-note">{t.note}</span>}
+    </li>
+  ))}
+</ul>
