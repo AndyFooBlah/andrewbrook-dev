@@ -31,6 +31,7 @@ const fmt = (d: Date) =>
                 <>
                   {i > 0 && ' · '}
                   {repo ? <a href={repo.url}>{repo.name}</a> : slug}
+                  {repo?.note && <> ({repo.note})</>}
                 </>
               );
             })}

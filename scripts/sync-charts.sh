@@ -21,5 +21,6 @@ sync_repo() { # repo-dir-name  source-subdir
 }
 
 sync_repo agent-time-bench blog/charts
+sync_repo wind-spirit blog/charts
 
 echo "done — reference charts in posts as /charts/<repo>/<file>.svg"

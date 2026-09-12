@@ -38,6 +38,7 @@ const grouped = THEMES.map((theme) => ({
             <li>
               <h3>
                 <a href={project.url}>{project.name}</a>
+                {project.note && <span class="lang">{project.note}</span>}
                 {project.lang && <span class="lang">{project.lang}</span>}
               </h3>
               <p>{project.blurb}</p>

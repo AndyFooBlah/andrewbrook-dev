@@ -31,6 +31,11 @@ export const THEMES = [
     blurb: 'Measuring what models and agents actually get right.',
   },
   {
+    id: 'simulation',
+    title: 'Simulations & games',
+    blurb: 'Small worlds with rules, run long enough to see what the rules actually do.',
+  },
+  {
     id: 'site',
     title: 'This site',
     blurb: '',
@@ -47,6 +52,8 @@ export interface Project {
   lang?: string;
   /** Published packages / live deployments worth linking. */
   links?: { label: string; url: string }[];
+  /** Short qualifier shown after the repo link, e.g. 'private for now'. */
+  note?: string;
 }
 
 /**
@@ -124,6 +131,15 @@ export const REPOS: Record<string, Project> = {
       'How well do LLM agents handle date/time in the tool calls they make and the answers they give? 10 domains × 10 scenarios, graded on both directions, across models from tiny open-weights to closed frontier.',
     theme: 'evaluation',
     lang: 'Python',
+  },
+  'wind-spirit': {
+    name: 'Wind Spirit',
+    url: 'https://github.com/AndyFooBlah/wind-spirit',
+    blurb:
+      'A civilization sandbox where every village is run by an AI chief and the player is a spirit who sees everything and can touch almost nothing. Deterministic weekly sim, headless balance harness first.',
+    theme: 'simulation',
+    lang: 'TypeScript',
+    note: 'private for now',
   },
   'andrewbrook-dev': {
     name: 'andrewbrook-dev',
