@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
 import StatTiles from '../components/StatTiles.astro';
 import WeeklyBars from '../components/WeeklyBars.astro';
-import { recentWeeks, totals, lines, compact, usd, pct } from '../lib/stats';
+import { recentWeeks, totals, lines, compact, pct } from '../lib/stats';
 import { getCollection } from 'astro:content';
 import { SITE } from '../consts';
 
@@ -48,7 +48,6 @@ const t = totals(weeks);
     tiles={[
       { label: 'of lines AI-written', value: pct(t.aiShare) },
       { label: 'hours with Claude', value: compact(t.hours) },
-      { label: 'spent', value: usd(t.spend) },
       { label: 'chores by hand', value: t.chores.toLocaleString('en-US') },
     ]}
   />
