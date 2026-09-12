@@ -139,7 +139,6 @@ export const REPOS: Record<string, Project> = {
       'A civilization sandbox where every village is run by an AI chief and the player is a spirit who sees everything and can touch almost nothing. Deterministic weekly sim, headless balance harness first.',
     theme: 'simulation',
     lang: 'TypeScript',
-    note: 'private for now',
   },
   'andrewbrook-dev': {
     name: 'andrewbrook-dev',
