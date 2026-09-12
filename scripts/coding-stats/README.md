@@ -48,15 +48,20 @@ Config keys (all optional except `repos`; defaults in `collect.py`):
 
 ## Refreshing the site
 
+A launchd job does this daily on the MacBook; see `launchd/README.md`.
+By hand it is:
+
 ```sh
 cd path/to/andrewbrook-dev
 git pull
-python3 scripts/coding-stats/collect.py   # writes src/data/coding-stats.json
+python3 scripts/coding-stats/detect_chores.py   # new chores from transcripts
+python3 scripts/coding-stats/collect.py         # writes src/data/coding-stats.json
 git commit -am "Refresh coding stats" && git push
 ```
 
-Python 3.9+ and `git`, nothing else. Takes a few seconds. `--out` defaults
-to this checkout's data file, so the script can be run from any directory.
+Python 3.9+, `git`, and the gcloud SDK (`bq` for billing, ADC for the chore
+detector). Takes under a minute. `--out` defaults to this checkout's data
+file, so the collector can be run from any directory.
 
 ## Chores
 
