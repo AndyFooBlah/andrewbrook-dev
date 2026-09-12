@@ -4,6 +4,7 @@
  "web_session_minutes": 30,
  "idle_gap_minutes": 15,
  "chore_categories": [
+  "terminal",
   "cloud-infra",
   "secrets-auth",
   "accounts-billing",
@@ -29,6 +30,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -55,6 +57,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -81,6 +84,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -107,6 +111,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -133,6 +138,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -159,6 +165,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -185,6 +192,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -211,6 +219,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -237,6 +246,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -263,6 +273,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -289,6 +300,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -315,6 +327,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -341,6 +354,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -367,6 +381,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -393,6 +408,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -419,6 +435,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -445,6 +462,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -471,6 +489,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -497,6 +516,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -523,6 +543,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -549,6 +570,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -575,6 +597,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -601,6 +624,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -627,6 +651,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -653,6 +678,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -679,6 +705,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -705,6 +732,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -731,6 +759,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -757,6 +786,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -783,6 +813,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -809,6 +840,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -835,6 +867,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -861,6 +894,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -887,6 +921,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -913,6 +948,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -939,6 +975,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -965,6 +1002,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -991,6 +1029,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -1017,6 +1056,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -1043,6 +1083,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -1069,6 +1110,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -1095,6 +1137,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -1121,6 +1164,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -1147,6 +1191,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -1173,6 +1218,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -1199,6 +1245,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -1225,6 +1272,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -1251,6 +1299,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -1277,6 +1326,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -1303,6 +1353,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -1329,6 +1380,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -1355,6 +1407,7 @@
    "sessions": 1,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -1381,14 +1434,15 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
-    "cloud-infra": 0,
-    "secrets-auth": 0,
+    "terminal": 16,
+    "cloud-infra": 1,
+    "secrets-auth": 1,
     "accounts-billing": 0,
     "dns-deploy": 0,
-    "manual-testing": 0,
+    "manual-testing": 3,
     "other": 0
    },
-   "chore_minutes": 0,
+   "chore_minutes": 193,
    "spend": {
     "claude": 255.18,
     "cloud": 0.0,
@@ -1407,14 +1461,15 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
-    "secrets-auth": 0,
+    "secrets-auth": 1,
     "accounts-billing": 0,
     "dns-deploy": 0,
     "manual-testing": 0,
     "other": 0
    },
-   "chore_minutes": 0,
+   "chore_minutes": 5,
    "spend": {
     "claude": 2.81,
     "cloud": 0.0,
@@ -1433,14 +1488,15 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
-    "cloud-infra": 0,
-    "secrets-auth": 0,
+    "terminal": 0,
+    "cloud-infra": 3,
+    "secrets-auth": 3,
     "accounts-billing": 0,
     "dns-deploy": 0,
     "manual-testing": 0,
     "other": 0
    },
-   "chore_minutes": 0,
+   "chore_minutes": 28,
    "spend": {
     "claude": 20.03,
     "cloud": 0.0,
@@ -1459,14 +1515,15 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 1,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
     "dns-deploy": 0,
-    "manual-testing": 0,
+    "manual-testing": 2,
     "other": 0
    },
-   "chore_minutes": 0,
+   "chore_minutes": 20,
    "spend": {
     "claude": 65.55,
     "cloud": 0.0,
@@ -1485,14 +1542,15 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
-    "cloud-infra": 0,
+    "terminal": 1,
+    "cloud-infra": 2,
     "secrets-auth": 0,
-    "accounts-billing": 0,
+    "accounts-billing": 1,
     "dns-deploy": 0,
     "manual-testing": 0,
     "other": 0
    },
-   "chore_minutes": 0,
+   "chore_minutes": 20,
    "spend": {
     "claude": 76.97,
     "cloud": 0.0,
@@ -1511,14 +1569,15 @@
    "sessions": 1,
    "web_sessions": 0,
    "chores": {
-    "cloud-infra": 0,
+    "terminal": 3,
+    "cloud-infra": 2,
     "secrets-auth": 0,
     "accounts-billing": 0,
     "dns-deploy": 0,
     "manual-testing": 0,
     "other": 0
    },
-   "chore_minutes": 0,
+   "chore_minutes": 22,
    "spend": {
     "claude": 36.23,
     "cloud": 0.0,
@@ -1537,14 +1596,15 @@
    "sessions": 1,
    "web_sessions": 0,
    "chores": {
-    "cloud-infra": 0,
-    "secrets-auth": 0,
-    "accounts-billing": 0,
+    "terminal": 6,
+    "cloud-infra": 1,
+    "secrets-auth": 1,
+    "accounts-billing": 2,
     "dns-deploy": 0,
     "manual-testing": 0,
     "other": 0
    },
-   "chore_minutes": 0,
+   "chore_minutes": 32,
    "spend": {
     "claude": 30.26,
     "cloud": 0.0,
@@ -1563,14 +1623,15 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
-    "cloud-infra": 0,
+    "terminal": 0,
+    "cloud-infra": 2,
     "secrets-auth": 0,
     "accounts-billing": 0,
     "dns-deploy": 0,
     "manual-testing": 0,
     "other": 0
    },
-   "chore_minutes": 0,
+   "chore_minutes": 10,
    "spend": {
     "claude": 22.57,
     "cloud": 0.0,
@@ -1589,14 +1650,15 @@
    "sessions": 8,
    "web_sessions": 0,
    "chores": {
-    "cloud-infra": 0,
-    "secrets-auth": 0,
+    "terminal": 5,
+    "cloud-infra": 3,
+    "secrets-auth": 10,
     "accounts-billing": 0,
-    "dns-deploy": 0,
-    "manual-testing": 0,
+    "dns-deploy": 3,
+    "manual-testing": 1,
     "other": 0
    },
-   "chore_minutes": 0,
+   "chore_minutes": 87,
    "spend": {
     "claude": 193.22,
     "cloud": 0.0,
@@ -1615,14 +1677,15 @@
    "sessions": 1,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
-    "secrets-auth": 0,
-    "accounts-billing": 0,
-    "dns-deploy": 0,
+    "secrets-auth": 3,
+    "accounts-billing": 1,
+    "dns-deploy": 3,
     "manual-testing": 0,
     "other": 0
    },
-   "chore_minutes": 0,
+   "chore_minutes": 37,
    "spend": {
     "claude": 35.37,
     "cloud": 0.0,
@@ -1641,6 +1704,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -1667,6 +1731,7 @@
    "sessions": 2,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -1693,6 +1758,7 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 0,
     "cloud-infra": 0,
     "secrets-auth": 0,
     "accounts-billing": 0,
@@ -1719,16 +1785,17 @@
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
+    "terminal": 2,
     "cloud-infra": 0,
-    "secrets-auth": 0,
-    "accounts-billing": 0,
+    "secrets-auth": 3,
+    "accounts-billing": 1,
     "dns-deploy": 0,
     "manual-testing": 0,
     "other": 0
    },
-   "chore_minutes": 0,
+   "chore_minutes": 25,
    "spend": {
-    "claude": 58.46,
+    "claude": 57.87,
     "cloud": 0.0,
     "other": 0.0
    }
@@ -1745,42 +1812,44 @@
    "sessions": 1,
    "web_sessions": 0,
    "chores": {
+    "terminal": 2,
     "cloud-infra": 0,
-    "secrets-auth": 0,
+    "secrets-auth": 4,
     "accounts-billing": 0,
-    "dns-deploy": 0,
+    "dns-deploy": 2,
     "manual-testing": 0,
     "other": 0
    },
-   "chore_minutes": 0,
+   "chore_minutes": 25,
    "spend": {
-    "claude": 38.42,
+    "claude": 37.56,
     "cloud": 0.0,
     "other": 0.0
    }
   },
   {
    "week": "2026-09-07",
-   "ai_added": 33304,
-   "ai_deleted": 7272,
+   "ai_added": 33774,
+   "ai_deleted": 7357,
    "hand_added": 0,
    "hand_deleted": 0,
-   "ai_commits": 73,
+   "ai_commits": 76,
    "hand_commits": 0,
-   "claude_minutes": 638,
+   "claude_minutes": 673,
    "sessions": 9,
    "web_sessions": 1,
    "chores": {
-    "cloud-infra": 0,
-    "secrets-auth": 0,
-    "accounts-billing": 0,
-    "dns-deploy": 0,
-    "manual-testing": 0,
+    "terminal": 14,
+    "cloud-infra": 9,
+    "secrets-auth": 6,
+    "accounts-billing": 4,
+    "dns-deploy": 1,
+    "manual-testing": 2,
     "other": 0
    },
-   "chore_minutes": 0,
+   "chore_minutes": 230,
    "spend": {
-    "claude": 51.16,
+    "claude": 52.62,
     "cloud": 0.0,
     "other": 0.0
    }

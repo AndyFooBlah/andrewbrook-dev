@@ -4,6 +4,7 @@ export type Week = (typeof raw.weeks)[number];
 export const stats = raw;
 
 export const CHORE_LABELS: Record<string, string> = {
+  terminal: 'Commands to run',
   'cloud-infra': 'Cloud infra config',
   'secrets-auth': 'Secrets & auth',
   'accounts-billing': 'Accounts & billing',
