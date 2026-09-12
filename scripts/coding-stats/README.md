@@ -8,13 +8,17 @@ commit messages or chore notes are written to it.
 
 ## One-time setup
 
+Clone this repo anywhere on the MacBook (it does not need to sit next to
+your other repos), then write the config:
+
 ```sh
+git clone git@github.com:AndyFooBlah/andrewbrook-dev.git
 mkdir -p ~/.config/coding-stats
 cat > ~/.config/coding-stats/config.json <<'JSON'
 {
   "repos": [
-    "~/src/andrewbrook-dev",
-    "~/src/some-other-project"
+    "~/wherever/andrewbrook-dev",
+    "~/wherever/some-other-project"
   ],
   "since": "2025-06-01",
   "authors": ["you@example.com", "12345+you@users.noreply.github.com"]
@@ -40,12 +44,14 @@ Config keys (all optional except `repos`; defaults in `collect.py`):
 ## Refreshing the site
 
 ```sh
-cd ~/src/andrewbrook-dev
-python3 scripts/coding-stats/collect.py --out src/data/coding-stats.json
+cd path/to/andrewbrook-dev
+git pull
+python3 scripts/coding-stats/collect.py   # writes src/data/coding-stats.json
 git commit -am "Refresh coding stats" && git push
 ```
 
-Python 3.9+ and `git`, nothing else. Takes a few seconds.
+Python 3.9+ and `git`, nothing else. Takes a few seconds. `--out` defaults
+to this checkout's data file, so the script can be run from any directory.
 
 ## Logging manual chores
 
@@ -53,7 +59,13 @@ Whenever an agent hands a task back to you (click something in a cloud
 console, paste a secret, approve an OAuth screen…), log it:
 
 ```sh
-scripts/coding-stats/chore.sh cloud-infra 15 "enabled the Vertex API"
+path/to/andrewbrook-dev/scripts/coding-stats/chore.sh cloud-infra 15 "enabled the Vertex API"
+```
+
+Symlink it somewhere on your PATH so it is just `chore`:
+
+```sh
+ln -s "$PWD/scripts/coding-stats/chore.sh" ~/bin/chore
 ```
 
 Categories: `cloud-infra`, `secrets-auth`, `accounts-billing`,
@@ -64,7 +76,7 @@ To have Claude Code prompt you, add to `~/.claude/CLAUDE.md`:
 > When you ask me to do something manually that you cannot do yourself
 > (console clicks, secrets, account setup, DNS, testing on a device), end
 > the message with a ready-to-run line
-> `~/src/andrewbrook-dev/scripts/coding-stats/chore.sh <category> <minutes> "<short note>"`
+> `chore <category> <minutes> "<short note>"`
 > using the closest category from cloud-infra, secrets-auth,
 > accounts-billing, dns-deploy, manual-testing, other.
 

@@ -13,8 +13,10 @@ The output contains ONLY weekly totals. No repo names, paths, session ids,
 commit messages or chore notes are ever written to it.
 
 Usage:
-  collect.py --config ~/.config/coding-stats/config.json \
-             --out src/data/coding-stats.json
+  collect.py [--config ~/.config/coding-stats/config.json] [--out FILE]
+
+--out defaults to src/data/coding-stats.json in this checkout, so it works
+from any working directory.
 
 See README.md next to this script for the config and ledger formats.
 """
@@ -279,7 +281,8 @@ def collect_spend(cfg: dict, weeks: dict) -> int:
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--config", default="~/.config/coding-stats/config.json")
-    ap.add_argument("--out", default="src/data/coding-stats.json")
+    repo_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    ap.add_argument("--out", default=os.path.join(repo_root, "src", "data", "coding-stats.json"))
     args = ap.parse_args()
 
     with open(expand(args.config), encoding="utf-8") as fh:

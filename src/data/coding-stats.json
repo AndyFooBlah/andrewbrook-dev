@@ -175,15 +175,15 @@
   },
   {
    "week": "2026-09-07",
-   "ai_added": 783,
+   "ai_added": 2025,
    "ai_deleted": 0,
    "hand_added": 0,
    "hand_deleted": 0,
-   "ai_commits": 4,
+   "ai_commits": 5,
    "hand_commits": 0,
    "claude_minutes": 0,
    "sessions": 0,
-   "web_sessions": 0,
+   "web_sessions": 1,
    "chores": {
     "cloud-infra": 0,
     "secrets-auth": 0,
