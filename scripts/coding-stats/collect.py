@@ -102,6 +102,20 @@ def new_week() -> dict:
 
 # ------------------------------------------------------------------- git
 
+def repo_dirs(patterns: list[str]) -> list[str]:
+    """Expand config 'repos' entries (paths or globs like ~/dev/*) to git repos."""
+    out: list[str] = []
+    for pat in patterns:
+        matches = sorted(glob.glob(expand(pat))) or [expand(pat)]
+        for path in matches:
+            if os.path.isdir(os.path.join(path, ".git")):
+                if path not in out:
+                    out.append(path)
+            elif not any(ch in pat for ch in "*?["):
+                print(f"skip (not a git repo): {path}", file=sys.stderr)
+    return out
+
+
 def collect_git(cfg: dict, weeks: dict) -> tuple[int, set[str]]:
     """Fill lines/commits per week. Returns (repo count, web session urls)."""
     ai_re = re.compile(cfg["ai_trailer_pattern"], re.I)
@@ -111,11 +125,7 @@ def collect_git(cfg: dict, weeks: dict) -> tuple[int, set[str]]:
            "%(trailers:key=Co-Authored-By,valueonly,separator=|)%x1f"
            "%(trailers:key=Claude-Session,valueonly,separator=|)")
     n = 0
-    for repo in cfg["repos"]:
-        repo = expand(repo)
-        if not os.path.isdir(os.path.join(repo, ".git")):
-            print(f"skip (not a git repo): {repo}", file=sys.stderr)
-            continue
+    for repo in repo_dirs(cfg["repos"]):
         n += 1
         cmd = ["git", "-C", repo, "log", "--no-merges", "--numstat",
                f"--since={cfg['since']}", f"--format={fmt}"]

@@ -16,10 +16,7 @@ git clone git@github.com:AndyFooBlah/andrewbrook-dev.git
 mkdir -p ~/.config/coding-stats
 cat > ~/.config/coding-stats/config.json <<'JSON'
 {
-  "repos": [
-    "~/wherever/andrewbrook-dev",
-    "~/wherever/some-other-project"
-  ],
+  "repos": ["~/dev/*"],
   "since": "2025-06-01",
   "authors": ["you@example.com", "12345+you@users.noreply.github.com"]
 }
@@ -30,7 +27,7 @@ Config keys (all optional except `repos`; defaults in `collect.py`):
 
 | key | meaning |
 |---|---|
-| `repos` | local checkouts to read. Private repos are fine; they never appear in the output. |
+| `repos` | local checkouts to read; paths or globs (`~/dev/*` takes every git repo in that directory). Private repos are fine; they never appear in the output. |
 | `since` | first date to count (ISO). |
 | `authors` | author emails to count; empty = every author. |
 | `exclude` | glob patterns of paths to ignore (lockfiles, images, `dist/**`, …). |
