@@ -139,8 +139,9 @@ const updated = new Date(stats.generated + 'T00:00:00Z').toLocaleDateString('en-
       <b>AI vs hand.</b> Every commit a coding agent makes carries a <code>Co-Authored-By</code> trailer
       or an <i>Assisted by Claude</i> line. Lines added and deleted in those commits count as AI-written;
       all other commits count as by hand. That cuts both ways: a hand edit folded into an agent's commit
-      is invisible, and an agent commit that lost its attribution counts as by hand. Lockfiles, vendored
-      data, generated images and build output are excluded.
+      is invisible, and an agent commit that lost its attribution counts as by hand, except in a few
+      repos I know I never edited by hand. Lockfiles, vendored data, generated images and build output
+      are excluded.
     </li>
     <li>
       <b>Hours.</b> Local coding-agent sessions leave timestamped transcripts; time between messages

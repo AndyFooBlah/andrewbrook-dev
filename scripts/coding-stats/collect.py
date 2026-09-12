@@ -53,6 +53,7 @@ DEFAULTS = {
         "gradlew", "gradlew.bat",
     ],
     "exclude_repos": [],           # glob patterns of checkouts to skip
+    "ai_repos": [],                # checkouts where every commit is AI-written
     "authors": [],                 # author emails to count; [] = everyone
     "all_branches": False,
     "ai_trailer_pattern": r"claude|anthropic",
@@ -168,6 +169,8 @@ def collect_git(cfg: dict, weeks: dict) -> tuple[int, set[str]]:
     n = 0
     for repo in repo_dirs(cfg["repos"], cfg["exclude_repos"]):
         n += 1
+        # Repos worked on only through agents that left no attribution.
+        repo_ai = any(fnmatch.fnmatch(repo, expand(x)) for x in cfg["ai_repos"])
         cmd = ["git", "-C", repo, "log", "--no-merges", "--numstat",
                f"--since={cfg['since']}", f"--format={fmt}"]
         if cfg["all_branches"]:
@@ -183,7 +186,8 @@ def collect_git(cfg: dict, weeks: dict) -> tuple[int, set[str]]:
             ai_author = bool(ai_re.search(email))
             if authors and email.lower() not in authors and not ai_author:
                 continue
-            is_ai = ai_author or bool(ai_re.search(coauth)) or bool(body_re.search(message))
+            is_ai = (repo_ai or ai_author or bool(ai_re.search(coauth))
+                     or bool(body_re.search(message)))
             wk = weeks[week_key(parse_ts(date).date())]
             added = deleted = 0
             for line in body.splitlines():
