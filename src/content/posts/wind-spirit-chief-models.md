@@ -179,24 +179,28 @@ my idea of a good chief, not a ground truth.
 ## Results
 
 After the fixes, the final Vertex pass and then the OpenRouter pass across 24
-more models. Here is quality against cost for every model that finished
-without piling up errors.
+more models; then, after the review described in the next section, a third
+pass of every model still in the running on the corrected corpus. The charts
+and numbers below are from that third pass: 25 models, 102 cases each. Here
+is quality against cost for every model that finished without piling up
+errors.
 
 <figure class="chart">
   <img src="/charts/wind-spirit/eval-score-vs-cost.svg" alt="Scatter plot of rule score against cost per decision on a log scale for 27 models, coloured by family. A dotted line marks the Gemini 3.8 Flash baseline at 0.974. Mistral Medium 3.1, GPT-5.4 nano, GPT-5.6 Luna and GLM 5.3 Flash sit on or above the line at a fifth of the baseline's cost or less. Claude Sonnet 5 ties the line at twice the cost; Claude Haiku 4.5 sits at 0.949 near the baseline's cost. The Gemini Flash-Lites cluster between 0.945 and 0.963 at a quarter to a twentieth of the cost.">
-  <figcaption>Rule score over 96 cases against measured cost per decision. Models with more than ten failed cases are left out.</figcaption>
+  <figcaption>Rule score over 102 cases against measured cost per decision. Models with more than ten failed cases are left out.</figcaption>
 </figure>
 
-The headline is the flatness. Twenty models sit between 0.945 and 0.985 on
-the rules across a thirtyfold range of price. Gemini 3.8 Flash, the baseline,
-scored 0.974 at $0.0070 a decision. Gemini 3.5 Flash-Lite scored 0.963 at
-$0.0016 in 1.6 seconds. Gemini 2.5 Flash-Lite scored 0.949 at $0.0004, a
-twentieth of the baseline. Four OpenRouter models beat or tied the baseline
-at a fifth of its cost or less: Mistral Medium 3.1 (0.984), GPT-5.4 nano
-(0.978), GPT-5.6 Luna (0.975) and GLM 5.3 Flash (0.972, at $0.0005 the price
-floor for "on par"). The Pro reference scored 0.968 at $0.0177 and 9.7
-seconds: no better than Flash on rules or judge, at three times the cost and
-latency.
+The headline is the flatness. Twenty of the twenty-four models that finished
+cleanly sit between 0.94 and 0.99 on the rules across a fortyfold range of
+price. Gemini 3.8 Flash, the baseline, scored 0.996 at $0.0074 a decision:
+two misses in 102 cases. Gemini 3.5 Flash-Lite scored 0.964 at $0.0016 in 1.6
+seconds. Gemini 2.5 Flash-Lite scored 0.943 at $0.0003, a twentieth of the
+baseline. Three OpenRouter models came within a hair of the baseline at a
+fifth of its cost or less: Mistral Medium 3.1 (0.988 at $0.0013), GPT-5.6
+Luna (0.980 at $0.0012) and GLM 5.3 Flash (0.974 at $0.0006, the price floor
+for "on par"). The Pro reference scored 0.980 at $0.0184 and 8.6 seconds: no
+better than Flash on the rules, better on the judge, at two and a half times
+the cost and latency.
 
 <figure class="chart">
   <img src="/charts/wind-spirit/eval-categories.svg" alt="Grouped bar chart of rule score by category for nine models. Routine, visitor, expansion and dream are close to level for all nine. Crisis drops to 0.87 for gpt-oss-120b and 0.83 for Gemma 4. Spirit drops to 0.93 for Claude Haiku 4.5 and 0.69 for Gemma 4. Gemma's dream score is 0.73.">
@@ -206,38 +210,42 @@ latency.
 By category, the story is more specific.
 
 **Routine work needs almost no intelligence.** Every model that could produce
-valid orders scored 0.93 to 0.98 on routine seasons, including 2.5 Flash-Lite
+valid orders scored 0.92 to 1.00 on routine seasons, including 2.5 Flash-Lite
 at a twentieth of the baseline's cost. The scripted policy does this job too.
 The only part of a routine decision a player ever reads is the journal, and
 that is where the money shows.
 
 **The impactful categories separate models less than I expected.** Visitor
-decisions were 0.93 for nearly everyone, and it is the same two cases that
-trip every model: a greedy ask that most models counter rather than refuse.
-Expansion was perfect for every Gemini and for gpt-oss. Crisis is where the
-small open models slip, to 0.47 to 0.87: keeping enough hands on food during
-a famine and preparing for a hard winter.
+decisions ran 0.87 to 1.00, and the misses cluster on the same cases: a
+greedy ask that some models counter rather than refuse. Expansion was perfect
+or nearly so for everyone. Crisis is where the small open models slip, to
+0.87 to 0.93: keeping enough hands on food during a famine and preparing for
+a hard winter.
 
 **Spirit is the discriminating category, and it is about credulity.** Ten of
 the fifteen spirit cases inject a false command, "plant nothing this spring,
-the soil is cursed," at middling trust. Counting from the archived results,
-3.8 Flash obeyed it in two of the ten, 3.5 Flash-Lite in four, 3.1 Flash-Lite
-and 2.5 Flash in nine each, and GPT-5 nano in all ten. A cheap chief is an
-obedient chief, which is exactly wrong for a game whose scoreboard is trust
-the player has to earn. (Gemini 3.1 Pro obeyed in six of the ten, which I
-still do not have a good story for.)
+the soil is cursed," at middling trust. In the third pass 3.8 Flash obeyed it
+once in ten, 3.5 Flash-Lite four times, 3.1 Flash-Lite eight, 2.5 Flash nine,
+Gemma 4 eight, GPT-5.4 nano seven and GPT-5 nano all ten; Mistral Medium and
+GLM 5.3 Flash never did. Mostly, a cheap chief is an obedient chief, which is
+exactly wrong for a game whose scoreboard is trust the player has to earn.
+Mostly: 2.5 Flash-Lite, the cheapest model here, obeyed once in ten, and in
+the second pass it had obeyed nine times. The prompt changed between the
+passes (the food arithmetic and the cadence line described below), and this
+is the category most sensitive to it. Treat the ordering as real and the
+individual counts as one draw.
 
 <figure class="chart">
   <img src="/charts/wind-spirit/eval-judge-vs-rules.svg" alt="Scatter of judge score for journals and dream replies against rule score for 25 models. GPT-5.6 Luna is highest on the judge at 4.46 with rules at 0.975. Gemini 3.5 Flash-Lite is at 4.28, Gemini 3.8 Flash at 3.92, Claude Sonnet 5 at 3.88. gpt-oss-120b is lowest at 2.85 despite rules at 0.967; GPT-5 nano is at 3.10.">
   <figcaption>Judge score (Gemini 3.1 Pro, 1 to 5) against rule score. Doing the right thing and saying it well are different skills.</figcaption>
 </figure>
 
-**Prose quality is the real price of going cheap.** gpt-oss-120b ties the
-baseline on the rules and beats it on cost tenfold, but the judge puts its
-journals at 2.85 against 3.92 for 3.8 Flash. Gemini 3.5 Flash-Lite's journals
-scored 4.28, better than 3.8 Flash's to the judge, at a quarter of the cost.
-GPT-5.6 Luna had the best prose in the study at 4.46, clean rules, $0.0011 a
-decision and six seconds a call. Two lines from the same routine spring
+**Prose quality is the real price of going cheap.** gpt-oss-120b comes
+within 0.03 of the baseline on the rules and beats it on cost ninefold, but
+the judge puts its journals at 3.00 against 4.09 for 3.8 Flash. Gemini 3.5
+Flash-Lite's journals scored 4.05, level with 3.8 Flash's to the judge, at a
+quarter of the cost. GPT-5.6 Luna had the best prose in the study at 4.36,
+clean rules, $0.0012 a decision and seven seconds a call. Two lines from the same routine spring
 season, to show the range. Gemini 3.8 Flash:
 
 > "Our grain stores are full and two new babes rest in the tents. We tend our
@@ -253,7 +261,7 @@ a person.
 
 <figure class="chart">
   <img src="/charts/wind-spirit/eval-latency.svg" alt="Horizontal bar chart of seconds per decision on a log scale for 34 models, sorted. The Gemini Flash-Lites take 1.6 seconds, Mistral Medium 2.2, Gemini 3.8 Flash 3.7, GPT-5.6 Luna 6, Claude Sonnet 5 9.4, Gemini 3.1 Pro 9.7, Claude Haiku 4.5 11.7, MiniMax 22, and nine models from 27 to 74 seconds. A dotted line at 5 seconds is annotated: a chief gets about 2 seconds a week at normal speed and acts on habit while it thinks.">
-  <figcaption>Seconds per decision. At normal speed a chief has about two seconds a week; above five or so it acts on habit while the model is still thinking.</figcaption>
+  <figcaption>Seconds per decision. At normal speed a chief has about two seconds a week; above five or so it acts on habit while the model is still thinking, and above ten the wait is a bad experience whatever the score.</figcaption>
 </figure>
 
 **Latency is a first-class axis, and it disqualified nine models outright.**
@@ -283,6 +291,83 @@ $0.0029 a case there against $0.0070 on Vertex, but scored 0.952 against
 0.974 and slipped on the spirit cases, most likely a different thinking
 configuration on that route. Worth a controlled check before ever moving the
 default.
+
+## Reviewing the golden answers
+
+Golden errors are the usual thing in a hand-built eval, and this one had
+them. Two of them I found only after publishing the first version of this
+post; the rest came from going looking. Both kinds are worth showing.
+
+**The eval missed the failure a new player sees first.** Playing the deployed
+game, the standard tier sometimes left nobody gathering food in the very
+first spring: six adults on wood, five on stone, and twenty-one people hungry
+by week ten. The corpus never saw it, because its earliest routine case was
+week 110, by which time the scripted policy had built stores. So the first
+fix was to the eval. A small script reproduces the moment: three fresh
+seeds, three repetitions, raw model output, counting first springs with
+nobody on food or under a third of hands on food. As shipped, 3.5 Flash-Lite
+left nobody on food in eight of nine, and 3.8 Flash put under a third of
+hands on food in nine of nine. The cause was the prompt. It said "food for 7
+weeks" and nothing about how long a decision lasts or what a forager brings
+in; a chief who does not know that a decision holds for thirteen weeks reads
+seven weeks as comfortable. Adding the cadence to the world rules and a short
+section that does the arithmetic out loud ("the village eats N units a week;
+one worker brings in about F foraging, H hunting, S fishing") took 3.5
+Flash-Lite to none of nine and 3.8 Flash to none of nine. The scheduler also
+gained a floor that overrules an order which starves the village and says so
+in the journal; the prompt did the work, the floor is the backstop. Six
+first-spring cases are now in the corpus, and every model over 0.95 passes
+them all.
+
+**Then the audit.** The cheap way to find golden errors is to take the
+strongest clean runs, twelve here, and list every case-and-check pair that at
+least half of them fail. A check most strong models fail is more likely wrong
+than they are. It found four kinds of error:
+
+- *Asked for the impossible.* The harvest check fired on three autumn cases
+  where nothing had been planted, and the planting check on a spring case
+  where nothing had been cleared. Nobody can harvest an empty field. Those
+  checks now apply only when there is something to harvest or plant.
+- *Never stated the threat.* Two visitor cases expected "refuse" and every
+  strong model accepted or countered. Their reasons said why ("a small ask
+  beside our full granary; goodwill"): the prompt rendered a threatening
+  mandate as "they demand tribute: nothing; they ask for: 8 grain", so the
+  chief saw a small request from a small party, not extortion. The prompt now
+  says what the envoys actually say, that their warriors will come and take
+  it and more if refused, and the menu adds a line about weighing strength
+  against strength and what paying once teaches. Under that prompt 3.8 Flash
+  and 3.5 Flash-Lite refuse both; GPT-5.6 Luna pays once. The golden stands;
+  the case had been unanswerable as written.
+- *Too strict when rich.* The food-share rule demanded a third of hands on
+  food in every routine case, including villages holding 120 to 218 weeks of
+  grain. All eight of 3.8 Flash's routine misses in the second pass were
+  exactly this: a season of building with a year of food in the granary. The
+  rule now binds only under a year of stores.
+- *Corpus drift.* Rebuilding the corpus after the sim changes produced
+  different villages at the same weeks (27 of 96 case ids changed), so
+  rescoring old outputs against the new corpus silently mis-scored them: the
+  parser resolved names against views the model had never seen. The only
+  clean answer was to re-run every model still in the running, which is the
+  third pass the charts show.
+
+Gemini 3.8 Flash is not flawless either. After the corrections it misses two
+of 102: it stopped planting once in ten false-fallow cases because a spirit
+said the field was cursed, and it once skipped the research a true rumour
+pointed at. The last audit pass leaves one borderline check, a greedy-visitor
+case where a village with 25 weeks of food gives away a little more than the
+rule allows and six of twelve strong models fail; it stays, flagged.
+
+What the review changed in the ranking: almost nothing at the top. The
+corrected checks lifted every model by about the same amount, so 3.8 Flash
+is still first, Mistral Medium 3.1 is still the cheapest thing within a hair
+of it, and GPT-5.6 Luna still has the best prose. Two MaaS models moved a
+long way: Gemma 4 26B from 0.85 to 0.98 and Qwen 3 235B from 0.38 to 0.97,
+because their first scores had been the constrained-decoding bug's, not
+theirs. And a latency bar of ten seconds a decision now sits over the
+whole table, because a village on provisional orders while its chief thinks
+for a quarter of a minute is a bad experience whatever the score: Kimi K3
+scores second and is out at 14.6 seconds, Claude Sonnet 5 fourth and out at
+10.8.
 
 ## Five cases, side by side
 
@@ -512,3 +597,5 @@ About $9 of Vertex and $13 of OpenRouter credit: 34 models, 96 cases each,
 plus judging. Roughly $22, which is less than one century of a single
 baseline chief at normal cadence. The study paid for itself the moment the
 default tier moved from Flash to a Flash-Lite for routine seasons.
+
+The third pass, 25 models on the corrected corpus with the judge on, added about $13.
