@@ -457,7 +457,7 @@ decision.
 
 ## Limitations
 
-For honesty, because the gaps this study rests on are small:
+The gaps this study rests on are small, so these limitations matter:
 
 - The judge is Gemini 3.1 Pro grading Gemini and others. A second judge from
   another family would be the first thing I add.

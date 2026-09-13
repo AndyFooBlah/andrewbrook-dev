@@ -197,7 +197,7 @@ time in the order the lessons were learned.
   <figcaption>Each bar adds one change to the one before it. The dashed line is the suite's 90% target.</figcaption>
 </figure>
 
-Two honest notes. The "every legacy rule" bar is a reconstruction: the sim
+Two caveats. The "every legacy rule" bar is a reconstruction: the sim
 never actually ran with all five broken rules at once, so 18% is what the
 worst version would have done rather than what it did. And rationing on its
 own made things worse, 72% down to 50%. Sharing the shortfall meant everybody

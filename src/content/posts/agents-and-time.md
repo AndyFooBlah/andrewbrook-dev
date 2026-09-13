@@ -181,7 +181,7 @@ to 1am last night" got clipped at midnight. All are fixed in nl2time 0.3.1,
 with the benchmark's cross-check ratchet enforcing that the corpus
 annotations track the library's actual behavior forever.
 
-## Honest limitations
+## Limitations
 
 Free-text grading is approximate: checks anchor on verifiable facts (a
 count, a civil day, a wall time), accept generously (explicit dates, "last
