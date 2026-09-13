@@ -15,6 +15,38 @@ tags:
   - claude-code
 ---
 
+## Preface - a Note from Andy
+I asked Claude to look into different models to be used in Wind Spirit and 
+come up with a way to evaluate them.  Some of the tasks have objective 
+measures (if a chief fails to assign villagers to gather food, the village
+starves) but many are partially or completely subjective.  It was also 
+unclear to me how much intelligence would actually be needed for the 
+relatively simple decisions a chief in this sim makes.
+
+The results were useful in terms of latency and cost and for discovering
+and working out several bugs in model routing and eval datasets.  The
+subjective elements are... subjective.  Claude seems to think there are
+clearly better prose styles.  I'm less convinced but... none of the ones
+that scored highly seem terrible so it's good enough for this sort of
+game, I think.
+
+It's also a good test of Claude's ability to set up and execute simple
+evaluations.  It got it almost all right on the first try but we found
+some bugs when I pushed on specific failure modes.  I've had similar
+experiences when working on evaluation problems with experienced
+human engineers so this isn't a disappointment, really.  
+
+Overall this is another example of how a few hours of collaborative
+discussion with an AI can enable exploration of a topic (social sims
+with emergent economics using AI for some of the players) that would
+have taken weeks or months of effort in the past - and thus would
+never be prioritized.  But now it's a fun way to spend half a day on
+a weekend.
+
+Now, on to Claude's write-up.  I provided the task, guidelines, and 
+some concrete suggestions but the code, data and results write-up 
+are all Claude.
+
 ## The question
 
 Every village in [Wind Spirit](https://wind-spirit-prod.web.app) is run by an
