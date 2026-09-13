@@ -132,6 +132,15 @@ export const REPOS: Record<string, Project> = {
     theme: 'evaluation',
     lang: 'Python',
   },
+  'grammar-garden': {
+    name: 'Grammar Garden',
+    url: 'https://github.com/AndyFooBlah/grammar-garden',
+    blurb:
+      'Plants grown from tiny L-system recipes, in a browser. Unstable shapes collapse, sunlight and soil water decide who thrives across two climates, and bees and butterflies breed the survivors — so the field evolves forms nobody designed.',
+    theme: 'simulation',
+    lang: 'TypeScript',
+    links: [{ label: 'play it', url: 'https://andyfooblah.github.io/grammar-garden/' }],
+  },
   'wind-spirit': {
     name: 'Wind Spirit',
     url: 'https://github.com/AndyFooBlah/wind-spirit',
