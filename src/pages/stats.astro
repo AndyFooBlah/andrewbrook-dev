@@ -148,7 +148,7 @@ const updated = new Date(stats.generated + 'T00:00:00Z').toLocaleDateString('en-
       data, generated images and build output are excluded.
     </li>
     <li>
-      <b>Hours.</b> Local coding-agent sessions leave timestamped transcripts; time between messages
+      <b>Hours.</b> Local Claude Code sessions leave timestamped transcripts; time between messages
       counts as active up to a {stats.idle_gap_minutes}-minute gap, and parallel sessions are not
       double counted. Sessions run from the web or phone leave no transcript, so each is estimated at{' '}
       {stats.web_session_minutes} minutes.
@@ -158,6 +158,11 @@ const updated = new Date(stats.generated + 'T00:00:00Z').toLocaleDateString('en-
       Claude wrote" is output tokens, the model's own text, code and reasoning; the far larger cache-read
       figure is context re-read from the prompt cache on each request. Web and phone sessions are missing
       here too.
+    </li>
+    <li>
+      <b>Blind spots.</b> Only Claude Code is measured for hours, tokens and chores. I also use Gemini
+      CLI, Antigravity and Gemini now and then, and did so more a few months ago; that work shows up in
+      the AI-written lines but nowhere else on this page.
     </li>
     <li>
       <b>Chores.</b> Things the agent could not do and handed back to me: run this in your terminal,
