@@ -36,6 +36,41 @@ export function spend(w: Week): number {
   return Object.values(w.spend).reduce((a, b) => a + b, 0);
 }
 
+export type TokenKind = 'input' | 'output' | 'cache_read' | 'cache_write';
+type Tokens = Record<string, Record<TokenKind, number>>;
+
+/** "claude-fable-5-1" → "Fable 5.1", "claude-haiku-4-5-20251001" → "Haiku 4.5". */
+export function modelLabel(id: string): string {
+  const m = id.match(/^claude-([a-z]+)-(\d+)(?:-(\d+))?/);
+  if (!m) return id;
+  return `${m[1][0].toUpperCase()}${m[1].slice(1)} ${m[2]}${m[3] ? `.${m[3]}` : ''}`;
+}
+
+export function tokens(w: Week, model: string, kind: TokenKind): number {
+  return (w.tokens as Tokens)[model]?.[kind] ?? 0;
+}
+
+export function tokenTotal(w: Week, kind: TokenKind): number {
+  return Object.keys(w.tokens).reduce((a, m) => a + tokens(w, m, kind), 0);
+}
+
+/** Models ranked by output tokens over `weeks`. */
+export function rankedModels(weeks: Week[]): string[] {
+  const out: Record<string, number> = {};
+  for (const w of weeks) for (const m of Object.keys(w.tokens)) out[m] = (out[m] ?? 0) + tokens(w, m, 'output');
+  return Object.keys(out).filter((m) => out[m] > 0).sort((a, b) => out[b] - out[a]);
+}
+
+/** Chart series for the top `n` models, the rest folded into "Other". */
+export function modelSeries(weeks: Week[], kind: TokenKind, n = 5) {
+  const models = rankedModels(weeks);
+  const top = models.slice(0, n);
+  const rest = models.slice(n);
+  const series = top.map((m, i) => ({ name: modelLabel(m), color: `--series-${i + 1}`, value: (w: Week) => tokens(w, m, kind) }));
+  if (rest.length) series.push({ name: 'Other', color: `--series-${top.length + 1}`, value: (w: Week) => rest.reduce((a, m) => a + tokens(w, m, kind), 0) });
+  return series;
+}
+
 /** Claude hours: transcript minutes plus the per-web-session estimate. */
 export function claudeHours(w: Week): number {
   return (w.claude_minutes + w.web_sessions * raw.web_session_minutes) / 60;
@@ -57,6 +92,8 @@ export function totals(weeks: Week[]) {
     sessions: sum((w) => w.sessions + w.web_sessions),
     chores: sum(chores),
     choreMinutes: sum((w) => w.chore_minutes),
+    outputTokens: sum((w) => tokenTotal(w, 'output')),
+    cacheReadTokens: sum((w) => tokenTotal(w, 'cache_read')),
     spend: sum(spend),
     byChore,
   };

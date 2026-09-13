@@ -5,7 +5,7 @@ import WeeklyBars from '../components/WeeklyBars.astro';
 import CategoryBars from '../components/CategoryBars.astro';
 import {
   stats, recentWeeks, totals, lines, chores, claudeHours, compact, pct,
-  CHORE_LABELS, weekRange,
+  CHORE_LABELS, weekRange, modelSeries, rankedModels, modelLabel, tokens, tokenTotal,
 } from '../lib/stats';
 
 const weeks = recentWeeks(52);
@@ -24,7 +24,7 @@ const updated = new Date(stats.generated + 'T00:00:00Z').toLocaleDateString('en-
   <p>
     Nearly everything I build is written by a coding agent. This page tracks what that actually looks
     like: lines the agent wrote versus lines I wrote or edited by hand, the hours I spent driving it,
-    and the chores that still needed a human. Numbers are weekly totals across all my projects;
+    which models did the work, and the chores that still needed a human. Numbers are weekly totals across all my projects;
     nothing here says which project.
   </p>
   <p class="meta">Updated {updated}.</p>
@@ -33,6 +33,7 @@ const updated = new Date(stats.generated + 'T00:00:00Z').toLocaleDateString('en-
     tiles={[
       { label: 'of lines changed were AI-written', value: pct(t.aiShare), note: `${compact(t.ai)} AI · ${compact(t.hand)} by hand` },
       { label: 'hours working with Claude', value: compact(t.hours), note: `${t.sessions.toLocaleString('en-US')} sessions` },
+      { label: 'tokens Claude wrote', value: compact(t.outputTokens), note: `${compact(t.cacheReadTokens)} read from cache` },
       { label: 'chores done by hand', value: t.chores.toLocaleString('en-US'), note: `${compact(t.choreMinutes / 60)} hours` },
     ]}
   />
@@ -73,6 +74,25 @@ const updated = new Date(stats.generated + 'T00:00:00Z').toLocaleDateString('en-
 
   <div class="viz-pair">
     <WeeklyBars
+      title="Which models did the work"
+      subtitle="Output tokens, per week"
+      source={SRC_CLAUDE}
+      weeks={weeks}
+      height={120}
+      format={compact}
+      series={modelSeries(weeks, 'output')}
+    />
+    <CategoryBars
+      title="Output tokens by model"
+      subtitle="Tokens, total"
+      source={SRC_CLAUDE}
+      format={compact}
+      rows={rankedModels(weeks).map((m) => ({ label: modelLabel(m), value: weeks.reduce((a, w) => a + tokens(w, m, 'output'), 0) }))}
+    />
+  </div>
+
+  <div class="viz-pair">
+    <WeeklyBars
       title="Chores I had to do myself"
       subtitle="Tasks handed back to me, per week"
       source={SRC_LEDGER}
@@ -95,7 +115,7 @@ const updated = new Date(stats.generated + 'T00:00:00Z').toLocaleDateString('en-
         <thead>
           <tr>
             <th>Week</th><th>AI lines</th><th>Hand lines</th><th>AI commits</th><th>Hand commits</th>
-            <th>Claude hours</th><th>Sessions</th><th>Chores</th>
+            <th>Claude hours</th><th>Sessions</th><th>Tokens out</th><th>Chores</th>
           </tr>
         </thead>
         <tbody>
@@ -108,6 +128,7 @@ const updated = new Date(stats.generated + 'T00:00:00Z').toLocaleDateString('en-
               <td>{w.hand_commits}</td>
               <td>{fmtHours(claudeHours(w))}h</td>
               <td>{w.sessions + w.web_sessions}</td>
+              <td>{compact(tokenTotal(w, 'output'))}</td>
               <td>{chores(w)}</td>
             </tr>
           ))}
@@ -131,6 +152,12 @@ const updated = new Date(stats.generated + 'T00:00:00Z').toLocaleDateString('en-
       counts as active up to a {stats.idle_gap_minutes}-minute gap, and parallel sessions are not
       double counted. Sessions run from the web or phone leave no transcript, so each is estimated at{' '}
       {stats.web_session_minutes} minutes.
+    </li>
+    <li>
+      <b>Tokens.</b> Every local transcript message records the model and its token counts. "Tokens
+      Claude wrote" is output tokens, the model's own text, code and reasoning; the far larger cache-read
+      figure is context re-read from the prompt cache on each request. Web and phone sessions are missing
+      here too.
     </li>
     <li>
       <b>Chores.</b> Things the agent could not do and handed back to me: run this in your terminal,
