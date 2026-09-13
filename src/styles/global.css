@@ -14,6 +14,9 @@
   --series-1: #006ba2;
   --series-2: #db444b;
   --series-3: #3ebcd2;
+  --series-4: #ebb434;
+  --series-5: #379a8b;
+  --series-6: #9a607f;
   --grid: #e1e0d9;
   --baseline: #52514e;
   --measure: 44rem;
@@ -35,6 +38,9 @@
     --series-1: #1f80bb;
     --series-2: #d9525a;
     --series-3: #1fa3bb;
+    --series-4: #f2c14e;
+    --series-5: #4fb09f;
+    --series-6: #b07a95;
     --grid: #2c2c2a;
     --baseline: #9b9a90;
   }
@@ -53,6 +59,9 @@
   --series-1: #1f80bb;
   --series-2: #d9525a;
   --series-3: #1fa3bb;
+    --series-4: #f2c14e;
+    --series-5: #4fb09f;
+    --series-6: #b07a95;
   --grid: #2c2c2a;
   --baseline: #9b9a90;
 }

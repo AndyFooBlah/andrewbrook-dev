@@ -1,5 +1,14 @@
 {
  "generated": "2026-09-12",
+ "models": [
+  "claude-fable-5-1",
+  "claude-fable-5",
+  "claude-opus-4-7",
+  "claude-opus-4-8",
+  "claude-opus-5",
+  "claude-sonnet-5",
+  "claude-haiku-4-5-20251001"
+ ],
  "since": "2025-06-01",
  "web_session_minutes": 30,
  "idle_gap_minutes": 15,
@@ -43,7 +52,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-06-02",
@@ -70,7 +80,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-06-09",
@@ -97,7 +108,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-06-16",
@@ -124,7 +136,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-06-23",
@@ -151,7 +164,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-06-30",
@@ -178,7 +192,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-07-07",
@@ -205,7 +220,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-07-14",
@@ -232,7 +248,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-07-21",
@@ -259,7 +276,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-07-28",
@@ -286,7 +304,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-08-04",
@@ -313,7 +332,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-08-11",
@@ -340,7 +360,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-08-18",
@@ -367,7 +388,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-08-25",
@@ -394,7 +416,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-09-01",
@@ -421,7 +444,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-09-08",
@@ -448,7 +472,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-09-15",
@@ -475,7 +500,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-09-22",
@@ -502,7 +528,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-09-29",
@@ -529,7 +556,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-10-06",
@@ -556,7 +584,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-10-13",
@@ -583,7 +612,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-10-20",
@@ -610,7 +640,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-10-27",
@@ -637,7 +668,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-11-03",
@@ -664,7 +696,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-11-10",
@@ -691,7 +724,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-11-17",
@@ -718,7 +752,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-11-24",
@@ -745,7 +780,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-12-01",
@@ -772,7 +808,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-12-08",
@@ -799,7 +836,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-12-15",
@@ -826,7 +864,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-12-22",
@@ -853,7 +892,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2025-12-29",
@@ -880,7 +920,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2026-01-05",
@@ -907,7 +948,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2026-01-12",
@@ -934,7 +976,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2026-01-19",
@@ -961,7 +1004,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2026-01-26",
@@ -988,7 +1032,8 @@
     "claude": 45.16,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2026-02-02",
@@ -1015,7 +1060,8 @@
     "claude": 45.16,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2026-02-09",
@@ -1042,7 +1088,8 @@
     "claude": 45.16,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2026-02-16",
@@ -1069,7 +1116,8 @@
     "claude": 45.16,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2026-02-23",
@@ -1096,7 +1144,8 @@
     "claude": 47.93,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2026-03-02",
@@ -1123,7 +1172,8 @@
     "claude": 50.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2026-03-09",
@@ -1150,7 +1200,8 @@
     "claude": 50.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2026-03-16",
@@ -1177,7 +1228,8 @@
     "claude": 50.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2026-03-23",
@@ -1204,7 +1256,8 @@
     "claude": 47.24,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2026-03-30",
@@ -1231,7 +1284,8 @@
     "claude": 45.16,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2026-04-06",
@@ -1258,7 +1312,8 @@
     "claude": 45.16,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2026-04-13",
@@ -1285,7 +1340,8 @@
     "claude": 45.16,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2026-04-20",
@@ -1312,7 +1368,8 @@
     "claude": 38.71,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2026-04-27",
@@ -1339,7 +1396,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2026-05-04",
@@ -1366,7 +1424,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2026-05-11",
@@ -1393,7 +1452,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2026-05-18",
@@ -1420,6 +1480,14 @@
     "claude": 7.57,
     "cloud": 0.0,
     "other": 0.0
+   },
+   "tokens": {
+    "claude-opus-4-7": {
+     "input": 24,
+     "output": 19074,
+     "cache_read": 89330,
+     "cache_write": 36650
+    }
    }
   },
   {
@@ -1447,6 +1515,14 @@
     "claude": 255.18,
     "cloud": 0.0,
     "other": 0.0
+   },
+   "tokens": {
+    "claude-opus-4-7": {
+     "input": 7158,
+     "output": 1185364,
+     "cache_read": 119778493,
+     "cache_write": 4782232
+    }
    }
   },
   {
@@ -1474,6 +1550,14 @@
     "claude": 2.81,
     "cloud": 0.0,
     "other": 0.0
+   },
+   "tokens": {
+    "claude-opus-4-7": {
+     "input": 94,
+     "output": 314117,
+     "cache_read": 27107456,
+     "cache_write": 3636438
+    }
    }
   },
   {
@@ -1501,6 +1585,14 @@
     "claude": 20.03,
     "cloud": 0.0,
     "other": 0.0
+   },
+   "tokens": {
+    "claude-opus-4-7": {
+     "input": 660,
+     "output": 624762,
+     "cache_read": 168992175,
+     "cache_write": 11710359
+    }
    }
   },
   {
@@ -1528,6 +1620,20 @@
     "claude": 65.55,
     "cloud": 0.0,
     "other": 0.0
+   },
+   "tokens": {
+    "claude-opus-4-7": {
+     "input": 4101,
+     "output": 1658539,
+     "cache_read": 433069461,
+     "cache_write": 12919406
+    },
+    "claude-haiku-4-5-20251001": {
+     "input": 95,
+     "output": 1866,
+     "cache_read": 200658,
+     "cache_write": 92667
+    }
    }
   },
   {
@@ -1555,6 +1661,14 @@
     "claude": 76.97,
     "cloud": 0.0,
     "other": 0.0
+   },
+   "tokens": {
+    "claude-opus-4-7": {
+     "input": 1213,
+     "output": 852679,
+     "cache_read": 270222194,
+     "cache_write": 11191866
+    }
    }
   },
   {
@@ -1582,6 +1696,20 @@
     "claude": 36.23,
     "cloud": 0.0,
     "other": 0.0
+   },
+   "tokens": {
+    "claude-opus-4-8": {
+     "input": 172197,
+     "output": 1782109,
+     "cache_read": 571881987,
+     "cache_write": 12273407
+    },
+    "claude-opus-4-7": {
+     "input": 324,
+     "output": 320295,
+     "cache_read": 51258746,
+     "cache_write": 4933183
+    }
    }
   },
   {
@@ -1609,6 +1737,26 @@
     "claude": 30.26,
     "cloud": 0.0,
     "other": 0.0
+   },
+   "tokens": {
+    "claude-fable-5": {
+     "input": 344334,
+     "output": 805784,
+     "cache_read": 212212028,
+     "cache_write": 7624944
+    },
+    "claude-opus-4-8": {
+     "input": 132330,
+     "output": 518982,
+     "cache_read": 169962206,
+     "cache_write": 2575370
+    },
+    "claude-opus-4-7": {
+     "input": 301,
+     "output": 228838,
+     "cache_read": 59374807,
+     "cache_write": 8100773
+    }
    }
   },
   {
@@ -1636,6 +1784,26 @@
     "claude": 22.57,
     "cloud": 0.0,
     "other": 0.0
+   },
+   "tokens": {
+    "claude-opus-4-7": {
+     "input": 55,
+     "output": 30295,
+     "cache_read": 26537819,
+     "cache_write": 2061005
+    },
+    "claude-fable-5": {
+     "input": 91032,
+     "output": 245680,
+     "cache_read": 110773633,
+     "cache_write": 10029036
+    },
+    "claude-opus-4-8": {
+     "input": 15566,
+     "output": 209317,
+     "cache_read": 159949631,
+     "cache_write": 849633
+    }
    }
   },
   {
@@ -1663,6 +1831,20 @@
     "claude": 193.22,
     "cloud": 0.0,
     "other": 0.0
+   },
+   "tokens": {
+    "claude-fable-5": {
+     "input": 1290210,
+     "output": 5058030,
+     "cache_read": 1126713337,
+     "cache_write": 43086969
+    },
+    "claude-opus-4-8": {
+     "input": 14174,
+     "output": 454442,
+     "cache_read": 251692028,
+     "cache_write": 4589545
+    }
    }
   },
   {
@@ -1690,6 +1872,26 @@
     "claude": 35.37,
     "cloud": 0.0,
     "other": 0.0
+   },
+   "tokens": {
+    "claude-fable-5": {
+     "input": 866,
+     "output": 380627,
+     "cache_read": 115317850,
+     "cache_write": 12266148
+    },
+    "claude-opus-5": {
+     "input": 539,
+     "output": 168200,
+     "cache_read": 88954795,
+     "cache_write": 8185183
+    },
+    "claude-sonnet-5": {
+     "input": 34,
+     "output": 3068,
+     "cache_read": 7078231,
+     "cache_write": 1374666
+    }
    }
   },
   {
@@ -1717,7 +1919,8 @@
     "claude": 0.0,
     "cloud": 0.0,
     "other": 0.0
-   }
+   },
+   "tokens": {}
   },
   {
    "week": "2026-08-10",
@@ -1744,6 +1947,14 @@
     "claude": 17.05,
     "cloud": 0.0,
     "other": 0.0
+   },
+   "tokens": {
+    "claude-opus-5": {
+     "input": 7479,
+     "output": 246073,
+     "cache_read": 53238831,
+     "cache_write": 1761208
+    }
    }
   },
   {
@@ -1771,6 +1982,14 @@
     "claude": 5.27,
     "cloud": 0.0,
     "other": 0.0
+   },
+   "tokens": {
+    "claude-opus-5": {
+     "input": 216,
+     "output": 94651,
+     "cache_read": 27203247,
+     "cache_write": 896739
+    }
    }
   },
   {
@@ -1795,9 +2014,29 @@
    },
    "chore_minutes": 25,
    "spend": {
-    "claude": 57.33,
+    "claude": 53.62,
     "cloud": 0.0,
     "other": 0.0
+   },
+   "tokens": {
+    "claude-opus-5": {
+     "input": 154,
+     "output": 46541,
+     "cache_read": 26795194,
+     "cache_write": 3229490
+    },
+    "claude-opus-4-8": {
+     "input": 480,
+     "output": 156994,
+     "cache_read": 48994259,
+     "cache_write": 2322370
+    },
+    "claude-fable-5": {
+     "input": 918,
+     "output": 384566,
+     "cache_read": 125923037,
+     "cache_write": 7780243
+    }
    }
   },
   {
@@ -1809,7 +2048,7 @@
    "ai_commits": 17,
    "hand_commits": 0,
    "claude_minutes": 501,
-   "sessions": 1,
+   "sessions": 2,
    "web_sessions": 0,
    "chores": {
     "terminal": 2,
@@ -1822,21 +2061,47 @@
    },
    "chore_minutes": 25,
    "spend": {
-    "claude": 36.78,
+    "claude": 31.41,
     "cloud": 0.0,
     "other": 0.0
+   },
+   "tokens": {
+    "claude-opus-4-8": {
+     "input": 328,
+     "output": 222244,
+     "cache_read": 52986895,
+     "cache_write": 2952534
+    },
+    "claude-opus-5": {
+     "input": 52,
+     "output": 20580,
+     "cache_read": 8110367,
+     "cache_write": 949169
+    },
+    "claude-fable-5-1": {
+     "input": 22298,
+     "output": 1587159,
+     "cache_read": 265849660,
+     "cache_write": 6650439
+    },
+    "claude-fable-5": {
+     "input": 128,
+     "output": 70600,
+     "cache_read": 19097348,
+     "cache_write": 1151908
+    }
    }
   },
   {
    "week": "2026-09-07",
-   "ai_added": 34254,
-   "ai_deleted": 7420,
+   "ai_added": 35269,
+   "ai_deleted": 7471,
    "hand_added": 0,
    "hand_deleted": 0,
-   "ai_commits": 79,
+   "ai_commits": 85,
    "hand_commits": 0,
-   "claude_minutes": 705,
-   "sessions": 9,
+   "claude_minutes": 976,
+   "sessions": 10,
    "web_sessions": 1,
    "chores": {
     "terminal": 14,
@@ -1849,9 +2114,23 @@
    },
    "chore_minutes": 240,
    "spend": {
-    "claude": 53.93,
+    "claude": 63.02,
     "cloud": 0.0,
     "other": 0.0
+   },
+   "tokens": {
+    "claude-opus-5": {
+     "input": 794,
+     "output": 218596,
+     "cache_read": 46969194,
+     "cache_write": 1666714
+    },
+    "claude-fable-5-1": {
+     "input": 195432,
+     "output": 6462680,
+     "cache_read": 1638485234,
+     "cache_write": 76386896
+    }
    }
   }
  ]

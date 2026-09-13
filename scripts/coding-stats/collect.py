@@ -11,8 +11,9 @@ Sources (all read locally, nothing leaves the machine except the output):
                  transcripts by scripts/coding-stats/detect_chores.py.
   spend.jsonl    subscription, top-ups, cloud bills -> dollars per week.
 
-The output contains ONLY weekly totals. No repo names, paths, session ids,
-commit messages or chore notes are ever written to it.
+The output contains ONLY weekly totals (plus token counts per model). No
+repo names, paths, session ids, commit messages or chore notes are ever
+written to it.
 
 Usage:
   collect.py [--config ~/.config/coding-stats/config.json] [--out FILE]
@@ -111,6 +112,7 @@ def new_week() -> dict:
         "chores": {c: 0 for c in CHORE_CATEGORIES},
         "chore_minutes": 0,
         "spend": {c: 0.0 for c in SPEND_CATEGORIES},
+        "tokens": {},   # model id -> {input, output, cache_read, cache_write}
     }
 
 
@@ -234,7 +236,8 @@ def collect_transcripts(cfg: dict, weeks: dict) -> int:
     Every user/assistant message timestamp is an "activity" point. Activity
     points from all sessions are merged so parallel sessions are not double
     counted, then each gap between consecutive points contributes
-    min(gap, idle_gap). Returns number of transcript files read.
+    min(gap, idle_gap). Assistant messages also carry the model and token
+    counts, summed per week and model. Returns number of transcript files read.
     """
     since = parse_ts(cfg["since"] + "T00:00:00+00:00")
     gap_cap = cfg["idle_gap_minutes"] * 60.0
@@ -259,6 +262,15 @@ def collect_transcripts(cfg: dict, weeks: dict) -> int:
                     if ts < since:
                         continue
                     points.append(ts)
+                    usage = o.get("message", {}).get("usage") if o["type"] == "assistant" else None
+                    model = o.get("message", {}).get("model", "")
+                    if usage and model and not model.startswith("<"):
+                        tk = weeks[week_key(ts.date())]["tokens"].setdefault(
+                            model, {"input": 0, "output": 0, "cache_read": 0, "cache_write": 0})
+                        tk["input"] += usage.get("input_tokens") or 0
+                        tk["output"] += usage.get("output_tokens") or 0
+                        tk["cache_read"] += usage.get("cache_read_input_tokens") or 0
+                        tk["cache_write"] += usage.get("cache_creation_input_tokens") or 0
                     sid = o.get("sessionId") or path
                     if sid not in session_start or ts < session_start[sid]:
                         session_start[sid] = ts
@@ -467,8 +479,13 @@ def main() -> None:
         w["spend"] = {k: round(v, 2) for k, v in w["spend"].items()}
         rows.append({"week": wk, **w})
 
+    by_model: dict[str, int] = defaultdict(int)
+    for r in rows:
+        for model, tk in r["tokens"].items():
+            by_model[model] += tk["output"]
     out = {
         "generated": today.isoformat(),
+        "models": sorted(by_model, key=lambda m: -by_model[m]),   # by output tokens
         "since": cfg["since"],
         "web_session_minutes": est_or(cfg),
         "idle_gap_minutes": cfg["idle_gap_minutes"],
