@@ -99,8 +99,9 @@ export function totals(weeks: Week[]) {
   };
 }
 
-/** 1,284 → "1.3K", 4200000 → "4.2M". */
+/** 1,284 → "1.3K", 4200000 → "4.2M", 6.3e9 → "6.3B". */
 export function compact(n: number): string {
+  if (Math.abs(n) >= 1e9) return `${(n / 1e9).toFixed(1).replace(/\.0$/, '')}B`;
   if (Math.abs(n) >= 1e6) return `${(n / 1e6).toFixed(1).replace(/\.0$/, '')}M`;
   if (Math.abs(n) >= 1e4) return `${Math.round(n / 1e3)}K`;
   if (Math.abs(n) >= 1e3) return `${(n / 1e3).toFixed(1).replace(/\.0$/, '')}K`;
