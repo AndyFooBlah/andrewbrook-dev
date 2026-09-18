@@ -11,11 +11,14 @@ Actions then deploys the site.
 Install (once, on the MacBook):
 
 ```sh
-cp scripts/coding-stats/launchd/dev.andrewbrook.coding-stats.plist ~/Library/LaunchAgents/
-launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/dev.andrewbrook.coding-stats.plist
-launchctl kickstart -k gui/$(id -u)/dev.andrewbrook.coding-stats   # run it now
+scripts/coding-stats/launchd/install.sh --now   # --now also runs it immediately
 tail -f ~/Library/Logs/coding-stats.log
 ```
+
+The committed plist writes its log to `__HOME__/Library/Logs/coding-stats.log`;
+launchd does not expand `$HOME` in a plist, so `install.sh` substitutes your
+home directory while copying it into `~/Library/LaunchAgents/`. Do not copy the
+plist by hand. Re-running the installer replaces the loaded job.
 
 Remove with `launchctl bootout gui/$(id -u)/dev.andrewbrook.coding-stats`.
 The job needs the same one-time setup as a manual run: the config in
