@@ -1,0 +1,26 @@
+name: Stats freshness
+
+# The coding stats are refreshed by a launchd job on a laptop. If that job
+# stops (keychain locked, credentials expired, machine off), the data goes
+# stale silently. This fails, and GitHub emails the failure, when the data
+# file's generated date is more than three days old.
+
+on:
+  schedule:
+    - cron: '30 15 * * *'   # daily, 08:30 Pacific
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Data file generated within the last 3 days
+        run: |
+          gen=$(python3 -c "import json;print(json.load(open('src/data/coding-stats.json'))['generated'])")
+          age=$(( ( $(date -u +%s) - $(date -u -d "$gen" +%s) ) / 86400 ))
+          echo "coding-stats.json generated $gen ($age days ago)"
+          if [ "$age" -gt 3 ]; then
+            echo "::error::coding-stats.json is $age days old; the laptop refresh job has stopped"
+            exit 1
+          fi

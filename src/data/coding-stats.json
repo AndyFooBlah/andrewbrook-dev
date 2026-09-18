@@ -1,11 +1,12 @@
 {
- "generated": "2026-09-17",
+ "generated": "2026-09-18",
  "models": [
   "claude-fable-5-1",
   "claude-fable-5",
   "claude-opus-4-7",
   "claude-opus-4-8",
   "claude-opus-5",
+  "gemini-3-flash-preview",
   "claude-sonnet-5",
   "claude-haiku-4-5-20251001"
  ],
@@ -1379,8 +1380,8 @@
    "hand_deleted": 0,
    "ai_commits": 15,
    "hand_commits": 0,
-   "claude_minutes": 0,
-   "sessions": 0,
+   "claude_minutes": 31,
+   "sessions": 1,
    "web_sessions": 0,
    "chores": {
     "terminal": 0,
@@ -1393,11 +1394,18 @@
    },
    "chore_minutes": 0,
    "spend": {
-    "claude": 0.0,
+    "claude": 8.03,
     "cloud": 0.0,
     "other": 0.0
    },
-   "tokens": {}
+   "tokens": {
+    "gemini-3-flash-preview": {
+     "input": 551144,
+     "output": 48618,
+     "cache_read": 2238299,
+     "cache_write": 0
+    }
+   }
   },
   {
    "week": "2026-05-04",
@@ -1407,7 +1415,7 @@
    "hand_deleted": 0,
    "ai_commits": 16,
    "hand_commits": 0,
-   "claude_minutes": 0,
+   "claude_minutes": 153,
    "sessions": 0,
    "web_sessions": 0,
    "chores": {
@@ -1421,11 +1429,18 @@
    },
    "chore_minutes": 0,
    "spend": {
-    "claude": 0.0,
+    "claude": 39.68,
     "cloud": 0.0,
     "other": 0.0
    },
-   "tokens": {}
+   "tokens": {
+    "gemini-3-flash-preview": {
+     "input": 8239543,
+     "output": 197582,
+     "cache_read": 71919938,
+     "cache_write": 0
+    }
+   }
   },
   {
    "week": "2026-05-11",
@@ -1463,7 +1478,7 @@
    "hand_deleted": 0,
    "ai_commits": 1,
    "hand_commits": 0,
-   "claude_minutes": 21,
+   "claude_minutes": 65,
    "sessions": 1,
    "web_sessions": 0,
    "chores": {
@@ -1477,7 +1492,7 @@
    },
    "chore_minutes": 0,
    "spend": {
-    "claude": 7.57,
+    "claude": 16.86,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1487,6 +1502,12 @@
      "output": 19074,
      "cache_read": 89330,
      "cache_write": 36650
+    },
+    "gemini-3-flash-preview": {
+     "input": 2758720,
+     "output": 33730,
+     "cache_read": 21771049,
+     "cache_write": 0
     }
    }
   },
@@ -1512,7 +1533,7 @@
    },
    "chore_minutes": 193,
    "spend": {
-    "claude": 255.18,
+    "claude": 197.5,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1533,8 +1554,8 @@
    "hand_deleted": 0,
    "ai_commits": 0,
    "hand_commits": 0,
-   "claude_minutes": 23,
-   "sessions": 0,
+   "claude_minutes": 42,
+   "sessions": 2,
    "web_sessions": 0,
    "chores": {
     "terminal": 0,
@@ -1547,7 +1568,7 @@
    },
    "chore_minutes": 5,
    "spend": {
-    "claude": 2.81,
+    "claude": 4.94,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1582,7 +1603,7 @@
    },
    "chore_minutes": 28,
    "spend": {
-    "claude": 20.03,
+    "claude": 19.82,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1604,7 +1625,7 @@
    "ai_commits": 3,
    "hand_commits": 0,
    "claude_minutes": 546,
-   "sessions": 0,
+   "sessions": 3,
    "web_sessions": 0,
    "chores": {
     "terminal": 1,
@@ -1617,7 +1638,7 @@
    },
    "chore_minutes": 20,
    "spend": {
-    "claude": 65.55,
+    "claude": 64.84,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1658,7 +1679,7 @@
    },
    "chore_minutes": 20,
    "spend": {
-    "claude": 76.97,
+    "claude": 76.44,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1924,11 +1945,11 @@
   },
   {
    "week": "2026-08-10",
-   "ai_added": 428,
-   "ai_deleted": 22,
+   "ai_added": 0,
+   "ai_deleted": 0,
    "hand_added": 0,
    "hand_deleted": 0,
-   "ai_commits": 1,
+   "ai_commits": 0,
    "hand_commits": 0,
    "claude_minutes": 185,
    "sessions": 2,
@@ -1959,8 +1980,8 @@
   },
   {
    "week": "2026-08-17",
-   "ai_added": 200,
-   "ai_deleted": 180,
+   "ai_added": 70,
+   "ai_deleted": 0,
    "hand_added": 0,
    "hand_deleted": 0,
    "ai_commits": 1,
@@ -1994,11 +2015,11 @@
   },
   {
    "week": "2026-08-24",
-   "ai_added": 2588,
+   "ai_added": 2622,
    "ai_deleted": 139,
    "hand_added": 0,
    "hand_deleted": 0,
-   "ai_commits": 9,
+   "ai_commits": 10,
    "hand_commits": 0,
    "claude_minutes": 346,
    "sessions": 0,
@@ -2014,7 +2035,7 @@
    },
    "chore_minutes": 25,
    "spend": {
-    "claude": 50.73,
+    "claude": 50.85,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -2061,7 +2082,7 @@
    },
    "chore_minutes": 25,
    "spend": {
-    "claude": 27.23,
+    "claude": 27.4,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -2114,7 +2135,7 @@
    },
    "chore_minutes": 289,
    "spend": {
-    "claude": 63.45,
+    "claude": 63.85,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -2135,14 +2156,14 @@
   },
   {
    "week": "2026-09-14",
-   "ai_added": 23646,
-   "ai_deleted": 483,
+   "ai_added": 24373,
+   "ai_deleted": 588,
    "hand_added": 0,
    "hand_deleted": 0,
-   "ai_commits": 24,
+   "ai_commits": 29,
    "hand_commits": 0,
-   "claude_minutes": 716,
-   "sessions": 7,
+   "claude_minutes": 817,
+   "sessions": 8,
    "web_sessions": 0,
    "chores": {
     "terminal": 10,
@@ -2155,22 +2176,28 @@
    },
    "chore_minutes": 126,
    "spend": {
-    "claude": 38.9,
+    "claude": 44.66,
     "cloud": 0.0,
     "other": 0.0
    },
    "tokens": {
     "claude-opus-5": {
-     "input": 3470,
-     "output": 1744730,
-     "cache_read": 446439138,
-     "cache_write": 10268835
+     "input": 4174,
+     "output": 2094705,
+     "cache_read": 535210744,
+     "cache_write": 22217110
+    },
+    "claude-fable-5": {
+     "input": 36,
+     "output": 15549,
+     "cache_read": 5145093,
+     "cache_write": 2579585
     },
     "claude-fable-5-1": {
-     "input": 2284,
-     "output": 83697,
-     "cache_read": 44595645,
-     "cache_write": 3536329
+     "input": 7610,
+     "output": 320604,
+     "cache_read": 86247323,
+     "cache_write": 14247815
     }
    }
   }
