@@ -148,7 +148,7 @@ const updated = new Date(stats.generated + 'T00:00:00Z').toLocaleDateString('en-
       data, generated images and build output are excluded.
     </li>
     <li>
-      <b>Hours.</b> Local Claude Code sessions leave timestamped transcripts; time between messages
+      <b>Hours.</b> Local Claude Code and Gemini CLI sessions leave timestamped transcripts; time between messages
       counts as active up to a {stats.idle_gap_minutes}-minute gap, and parallel sessions are not
       double counted. Sessions run from the web or phone leave no transcript, so each is estimated at{' '}
       {stats.web_session_minutes} minutes.
@@ -160,9 +160,10 @@ const updated = new Date(stats.generated + 'T00:00:00Z').toLocaleDateString('en-
       here too.
     </li>
     <li>
-      <b>Blind spots.</b> Only Claude Code is measured for hours, tokens and chores. I also use Gemini
-      CLI, Antigravity and Gemini now and then, and did so more a few months ago; that work shows up in
-      the AI-written lines but nowhere else on this page.
+      <b>Blind spots.</b> Hours and tokens come from what leaves a log on this machine: Claude Code,
+      Gemini CLI, and the Antigravity command line (prompts only, no tokens). I also use the Antigravity
+      editor and Gemini itself now and then, and did so more a few months ago; that work shows up in the
+      AI-written lines but nowhere else on this page. Chores are detected from Claude Code only.
     </li>
     <li>
       <b>Chores.</b> Things the agent could not do and handed back to me: run this in your terminal,

@@ -5,7 +5,9 @@ Sources (all read locally, nothing leaves the machine except the output):
 
   git repos      lines/commits per week, split AI vs hand by the
                  "Co-Authored-By: Claude" trailer that Claude Code writes.
-  transcripts    ~/.claude/projects/**/*.jsonl -> active minutes with Claude.
+  transcripts    ~/.claude/projects/**/*.jsonl -> active minutes with Claude,
+                 plus Gemini CLI chats and the Antigravity CLI prompt history
+                 where they exist, for the same measures.
   chores.jsonl   manual tasks you logged (scripts/coding-stats/chore.sh).
   chores-auto.jsonl  tasks the agent handed back to you, found in the
                  transcripts by scripts/coding-stats/detect_chores.py.
@@ -66,6 +68,8 @@ DEFAULTS = {
     # for agents that leave a body line instead of a trailer.
     "ai_body_pattern": r"^\s*(assisted by|generated with|🤖 generated with)\b.*\b(claude|gemini|codex|copilot)\b",
     "transcripts": ["~/.claude/projects"],
+    "gemini_transcripts": ["~/.gemini/tmp"],          # Gemini CLI **/chats/*.jsonl
+    "antigravity_history": "~/.gemini/antigravity-cli/history.jsonl",
     "idle_gap_minutes": 15,
     "web_session_minutes": 30,     # estimate per remote (claude.ai/code) session
     "ledger": "~/.config/coding-stats/chores.jsonl",
@@ -274,12 +278,79 @@ def collect_transcripts(cfg: dict, weeks: dict) -> int:
                     sid = o.get("sessionId") or path
                     if sid not in session_start or ts < session_start[sid]:
                         session_start[sid] = ts
+    files += collect_gemini(cfg, weeks, points, session_start, since)
     points.sort()
     for a, b in zip(points, points[1:]):
         gap = (b - a).total_seconds()
         weeks[week_key(a.date())]["claude_minutes"] += min(gap, gap_cap) / 60.0
     for ts in session_start.values():
         weeks[week_key(ts.date())]["sessions"] += 1
+    return files
+
+
+def add_tokens(weeks: dict, ts: dt.datetime, model: str, inp: int, out: int, cread: int, cwrite: int) -> None:
+    tk = weeks[week_key(ts.date())]["tokens"].setdefault(
+        model, {"input": 0, "output": 0, "cache_read": 0, "cache_write": 0})
+    tk["input"] += inp
+    tk["output"] += out
+    tk["cache_read"] += cread
+    tk["cache_write"] += cwrite
+
+
+def collect_gemini(cfg: dict, weeks: dict, points: list, session_start: dict, since: dt.datetime) -> int:
+    """Gemini CLI chat logs and the Antigravity CLI prompt history.
+
+    Gemini CLI writes one JSONL per session under <root>/**/chats/ with
+    `user` and `gemini` records; `gemini` records carry the model and a
+    tokens block (input includes cached; thoughts are output). Antigravity
+    CLI keeps only a prompt history with millisecond timestamps, so it adds
+    activity time and sessions but no tokens. Returns files read.
+    """
+    files = 0
+    for root in cfg["gemini_transcripts"]:
+        for path in glob.glob(os.path.join(expand(root), "**", "chats", "*.jsonl"), recursive=True):
+            files += 1
+            with open(path, encoding="utf-8", errors="replace") as fh:
+                for line in fh:
+                    try:
+                        o = json.loads(line)
+                    except json.JSONDecodeError:
+                        continue
+                    if o.get("type") not in ("user", "gemini") or "timestamp" not in o:
+                        continue
+                    try:
+                        ts = parse_ts(o["timestamp"])
+                    except ValueError:
+                        continue
+                    if ts < since:
+                        continue
+                    points.append(ts)
+                    sid = "gemini:" + path
+                    if sid not in session_start or ts < session_start[sid]:
+                        session_start[sid] = ts
+                    t, model = o.get("tokens") or {}, o.get("model")
+                    if o["type"] == "gemini" and t and model:
+                        cached = int(t.get("cached") or 0)
+                        add_tokens(weeks, ts, model, max(int(t.get("input") or 0) - cached, 0),
+                                   int(t.get("output") or 0) + int(t.get("thoughts") or 0), cached, 0)
+    hist = expand(cfg["antigravity_history"])
+    if os.path.exists(hist):
+        files += 1
+        with open(hist, encoding="utf-8", errors="replace") as fh:
+            for line in fh:
+                try:
+                    o = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if "timestamp" not in o:
+                    continue
+                ts = dt.datetime.fromtimestamp(o["timestamp"] / 1000, tz=dt.timezone.utc)
+                if ts < since:
+                    continue
+                points.append(ts)
+                sid = "antigravity:" + str(o.get("conversationId") or ts.date())
+                if sid not in session_start or ts < session_start[sid]:
+                    session_start[sid] = ts
     return files
 
 

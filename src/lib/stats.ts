@@ -39,11 +39,14 @@ export function spend(w: Week): number {
 export type TokenKind = 'input' | 'output' | 'cache_read' | 'cache_write';
 type Tokens = Record<string, Record<TokenKind, number>>;
 
-/** "claude-fable-5-1" → "Fable 5.1", "claude-haiku-4-5-20251001" → "Haiku 4.5". */
+/** "claude-fable-5-1" → "Fable 5.1", "claude-haiku-4-5-20251001" → "Haiku 4.5", "gemini-3-flash-preview" → "Gemini 3 Flash". */
 export function modelLabel(id: string): string {
-  const m = id.match(/^claude-([a-z]+)-(\d+)(?:-(\d+))?/);
-  if (!m) return id;
-  return `${m[1][0].toUpperCase()}${m[1].slice(1)} ${m[2]}${m[3] ? `.${m[3]}` : ''}`;
+  const cap = (s: string) => s.split('-').map((p) => p[0].toUpperCase() + p.slice(1)).join(' ');
+  const c = id.match(/^claude-([a-z]+)-(\d+)(?:-(\d+))?/);
+  if (c) return `${cap(c[1])} ${c[2]}${c[3] ? `.${c[3]}` : ''}`;
+  const g = id.match(/^gemini-(\d+(?:[.-]\d+)?)-(flash-lite|flash|pro)/);
+  if (g) return `Gemini ${g[1].replace('-', '.')} ${cap(g[2])}`;
+  return id;
 }
 
 export function tokens(w: Week, model: string, kind: TokenKind): number {
