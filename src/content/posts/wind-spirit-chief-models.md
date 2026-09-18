@@ -338,6 +338,14 @@ than they are. It found four kinds of error:
   against strength and what paying once teaches. Under that prompt 3.8 Flash
   and 3.5 Flash-Lite refuse both; GPT-5.6 Luna pays once. The golden stands;
   the case had been unanswerable as written.
+  **Correction, 18 September.** That last sentence rests on two observations,
+  one per case, and it does not hold. Repeating the question eighteen times
+  put 3.8 Flash at three refusals. Worse, the case itself was wrong: it sized
+  the war band against the whole village when the sim resolves a raid against
+  adults, so "weak" was eight attackers against eleven defenders, which the
+  sim's own combat model says wins two times in five. The model had been
+  reasoning correctly about a case labelled weak on the wrong measure. The
+  full account is below.
 - *Too strict when rich.* The food-share rule demanded a third of hands on
   food in every routine case, including villages holding 120 to 218 weeks of
   grain. All eight of 3.8 Flash's routine misses in the second pass were
@@ -368,6 +376,64 @@ whole table, because a village on provisional orders while its chief thinks
 for a quarter of a minute is a bad experience whatever the score: Kimi K3
 scores second and is out at 14.6 seconds, Claude Sonnet 5 fourth and out at
 10.8.
+
+## What two observations cannot tell you
+
+A month after publishing I went looking for a different bug and found that
+this section is wrong, in a way worth keeping rather than quietly editing.
+
+The claim was that strengthening the threat clause fixed the tribute cases,
+evidenced by 3.8 Flash refusing both of them. Both. Two observations, one per
+case, from a single pass. Asked the same question eighteen times, that model
+refuses about a third of the time. Two samples cannot distinguish "always"
+from "sometimes", and I wrote "refuse both" as though they could.
+
+Then the deeper error. The case builds a war band demanding tribute and calls
+it weak, sizing it at a third of the village's population. But the simulation
+resolves a raid against adults, not against everyone, and a third of the
+population is most of the adults. Running the sim's own combat formula twenty
+thousand times:
+
+| attackers | adult defenders | raid succeeds |
+|---|---|---|
+| 3 | 11 | 0.00 |
+| 6 | 11 | 0.10 |
+| 8 | 11 | 0.41 |
+| 9 | 11 | 0.60 |
+| 12 | 11 | 0.91 |
+
+The "weak" bully in the corpus is eight attackers against eleven adults: a
+two-in-five chance of sacking the village. Against that, eight units of grain
+out of three thousand is cheap insurance, and the models that paid were right.
+The golden answer encoded my intuition about bullies rather than the world the
+game actually simulates.
+
+Sizing the band against the adults who would fight it puts the weak case at
+three attackers, where the raid never succeeds. Two more things were missing,
+both of them facts a village plainly has: the chief was told to weigh strength
+against strength and never told how many were at the gate, and was left to do
+the arithmetic. Stating the number, and the village's own reckoning of the
+odds, takes both tier models to six refusals out of six. On the old ambiguous
+case the same model now refuses two times in six, which is the right shape of
+answer for a fight that could genuinely go either way.
+
+Three habits came out of this, and they are the reason the section stays in:
+
+- **Check a golden answer against the simulation, not against intuition.** The
+  game has a combat model. It could have told me what "weak" meant at any
+  point, and it disagreed with me.
+- **Count the observations behind a claim before writing it down.** The number
+  two should have stopped me.
+- **Report the discriminating cases separately.** Fifteen visitor cases, ten of
+  them easy, average to 0.93 for everyone, and a model that pays every bully
+  sits comfortably inside that average. The report now breaks out every case
+  kind where models disagree, and prints how many cases are behind each
+  figure.
+
+There is a fourth, less comfortable one. The first version of this section was
+itself about finding and fixing errors in golden answers, and I still shipped a
+conclusion resting on two data points in the middle of it. Knowing the failure
+mode is not the same as being immune to it.
 
 ## Five cases, side by side
 
