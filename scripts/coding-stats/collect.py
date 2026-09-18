@@ -47,7 +47,7 @@ CHORE_CATEGORIES = [
     "manual-testing",   # clicking through the thing to see if it works
     "other",
 ]
-SPEND_CATEGORIES = ["claude", "cloud", "other"]
+SPEND_CATEGORIES = ["claude", "jev", "cloud", "other"]
 
 DEFAULTS = {
     "since": "2025-01-01",
@@ -75,9 +75,14 @@ DEFAULTS = {
     "ledger": "~/.config/coding-stats/chores.jsonl",
     "auto_ledger": "~/.config/coding-stats/chores-auto.jsonl",  # written by detect_chores.py
     "spend": "~/.config/coding-stats/spend.jsonl",
+    "spend_auto": "~/.config/coding-stats/spend-auto.jsonl",   # written by collectors below
     # Automatic spend sources; see README. Each is optional.
     "subscriptions": [],           # [{"category","amount","since","until","note"}]
     "gcp_billing_export": None,    # {"project","dataset"} holding gcp_billing_export_v1_* tables
+    # Jev (TypeSafe) calls go through a Cloud Run proxy that logs each request
+    # with its cost; {"project","service"}. Logs expire, so days are persisted
+    # into `spend_auto`.
+    "jev_proxy_logs": None,
 }
 
 
@@ -468,6 +473,54 @@ def collect_gcp_billing(cfg: dict, weeks: dict) -> int:
     return len(rows)
 
 
+def upsert_auto_spend(cfg: dict, source: str, days: dict[str, float]) -> None:
+    """Replace this source's rows for the given days in the auto spend ledger."""
+    path = expand(cfg["spend_auto"])
+    keep = [r for r in read_jsonl(cfg["spend_auto"])
+            if not (r.get("source") == source and r["date"] in days)]
+    for day, amount in sorted(days.items()):
+        keep.append({"date": day, "start": day, "end": day, "category": "jev" if source == "jev-proxy" else "other",
+                     "amount": round(amount, 6), "source": source})
+    keep.sort(key=lambda r: (r["date"], r.get("source", "")))
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as fh:
+        for r in keep:
+            fh.write(json.dumps(r) + "\n")
+
+
+def collect_jev_logs(cfg: dict) -> int:
+    """Daily Jev cost from the proxy's request log (jsonPayload.costUsd).
+
+    The proxy computes cost from TypeSafe's list price per request. Cloud
+    Logging keeps 30 days, so each run re-reads that window and rewrites
+    those days in the auto ledger; older days stay as previously recorded.
+    Returns the number of days updated.
+    """
+    src = cfg["jev_proxy_logs"]
+    if not src:
+        return 0
+    flt = (f'resource.type="cloud_run_revision" AND resource.labels.service_name="{src["service"]}" '
+           'AND jsonPayload.message="request" AND jsonPayload.provider="typesafe"')
+    r = subprocess.run(["gcloud", "logging", "read", flt, "--project", src["project"], "--freshness=30d",
+                        "--limit=100000", "--format=value(timestamp,jsonPayload.costUsd)"],
+                       capture_output=True, text=True)
+    if r.returncode != 0:
+        print("warning: Jev proxy log query failed; jev spend not updated:\n" + r.stderr.strip(), file=sys.stderr)
+        return 0
+    days: dict[str, float] = defaultdict(float)
+    for line in r.stdout.splitlines():
+        parts = line.split("\t")
+        if len(parts) == 2 and parts[1]:
+            days[parts[0][:10]] += float(parts[1])
+    # Days inside the window with no calls are recorded as zero so a stale
+    # value from an earlier run cannot linger.
+    start = dt.date.today() - dt.timedelta(days=29)
+    for i in range(30):
+        days.setdefault((start + dt.timedelta(days=i)).isoformat(), 0.0)
+    upsert_auto_spend(cfg, "jev-proxy", dict(days))
+    return sum(1 for v in days.values() if v)
+
+
 def collect_spend(cfg: dict, weeks: dict, today: dt.date) -> int:
     """Spread each spend row across the weeks of its period.
 
@@ -479,7 +532,7 @@ def collect_spend(cfg: dict, weeks: dict, today: dt.date) -> int:
     web-session estimate) so idle weeks cost nothing; everything else
     (cloud bills etc.) is spread evenly by calendar day.
     """
-    rows = read_jsonl(cfg["spend"]) + subscription_rows(cfg, today)
+    rows = read_jsonl(cfg["spend"]) + read_jsonl(cfg["spend_auto"]) + subscription_rows(cfg, today)
     est = cfg["web_session_minutes"]
     for r in rows:
         cat = r.get("category", "other")
@@ -531,6 +584,7 @@ def main() -> None:
     nfiles = collect_transcripts(cfg, weeks)
     nchores = collect_chores(cfg, weeks)
     today = dt.date.today()
+    njev = collect_jev_logs(cfg)
     nspend = collect_spend(cfg, weeks, today)
     ndays = collect_gcp_billing(cfg, weeks)
 
@@ -570,7 +624,7 @@ def main() -> None:
         fh.write("\n")
     print(f"wrote {args.out}: {len(rows)} weeks from {nrepos} repos, "
           f"{nfiles} transcript files, {len(web)} web sessions, "
-          f"{nchores} chores, {nspend} spend rows, {ndays} GCP billing days", file=sys.stderr)
+          f"{nchores} chores, {nspend} spend rows, {njev} Jev days, {ndays} GCP billing days", file=sys.stderr)
 
 
 def est_or(cfg: dict) -> int:
