@@ -24,6 +24,7 @@
  ],
  "spend_categories": [
   "claude",
+  "jev",
   "cloud",
   "other"
  ],
@@ -51,6 +52,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -79,6 +81,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -107,6 +110,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -135,6 +139,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -163,6 +168,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -191,6 +197,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -219,6 +226,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -247,6 +255,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -275,6 +284,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -303,6 +313,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -331,6 +342,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -359,6 +371,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -387,6 +400,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -415,6 +429,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -443,6 +458,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -471,6 +487,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -499,6 +516,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -527,6 +545,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -555,6 +574,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -583,6 +603,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -611,6 +632,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -639,6 +661,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -667,6 +690,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -695,6 +719,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -723,6 +748,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -751,6 +777,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -779,6 +806,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -807,6 +835,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -835,6 +864,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -863,6 +893,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -891,6 +922,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -919,6 +951,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -947,6 +980,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -975,6 +1009,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1003,6 +1038,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1031,6 +1067,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 45.16,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1059,6 +1096,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 45.16,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1087,6 +1125,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 45.16,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1115,6 +1154,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 45.16,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1143,6 +1183,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 47.93,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1171,6 +1212,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 50.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1199,6 +1241,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 50.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1227,6 +1270,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 50.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1255,6 +1299,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 47.24,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1283,6 +1328,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 45.16,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1311,6 +1357,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 45.16,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1339,6 +1386,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 45.16,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1367,6 +1415,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 38.71,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1395,6 +1444,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 8.03,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1430,6 +1480,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 39.68,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1465,6 +1516,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1493,6 +1545,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 16.86,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1534,6 +1587,7 @@
    "chore_minutes": 193,
    "spend": {
     "claude": 197.5,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1569,6 +1623,7 @@
    "chore_minutes": 5,
    "spend": {
     "claude": 4.94,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1604,6 +1659,7 @@
    "chore_minutes": 28,
    "spend": {
     "claude": 19.82,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1639,6 +1695,7 @@
    "chore_minutes": 20,
    "spend": {
     "claude": 64.84,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1680,6 +1737,7 @@
    "chore_minutes": 20,
    "spend": {
     "claude": 76.44,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1715,6 +1773,7 @@
    "chore_minutes": 22,
    "spend": {
     "claude": 36.23,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1756,6 +1815,7 @@
    "chore_minutes": 32,
    "spend": {
     "claude": 30.26,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1803,6 +1863,7 @@
    "chore_minutes": 10,
    "spend": {
     "claude": 22.57,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1829,11 +1890,11 @@
   },
   {
    "week": "2026-07-20",
-   "ai_added": 56860,
-   "ai_deleted": 7857,
+   "ai_added": 56569,
+   "ai_deleted": 7843,
    "hand_added": 0,
    "hand_deleted": 0,
-   "ai_commits": 123,
+   "ai_commits": 122,
    "hand_commits": 0,
    "claude_minutes": 1198,
    "sessions": 8,
@@ -1850,6 +1911,7 @@
    "chore_minutes": 87,
    "spend": {
     "claude": 193.22,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1891,6 +1953,7 @@
    "chore_minutes": 37,
    "spend": {
     "claude": 35.37,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1938,6 +2001,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 0.0,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -1966,6 +2030,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 17.05,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -2001,6 +2066,7 @@
    "chore_minutes": 0,
    "spend": {
     "claude": 5.27,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -2035,7 +2101,8 @@
    },
    "chore_minutes": 25,
    "spend": {
-    "claude": 50.85,
+    "claude": 50.83,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -2082,7 +2149,8 @@
    },
    "chore_minutes": 25,
    "spend": {
-    "claude": 27.4,
+    "claude": 27.37,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -2135,7 +2203,8 @@
    },
    "chore_minutes": 289,
    "spend": {
-    "claude": 63.85,
+    "claude": 63.78,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
@@ -2156,13 +2225,13 @@
   },
   {
    "week": "2026-09-14",
-   "ai_added": 24373,
-   "ai_deleted": 588,
+   "ai_added": 24764,
+   "ai_deleted": 739,
    "hand_added": 0,
    "hand_deleted": 0,
-   "ai_commits": 29,
+   "ai_commits": 37,
    "hand_commits": 0,
-   "claude_minutes": 817,
+   "claude_minutes": 820,
    "sessions": 8,
    "web_sessions": 0,
    "chores": {
@@ -2176,16 +2245,17 @@
    },
    "chore_minutes": 126,
    "spend": {
-    "claude": 44.66,
+    "claude": 44.78,
+    "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
    "tokens": {
     "claude-opus-5": {
-     "input": 4174,
-     "output": 2094705,
-     "cache_read": 535210744,
-     "cache_write": 22217110
+     "input": 4318,
+     "output": 2158820,
+     "cache_read": 574030379,
+     "cache_write": 22289309
     },
     "claude-fable-5": {
      "input": 36,
@@ -2194,10 +2264,10 @@
      "cache_write": 2579585
     },
     "claude-fable-5-1": {
-     "input": 7610,
-     "output": 320604,
-     "cache_read": 86247323,
-     "cache_write": 14247815
+     "input": 12762,
+     "output": 424941,
+     "cache_read": 109934835,
+     "cache_write": 14773271
     }
    }
   }

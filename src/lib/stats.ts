@@ -15,6 +15,7 @@ export const CHORE_LABELS: Record<string, string> = {
 
 export const SPEND_LABELS: Record<string, string> = {
   claude: 'Claude',
+  jev: 'Jev (TypeSafe)',
   cloud: 'Cloud',
   other: 'Other',
 };
