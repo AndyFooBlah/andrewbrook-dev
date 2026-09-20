@@ -1,10 +1,10 @@
 {
- "generated": "2026-09-18",
+ "generated": "2026-09-19",
  "models": [
   "claude-fable-5-1",
   "claude-fable-5",
-  "claude-opus-4-7",
   "claude-opus-5",
+  "claude-opus-4-7",
   "claude-opus-4-8",
   "gemini-3-flash-preview",
   "claude-sonnet-5",
@@ -2101,7 +2101,7 @@
    },
    "chore_minutes": 25,
    "spend": {
-    "claude": 49.8,
+    "claude": 48.79,
     "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
@@ -2149,7 +2149,7 @@
    },
    "chore_minutes": 25,
    "spend": {
-    "claude": 25.88,
+    "claude": 24.43,
     "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
@@ -2203,7 +2203,7 @@
    },
    "chore_minutes": 289,
    "spend": {
-    "claude": 60.3,
+    "claude": 56.93,
     "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
@@ -2225,37 +2225,37 @@
   },
   {
    "week": "2026-09-14",
-   "ai_added": 31102,
-   "ai_deleted": 6995,
+   "ai_added": 43726,
+   "ai_deleted": 7444,
    "hand_added": 0,
    "hand_deleted": 0,
-   "ai_commits": 82,
+   "ai_commits": 111,
    "hand_commits": 0,
-   "claude_minutes": 984,
-   "sessions": 9,
+   "claude_minutes": 1295,
+   "sessions": 13,
    "web_sessions": 0,
    "chores": {
     "terminal": 15,
-    "cloud-infra": 3,
-    "secrets-auth": 7,
+    "cloud-infra": 6,
+    "secrets-auth": 9,
     "accounts-billing": 1,
     "dns-deploy": 0,
-    "manual-testing": 6,
+    "manual-testing": 13,
     "other": 4
    },
-   "chore_minutes": 374,
+   "chore_minutes": 463,
    "spend": {
-    "claude": 50.78,
+    "claude": 63.06,
     "jev": 0.0,
     "cloud": 0.0,
     "other": 0.0
    },
    "tokens": {
     "claude-opus-5": {
-     "input": 6228,
-     "output": 3136426,
-     "cache_read": 1050983180,
-     "cache_write": 29451019
+     "input": 10126,
+     "output": 4885605,
+     "cache_read": 1489597424,
+     "cache_write": 47209930
     },
     "claude-fable-5": {
      "input": 110,
@@ -2264,10 +2264,10 @@
      "cache_write": 4446211
     },
     "claude-fable-5-1": {
-     "input": 24894,
-     "output": 669533,
-     "cache_read": 188378007,
-     "cache_write": 16215990
+     "input": 25362,
+     "output": 696383,
+     "cache_read": 195978851,
+     "cache_write": 17172304
     }
    }
   }
