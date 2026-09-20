@@ -78,7 +78,9 @@ DEFAULTS = {
     "spend_auto": "~/.config/coding-stats/spend-auto.jsonl",   # written by collectors below
     # Automatic spend sources; see README. Each is optional.
     "subscriptions": [],           # [{"category","amount","since","until","note"}]
-    "gcp_billing_export": None,    # {"project","dataset"} holding gcp_billing_export_v1_* tables
+    # {"project","dataset"} (or a list of them, one per billing account) holding
+    # gcp_billing_export_v1_* tables.
+    "gcp_billing_export": None,
     # Jev (TypeSafe) calls go through a Cloud Run proxy that logs each request
     # with its cost; {"project","service"}. Logs expire, so days are persisted
     # into `spend_auto`.
@@ -444,33 +446,38 @@ def subscription_rows(cfg: dict, today: dt.date) -> list[dict]:
 def collect_gcp_billing(cfg: dict, weeks: dict) -> int:
     """Net daily cost from a Cloud Billing BigQuery export, via the bq CLI.
 
-    Reads every gcp_billing_export_v1_* table in the dataset (one per
-    billing account), nets out credits, and books each day's cost to its
-    week as "cloud" spend. Returns the number of days read.
+    Reads every gcp_billing_export_v1_* table in each configured dataset
+    (Google requires the dataset's project to sit on the billing account it
+    exports, so one dataset per billing account), nets out credits, and
+    books each day's cost to its week as "cloud" spend. A dataset with no
+    tables yet is a warning. Returns the number of (dataset, day) rows read.
     """
-    src = cfg["gcp_billing_export"]
-    if not src:
-        return 0
-    table = f"`{src['project']}.{src['dataset']}.gcp_billing_export_v1_*`"
-    sql = f"""
-        SELECT DATE(usage_start_time) AS day, currency,
-               SUM(cost) + SUM(IFNULL((SELECT SUM(c.amount) FROM UNNEST(credits) c), 0)) AS net
-        FROM {table}
-        WHERE usage_start_time >= TIMESTAMP('{cfg["since"]}')
-        GROUP BY day, currency ORDER BY day"""
-    r = subprocess.run(["bq", "--project_id", src["project"], "--format=json", "--headless",
-                        "query", "--use_legacy_sql=false", "--nouse_cache", "--max_rows=100000", sql],
-                       capture_output=True, text=True)
-    if r.returncode != 0:
-        print("warning: GCP billing export query failed; cloud spend not updated:\n"
-              + (r.stderr.strip() or r.stdout.strip()), file=sys.stderr)
-        return 0
-    rows = json.loads(r.stdout or "[]")
-    for row in rows:
-        if row["currency"] != "USD":
-            sys.exit(f"gcp billing: unexpected currency {row['currency']}; the page assumes USD")
-        weeks[week_key(dt.date.fromisoformat(row["day"]))]["spend"]["cloud"] += float(row["net"])
-    return len(rows)
+    srcs = cfg["gcp_billing_export"] or []
+    if isinstance(srcs, dict):
+        srcs = [srcs]
+    n = 0
+    for src in srcs:
+        table = f"`{src['project']}.{src['dataset']}.gcp_billing_export_v1_*`"
+        sql = f"""
+            SELECT DATE(usage_start_time) AS day, currency,
+                   SUM(cost) + SUM(IFNULL((SELECT SUM(c.amount) FROM UNNEST(credits) c), 0)) AS net
+            FROM {table}
+            WHERE usage_start_time >= TIMESTAMP('{cfg["since"]}')
+            GROUP BY day, currency ORDER BY day"""
+        r = subprocess.run(["bq", "--project_id", src["project"], "--format=json", "--headless",
+                            "query", "--use_legacy_sql=false", "--nouse_cache", "--max_rows=100000", sql],
+                           capture_output=True, text=True)
+        if r.returncode != 0:
+            err = (r.stderr.strip() or r.stdout.strip()).splitlines()
+            print(f"warning: no billing export data in {src['project']}.{src['dataset']} yet: "
+                  + (err[-1] if err else ""), file=sys.stderr)
+            continue
+        for row in json.loads(r.stdout or "[]"):
+            if row["currency"] != "USD":
+                sys.exit(f"gcp billing: unexpected currency {row['currency']}; the page assumes USD")
+            weeks[week_key(dt.date.fromisoformat(row["day"]))]["spend"]["cloud"] += float(row["net"])
+            n += 1
+    return n
 
 
 def upsert_auto_spend(cfg: dict, source: str, days: dict[str, float]) -> None:

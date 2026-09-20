@@ -46,7 +46,7 @@ Config keys (all optional except `repos`; defaults in `collect.py`):
 | `subscriptions` | flat-rate plans, charged automatically each billing cycle: `[{"category": "claude", "amount": 200, "since": "2026-01-26", "until": null, "note": "Claude Max 20x"}]`. Charges land on the day-of-month of `since`. |
 | `jev_proxy_logs` | `{"project": "...", "service": "..."}`: the Cloud Run service whose request log carries `jsonPayload.provider="typesafe"` and `costUsd`; daily Jev (TypeSafe) cost is read from it and persisted in `spend_auto`, since logs expire after 30 days. |
 | `spend_auto` | ledger the collectors above write (default `~/.config/coding-stats/spend-auto.jsonl`); never edit by hand. |
-| `gcp_billing_export` | `{"project": "...", "dataset": "..."}` of a BigQuery dataset holding Cloud Billing `gcp_billing_export_v1_*` tables; net daily cost (credits applied) is booked as `cloud` spend. Needs the `bq` CLI and an account that can query the dataset. |
+| `gcp_billing_export` | one `{"project": "...", "dataset": "..."}` per billing account (a list), each a BigQuery dataset holding that account's Cloud Billing `gcp_billing_export_v1_*` table; net daily cost (credits applied) is booked as `cloud` spend. Google requires the dataset's project to be on the billing account being exported. Needs the `bq` CLI. |
 
 ## Refreshing the site
 
