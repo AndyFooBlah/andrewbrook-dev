@@ -2225,11 +2225,11 @@
   },
   {
    "week": "2026-09-14",
-   "ai_added": 48236,
-   "ai_deleted": 8190,
+   "ai_added": 49075,
+   "ai_deleted": 8264,
    "hand_added": 0,
    "hand_deleted": 0,
-   "ai_commits": 125,
+   "ai_commits": 129,
    "hand_commits": 0,
    "claude_minutes": 1402,
    "sessions": 15,
@@ -2237,13 +2237,13 @@
    "chores": {
     "terminal": 15,
     "cloud-infra": 6,
-    "secrets-auth": 9,
+    "secrets-auth": 10,
     "accounts-billing": 1,
     "dns-deploy": 0,
     "manual-testing": 13,
     "other": 4
    },
-   "chore_minutes": 463,
+   "chore_minutes": 478,
    "spend": {
     "claude": 68.8,
     "jev": 0.0,
