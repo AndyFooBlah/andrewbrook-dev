@@ -4,8 +4,8 @@ import StatTiles from '../components/StatTiles.astro';
 import WeeklyBars from '../components/WeeklyBars.astro';
 import CategoryBars from '../components/CategoryBars.astro';
 import {
-  stats, recentWeeks, totals, lines, chores, claudeHours, compact, pct,
-  CHORE_LABELS, weekRange, modelSeries, rankedModels, modelLabel, tokens, tokenTotal,
+  stats, recentWeeks, totals, lines, chores, claudeHours, compact, usd, pct,
+  CHORE_LABELS, SPEND_LABELS, weekRange, modelSeries, rankedModels, modelLabel, tokens, tokenTotal,
 } from '../lib/stats';
 
 const weeks = recentWeeks(52);
@@ -19,12 +19,12 @@ const updated = new Date(stats.generated + 'T00:00:00Z').toLocaleDateString('en-
 });
 ---
 
-<Base title="Stats" description="How much of my code is written by AI, how many hours I spend with Claude, and what I still have to do by hand.">
+<Base title="Stats" description="How much of my code is written by AI, how many hours I spend with Claude, what it costs, and what I still have to do by hand.">
   <h1>Stats</h1>
   <p>
     Nearly everything I build is written by a coding agent. This page tracks what that actually looks
     like: lines the agent wrote versus lines I wrote or edited by hand, the hours I spent driving it,
-    which models did the work, and the chores that still needed a human. Numbers are weekly totals across all my projects;
+    which models did the work, what it cost, and the chores that still needed a human. Numbers are weekly totals across all my projects;
     nothing here says which project.
   </p>
   <p class="meta">Updated {updated}.</p>
@@ -34,6 +34,7 @@ const updated = new Date(stats.generated + 'T00:00:00Z').toLocaleDateString('en-
       { label: 'of lines changed were AI-written', value: pct(t.aiShare), note: `${compact(t.ai)} AI · ${compact(t.hand)} by hand` },
       { label: 'hours working with Claude', value: compact(t.hours), note: `${t.sessions.toLocaleString('en-US')} sessions` },
       { label: 'tokens Claude wrote', value: compact(t.outputTokens), note: `${compact(t.cacheReadTokens)} read from cache` },
+      { label: 'spent, all in', value: usd(t.spend), note: 'Claude, Jev and Google Cloud' },
       { label: 'chores done by hand', value: t.chores.toLocaleString('en-US'), note: `${compact(t.choreMinutes / 60)} hours` },
     ]}
   />
@@ -91,6 +92,20 @@ const updated = new Date(stats.generated + 'T00:00:00Z').toLocaleDateString('en-
     />
   </div>
 
+  <WeeklyBars
+    title="What it cost"
+    subtitle="US dollars, per week, estimated"
+    source="Claude subscription by activity; Jev and Google Cloud as billed"
+    weeks={weeks}
+    height={120}
+    format={usd}
+    series={stats.spend_categories.map((c, i) => ({
+      name: SPEND_LABELS[c] ?? c,
+      color: `--series-${i + 1}`,
+      value: (w) => w.spend[c as keyof typeof w.spend],
+    }))}
+  />
+
   <div class="viz-pair">
     <WeeklyBars
       title="Chores I had to do myself"
@@ -115,7 +130,7 @@ const updated = new Date(stats.generated + 'T00:00:00Z').toLocaleDateString('en-
         <thead>
           <tr>
             <th>Week</th><th>AI lines</th><th>Hand lines</th><th>AI commits</th><th>Hand commits</th>
-            <th>Claude hours</th><th>Sessions</th><th>Tokens out</th><th>Chores</th>
+            <th>Claude hours</th><th>Sessions</th><th>Tokens out</th><th>Spend</th><th>Chores</th>
           </tr>
         </thead>
         <tbody>
@@ -129,6 +144,7 @@ const updated = new Date(stats.generated + 'T00:00:00Z').toLocaleDateString('en-
               <td>{fmtHours(claudeHours(w))}h</td>
               <td>{w.sessions + w.web_sessions}</td>
               <td>{compact(tokenTotal(w, 'output'))}</td>
+              <td>{usd(Object.values(w.spend).reduce((a, b) => a + b, 0))}</td>
               <td>{chores(w)}</td>
             </tr>
           ))}
@@ -164,6 +180,14 @@ const updated = new Date(stats.generated + 'T00:00:00Z').toLocaleDateString('en-
       Gemini CLI, and the Antigravity command line (prompts only, no tokens). I also use the Antigravity
       editor and Gemini itself now and then, and did so more a few months ago; that work shows up in the
       AI-written lines but nowhere else on this page. Chores are detected from Claude Code only.
+    </li>
+    <li>
+      <b>Spend.</b> The Claude subscription is spread across each billing cycle in proportion to
+      activity, so idle weeks cost nothing. Jev (TypeSafe) is the per-request cost logged by the proxy
+      every call goes through. Google Cloud is the billing export, per day with credits applied; it only
+      reaches back to late July 2026, when the export was switched on. Usage credits bought on top of
+      the Claude plan are not visible anywhere and are missing. An estimate of what building this way
+      costs, not an invoice.
     </li>
     <li>
       <b>Chores.</b> Things the agent could not do and handed back to me: run this in your terminal,
