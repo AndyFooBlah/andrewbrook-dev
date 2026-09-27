@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-25",
+ "generated": "2026-09-26",
  "models": [
   "claude-fable-5-1",
   "claude-opus-5",
@@ -2294,9 +2294,9 @@
    },
    "chore_minutes": 50,
    "spend": {
-    "claude": 27.66,
+    "claude": 34.32,
     "jev": 0.0,
-    "cloud": 34.95,
+    "cloud": 42.7,
     "other": 0.0
    },
    "tokens": {
