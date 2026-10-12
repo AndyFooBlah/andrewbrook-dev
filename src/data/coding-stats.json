@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-10",
+ "generated": "2026-10-11",
  "models": [
   "claude-fable-5-1",
   "claude-opus-5",
@@ -2294,7 +2294,7 @@
    },
    "chore_minutes": 50,
    "spend": {
-    "claude": 58.97,
+    "claude": 57.91,
     "jev": 0.0,
     "cloud": 52.57,
     "other": 0.0
@@ -2342,7 +2342,7 @@
    },
    "chore_minutes": 38,
    "spend": {
-    "claude": 10.4,
+    "claude": 10.04,
     "jev": 0.0,
     "cloud": 50.74,
     "other": 0.0
@@ -2370,31 +2370,31 @@
    "hand_deleted": 0,
    "ai_commits": 35,
    "hand_commits": 0,
-   "claude_minutes": 1084,
-   "sessions": 8,
+   "claude_minutes": 1276,
+   "sessions": 9,
    "web_sessions": 0,
    "chores": {
-    "terminal": 5,
-    "cloud-infra": 3,
+    "terminal": 6,
+    "cloud-infra": 4,
     "secrets-auth": 1,
     "accounts-billing": 0,
     "dns-deploy": 2,
-    "manual-testing": 3,
+    "manual-testing": 4,
     "other": 1
    },
-   "chore_minutes": 124,
+   "chore_minutes": 179,
    "spend": {
-    "claude": 58.95,
+    "claude": 67.02,
     "jev": 0.0,
-    "cloud": 57.11,
+    "cloud": 62.05,
     "other": 0.0
    },
    "tokens": {
     "claude-opus-5-5": {
-     "input": 3098,
-     "output": 1448549,
-     "cache_read": 377457018,
-     "cache_write": 16476431
+     "input": 3634,
+     "output": 1557486,
+     "cache_read": 395615763,
+     "cache_write": 21468342
     },
     "claude-opus-5": {
      "input": 160,
