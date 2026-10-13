@@ -65,13 +65,24 @@ export function rankedModels(weeks: Week[]): string[] {
   return Object.keys(out).filter((m) => out[m] > 0).sort((a, b) => out[b] - out[a]);
 }
 
-/** Chart series for the top `n` models, the rest folded into "Other". */
-export function modelSeries(weeks: Week[], kind: TokenKind, n = 5) {
-  const models = rankedModels(weeks);
-  const top = models.slice(0, n);
-  const rest = models.slice(n);
+/**
+ * Chart series for up to `n` models, the rest folded into a grey "Other".
+ * A model that led any week gets a series before a bigger-but-steadier one,
+ * so a newly adopted model shows up as soon as it takes over rather than
+ * after it has outscored a year of history.
+ */
+export function modelSeries(weeks: Week[], kind: TokenKind, n = 6) {
+  const ranked = rankedModels(weeks);
+  const leaders = new Set<string>();
+  for (const w of weeks) {
+    const best = Object.keys(w.tokens).sort((a, b) => tokens(w, b, 'output') - tokens(w, a, 'output'))[0];
+    if (best && tokens(w, best, 'output') > 0) leaders.add(best);
+  }
+  const ordered = [...ranked.filter((m) => leaders.has(m)), ...ranked.filter((m) => !leaders.has(m))];
+  const top = ordered.slice(0, n).sort((a, b) => ranked.indexOf(a) - ranked.indexOf(b));
+  const rest = ordered.slice(n);
   const series = top.map((m, i) => ({ name: modelLabel(m), color: `--series-${i + 1}`, value: (w: Week) => tokens(w, m, kind) }));
-  if (rest.length) series.push({ name: 'Other', color: `--series-${top.length + 1}`, value: (w: Week) => rest.reduce((a, m) => a + tokens(w, m, kind), 0) });
+  if (rest.length) series.push({ name: 'Other', color: '--series-other', value: (w: Week) => rest.reduce((a, m) => a + tokens(w, m, kind), 0) });
   return series;
 }
 
