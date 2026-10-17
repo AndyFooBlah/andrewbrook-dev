@@ -28,3 +28,4 @@ Astro static site, deployed to GitHub Pages by `.github/workflows/deploy.yml`.
   `gh api -X PUT repos/AndyFooBlah/andrewbrook-dev/pages -f cname=andrewbrook.dev`,
   wait for `.https_certificate.state == "approved"`, then re-enable
   `https_enforced`.
+- **Journal**: `JOURNAL.md` is the append-only project journal (UTC-stamped, tagged entries; never edit past entries). Add an entry in the same commit as any significant change.
