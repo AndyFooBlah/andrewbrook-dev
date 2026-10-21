@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-19",
+ "generated": "2026-10-20",
  "models": [
   "claude-opus-5-5",
   "claude-opus-5",
@@ -2294,7 +2294,7 @@
    },
    "chore_minutes": 50,
    "spend": {
-    "claude": 40.47,
+    "claude": 39.96,
     "jev": 0.0,
     "cloud": 52.57,
     "other": 0.0
@@ -2342,7 +2342,7 @@
    },
    "chore_minutes": 38,
    "spend": {
-    "claude": 4.12,
+    "claude": 3.95,
     "jev": 0.0,
     "cloud": 50.74,
     "other": 0.0
@@ -2384,7 +2384,7 @@
    },
    "chore_minutes": 179,
    "spend": {
-    "claude": 27.54,
+    "claude": 26.38,
     "jev": 0.0,
     "cloud": 64.33,
     "other": 0.0
@@ -2426,9 +2426,9 @@
    },
    "chore_minutes": 1644,
    "spend": {
-    "claude": 91.9,
+    "claude": 88.06,
     "jev": 0.0,
-    "cloud": 2242.73,
+    "cloud": 2243.21,
     "other": 0.0
    },
    "tokens": {
@@ -2466,37 +2466,37 @@
   },
   {
    "week": "2026-10-19",
-   "ai_added": 4589,
-   "ai_deleted": 1772,
+   "ai_added": 54801,
+   "ai_deleted": 1988,
    "hand_added": 0,
    "hand_deleted": 0,
-   "ai_commits": 21,
+   "ai_commits": 62,
    "hand_commits": 0,
-   "claude_minutes": 1125,
-   "sessions": 11,
+   "claude_minutes": 1771,
+   "sessions": 15,
    "web_sessions": 0,
    "chores": {
-    "terminal": 9,
-    "cloud-infra": 12,
-    "secrets-auth": 7,
-    "accounts-billing": 9,
-    "dns-deploy": 4,
-    "manual-testing": 6,
-    "other": 5
+    "terminal": 15,
+    "cloud-infra": 26,
+    "secrets-auth": 12,
+    "accounts-billing": 18,
+    "dns-deploy": 5,
+    "manual-testing": 11,
+    "other": 8
    },
-   "chore_minutes": 334,
+   "chore_minutes": 603,
    "spend": {
-    "claude": 24.28,
+    "claude": 36.62,
     "jev": 0.0,
-    "cloud": 856.28,
+    "cloud": 1138.03,
     "other": 0.0
    },
    "tokens": {
     "claude-opus-5-5": {
-     "input": 40764,
-     "output": 13320580,
-     "cache_read": 5953712320,
-     "cache_write": 136208770
+     "input": 54782,
+     "output": 18267868,
+     "cache_read": 8619132795,
+     "cache_write": 304697048
     }
    }
   }
