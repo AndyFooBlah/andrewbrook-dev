@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-20",
+ "generated": "2026-10-21",
  "models": [
   "claude-opus-5-5",
   "claude-opus-5",
@@ -8,6 +8,7 @@
   "claude-opus-4-7",
   "claude-opus-4-8",
   "gemini-3-flash-preview",
+  "claude-haiku-5-5",
   "claude-sonnet-5",
   "claude-haiku-4-5-20251001"
  ],
@@ -2294,7 +2295,7 @@
    },
    "chore_minutes": 50,
    "spend": {
-    "claude": 39.96,
+    "claude": 39.39,
     "jev": 0.0,
     "cloud": 52.57,
     "other": 0.0
@@ -2342,7 +2343,7 @@
    },
    "chore_minutes": 38,
    "spend": {
-    "claude": 3.95,
+    "claude": 3.76,
     "jev": 0.0,
     "cloud": 50.74,
     "other": 0.0
@@ -2384,7 +2385,7 @@
    },
    "chore_minutes": 179,
    "spend": {
-    "claude": 26.38,
+    "claude": 25.09,
     "jev": 0.0,
     "cloud": 64.33,
     "other": 0.0
@@ -2426,7 +2427,7 @@
    },
    "chore_minutes": 1644,
    "spend": {
-    "claude": 88.06,
+    "claude": 83.72,
     "jev": 0.0,
     "cloud": 2243.21,
     "other": 0.0
@@ -2466,37 +2467,43 @@
   },
   {
    "week": "2026-10-19",
-   "ai_added": 54801,
-   "ai_deleted": 1988,
+   "ai_added": 57749,
+   "ai_deleted": 2022,
    "hand_added": 0,
    "hand_deleted": 0,
-   "ai_commits": 62,
+   "ai_commits": 68,
    "hand_commits": 0,
-   "claude_minutes": 1771,
-   "sessions": 15,
+   "claude_minutes": 2527,
+   "sessions": 25,
    "web_sessions": 0,
    "chores": {
-    "terminal": 15,
-    "cloud-infra": 26,
-    "secrets-auth": 12,
-    "accounts-billing": 18,
-    "dns-deploy": 5,
-    "manual-testing": 11,
-    "other": 8
+    "terminal": 21,
+    "cloud-infra": 42,
+    "secrets-auth": 20,
+    "accounts-billing": 28,
+    "dns-deploy": 6,
+    "manual-testing": 22,
+    "other": 9
    },
-   "chore_minutes": 603,
+   "chore_minutes": 874,
    "spend": {
-    "claude": 36.62,
+    "claude": 49.68,
     "jev": 0.0,
-    "cloud": 1138.03,
+    "cloud": 1482.12,
     "other": 0.0
    },
    "tokens": {
     "claude-opus-5-5": {
-     "input": 54782,
-     "output": 18267868,
-     "cache_read": 8619132795,
-     "cache_write": 304697048
+     "input": 76406,
+     "output": 25427639,
+     "cache_read": 11752192377,
+     "cache_write": 387371745
+    },
+    "claude-haiku-5-5": {
+     "input": 34,
+     "output": 6685,
+     "cache_read": 670421,
+     "cache_write": 192459
     }
    }
   }
