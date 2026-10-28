@@ -62,3 +62,4 @@ one's timestamp. Synced daily to `andy-private-docs/journals/`.
   and scrolls sideways inside its box when days don't fit, opening at the newest day; each animal has a fixed colour
   (site series 1-6, then extra hues for skunk, hawk, owl, fox, bobcat and the rest). Supersedes the 3-colour rule in
   the previous entry.
+- 2026-10-28T10:16Z [step] Refreshed /yard/ data after the Yardwatch archive backfill completed: Sep 25 to Oct 28, 34 days, 158 animal visits (cats 71, raccoons 32, squirrels 24, unidentified 13, dogs 8, opossums 7, birds 3). Previously Sep 25 to Oct 3 only. Data file checked for times, camera words and URLs before commit; still hand-run, automation to follow.

@@ -1,45 +1,246 @@
 {
- "generated": "2026-10-27",
+ "generated": "2026-10-28",
  "first": "2026-09-25",
- "last": "2026-10-03",
+ "last": "2026-10-28",
  "visit_gap_min": 20,
  "species": [
   {
    "name": "cat",
-   "visits": 23,
-   "days": 8
+   "visits": 71,
+   "days": 29
   },
   {
    "name": "raccoon",
-   "visits": 5,
-   "days": 2
-  },
-  {
-   "name": "opossum",
-   "visits": 3,
-   "days": 3
-  },
-  {
-   "name": "dog",
-   "visits": 3,
-   "days": 2
+   "visits": 32,
+   "days": 17
   },
   {
    "name": "squirrel",
-   "visits": 2,
-   "days": 2
+   "visits": 24,
+   "days": 18
   },
   {
    "name": "unidentified animal",
-   "visits": 2,
-   "days": 2
+   "visits": 13,
+   "days": 9
+  },
+  {
+   "name": "dog",
+   "visits": 8,
+   "days": 7
+  },
+  {
+   "name": "opossum",
+   "visits": 7,
+   "days": 7
+  },
+  {
+   "name": "bird",
+   "visits": 3,
+   "days": 3
   }
  ],
  "days": [
   {
-   "date": "2026-10-03",
+   "date": "2026-10-28",
+   "visits": {
+    "raccoon": 1
+   }
+  },
+  {
+   "date": "2026-10-27",
+   "visits": {
+    "raccoon": 5,
+    "cat": 3,
+    "squirrel": 1
+   }
+  },
+  {
+   "date": "2026-10-26",
+   "visits": {
+    "raccoon": 3,
+    "squirrel": 1,
+    "bird": 1
+   }
+  },
+  {
+   "date": "2026-10-25",
+   "visits": {
+    "squirrel": 3,
+    "unidentified animal": 2,
+    "cat": 2
+   }
+  },
+  {
+   "date": "2026-10-24",
+   "visits": {
+    "raccoon": 2,
+    "squirrel": 2,
+    "cat": 1
+   }
+  },
+  {
+   "date": "2026-10-23",
+   "visits": {
+    "cat": 4
+   }
+  },
+  {
+   "date": "2026-10-22",
+   "visits": {
+    "squirrel": 1
+   }
+  },
+  {
+   "date": "2026-10-21",
+   "visits": {
+    "raccoon": 1,
+    "cat": 1
+   }
+  },
+  {
+   "date": "2026-10-20",
    "visits": {
     "cat": 1
+   }
+  },
+  {
+   "date": "2026-10-19",
+   "visits": {
+    "cat": 3,
+    "raccoon": 1,
+    "opossum": 1,
+    "dog": 1,
+    "unidentified animal": 1,
+    "squirrel": 1
+   }
+  },
+  {
+   "date": "2026-10-18",
+   "visits": {
+    "cat": 4,
+    "squirrel": 1,
+    "dog": 1
+   }
+  },
+  {
+   "date": "2026-10-17",
+   "visits": {
+    "cat": 2,
+    "squirrel": 1
+   }
+  },
+  {
+   "date": "2026-10-16",
+   "visits": {
+    "cat": 3,
+    "squirrel": 2,
+    "unidentified animal": 2,
+    "dog": 1,
+    "raccoon": 1
+   }
+  },
+  {
+   "date": "2026-10-15",
+   "visits": {
+    "squirrel": 3,
+    "raccoon": 1,
+    "cat": 1
+   }
+  },
+  {
+   "date": "2026-10-14",
+   "visits": {
+    "cat": 2,
+    "dog": 1,
+    "squirrel": 1
+   }
+  },
+  {
+   "date": "2026-10-13",
+   "visits": {
+    "unidentified animal": 2,
+    "raccoon": 2,
+    "cat": 1,
+    "squirrel": 1,
+    "bird": 1
+   }
+  },
+  {
+   "date": "2026-10-12",
+   "visits": {
+    "raccoon": 2,
+    "cat": 2,
+    "unidentified animal": 1,
+    "squirrel": 1,
+    "bird": 1
+   }
+  },
+  {
+   "date": "2026-10-11",
+   "visits": {
+    "raccoon": 1,
+    "opossum": 1,
+    "cat": 1
+   }
+  },
+  {
+   "date": "2026-10-10",
+   "visits": {
+    "opossum": 1,
+    "raccoon": 1,
+    "cat": 1
+   }
+  },
+  {
+   "date": "2026-10-09",
+   "visits": {
+    "cat": 2,
+    "opossum": 1,
+    "raccoon": 1
+   }
+  },
+  {
+   "date": "2026-10-08",
+   "visits": {
+    "cat": 4,
+    "unidentified animal": 1
+   }
+  },
+  {
+   "date": "2026-10-07",
+   "visits": {
+    "cat": 3,
+    "dog": 1,
+    "squirrel": 1
+   }
+  },
+  {
+   "date": "2026-10-06",
+   "visits": {
+    "raccoon": 3,
+    "squirrel": 1
+   }
+  },
+  {
+   "date": "2026-10-05",
+   "visits": {
+    "cat": 2
+   }
+  },
+  {
+   "date": "2026-10-04",
+   "visits": {
+    "cat": 5,
+    "raccoon": 2
+   }
+  },
+  {
+   "date": "2026-10-03",
+   "visits": {
+    "unidentified animal": 2,
+    "cat": 1,
+    "squirrel": 1
    }
   },
   {
