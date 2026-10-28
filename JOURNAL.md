@@ -57,3 +57,8 @@ one's timestamp. Synced daily to `andy-private-docs/journals/`.
   page (added as a short Yard wildlife section). Palette: --series-1..3 for raccoons/cats/opossums plus
   --series-other; the dataviz validator fails slots 4 and 5 (lightness, chroma), so other animals fold into Other.
   Integer y ticks, since visits are whole numbers.
+- 2026-10-28T05:31Z [decision] Owner: "the animal chart should have each day labeled. We can use a wider range of colors (even if
+  it's not great for people with color blindness)." DailyBars now labels every day (day number, month under the 1st)
+  and scrolls sideways inside its box when days don't fit, opening at the newest day; each animal has a fixed colour
+  (site series 1-6, then extra hues for skunk, hawk, owl, fox, bobcat and the rest). Supersedes the 3-colour rule in
+  the previous entry.

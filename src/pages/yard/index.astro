@@ -16,13 +16,28 @@ const PLURALS: Record<string, string> = {
 };
 const plural = (name: string, n: number) => (n === 1 ? name : PLURALS[name] ?? `${name}s`);
 
-// Colour follows the animal, never its rank: three named slots, everything else folds into Other.
-const NAMED = [
-  { key: 'raccoon', name: 'Raccoons', color: '--series-1' },
-  { key: 'cat', name: 'Cats', color: '--series-2' },
-  { key: 'opossum', name: 'Opossums', color: '--series-3' },
+// Colour follows the animal, never its rank. Owner, 2026-10-27: use a wider range of colours, even at some cost to
+// colour-blind readers; the tooltip, legend and day-by-day list carry the same numbers in text.
+const COLORS: [string, string, string][] = [
+  ['raccoon', 'Raccoons', 'var(--series-1)'],
+  ['cat', 'Cats', 'var(--series-2)'],
+  ['opossum', 'Opossums', 'var(--series-3)'],
+  ['squirrel', 'Squirrels', 'var(--series-4)'],
+  ['bird', 'Birds', 'var(--series-5)'],
+  ['dog', 'Dogs', 'var(--series-6)'],
+  ['skunk', 'Skunks', '#e67e22'],
+  ['rat or mouse', 'Rats or mice', '#8d6e63'],
+  ['rabbit', 'Rabbits', '#f48fb1'],
+  ['hawk', 'Hawks', '#c2185b'],
+  ['owl', 'Owls', '#7e57c2'],
+  ['deer', 'Deer', '#c8a165'],
+  ['coyote', 'Coyotes', '#ff7043'],
+  ['fox', 'Foxes', '#ef6c00'],
+  ['bobcat', 'Bobcats', '#6d4c41'],
+  ['mountain lion', 'Mountain lions', '#bf360c'],
+  ['lizard or snake', 'Lizards or snakes', '#9ccc65'],
+  ['unidentified animal', 'Unidentified', 'var(--series-other)'],
 ];
-const OTHER = { name: 'Other', color: '--series-other' };
 const byDate = new Map(data.days.map((d) => [d.date, d.visits as Record<string, number>]));
 const days: string[] = [];
 if (data.first && data.last) {
@@ -30,14 +45,17 @@ if (data.first && data.last) {
     days.push(new Date(t).toISOString().slice(0, 10));
   }
 }
-const present = NAMED.filter((s) => data.species.some((x) => x.name === s.key));
-const hasOther = data.species.some((x) => !NAMED.some((s) => s.key === x.name));
-const series = [...present, ...(hasOther ? [OTHER] : [])];
+const seen = new Set(data.species.map((s) => s.name));
+const known = COLORS.filter(([key]) => seen.has(key));
+const unknown = [...seen].filter((k) => !COLORS.some(([key]) => key === k)); // a new species before it gets a colour
+const series = [
+  ...known.map(([, name, color]) => ({ name, color })),
+  ...(unknown.length ? [{ name: 'Other', color: 'var(--series-other)' }] : []),
+];
 const values = days.map((d) => {
   const v = byDate.get(d) ?? {};
-  const named = present.map((s) => v[s.key] ?? 0);
-  const other = Object.entries(v).filter(([k]) => !NAMED.some((s) => s.key === k)).reduce((a, [, n]) => a + n, 0);
-  return hasOther ? [...named, other] : named;
+  const row = known.map(([key]) => v[key] ?? 0);
+  return unknown.length ? [...row, unknown.reduce((a, k) => a + (v[k] ?? 0), 0)] : row;
 });
 ---
 
@@ -49,7 +67,7 @@ const values = days.map((d) => {
     title="Animal visits per day"
     subtitle="One visit = one kind of animal seen on any camera, gaps under 20 minutes"
     days={days}
-    series={series.map(({ name, color }) => ({ name, color }))}
+    series={series}
     values={values}
   />
 

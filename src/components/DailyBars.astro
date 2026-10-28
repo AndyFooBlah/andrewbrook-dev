@@ -1,13 +1,14 @@
 ---
 /**
- * Stacked daily column chart in plain HTML/CSS, same look as WeeklyBars (shares its .wb styles).
- * One column per day, empty days included; each series is a segment. Hover/focus shows the day's breakdown.
+ * Stacked daily column chart in plain HTML/CSS, styled like WeeklyBars. One column per day (empty days included),
+ * every day labelled. When the days don't fit, the plot scrolls sideways inside its own box (the y axis stays put)
+ * and opens scrolled to the newest day. Hover/focus shows the day's breakdown.
  */
 import { niceTicks } from '../lib/stats';
 
 interface Series {
   name: string;
-  /** CSS custom property name, e.g. --series-1 */
+  /** Any CSS colour, e.g. var(--series-1) or #e67e22 */
   color: string;
 }
 interface Props {
@@ -31,12 +32,9 @@ if (ticks.some((t) => !Number.isInteger(t))) {
   ticks = Array.from({ length: Math.ceil(top / step) }, (_, i) => (i + 1) * step);
 }
 const max = ticks[ticks.length - 1];
-const fmt = (d: string, opts: Intl.DateTimeFormatOptions) =>
-  new Date(d + 'T12:00:00Z').toLocaleDateString('en-US', { ...opts, timeZone: 'UTC' });
-// Label Mondays, about weekly; a label needs ~4 columns of room, so skip one too close to the end.
-const labels = days.map((d, i) =>
-  new Date(d + 'T12:00:00Z').getUTCDay() === 1 && i < days.length - 3 ? fmt(d, { month: 'short', day: 'numeric' }) : '',
-);
+const d12 = (d: string) => new Date(d + 'T12:00:00Z');
+const fmt = (d: string, opts: Intl.DateTimeFormatOptions) => d12(d).toLocaleDateString('en-US', { ...opts, timeZone: 'UTC' });
+const months = days.map((d, i) => (i === 0 || d12(d).getUTCDate() === 1 ? fmt(d, { month: 'short' }) : ''));
 const id = `db-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
@@ -47,41 +45,63 @@ const id = `db-${Math.random().toString(36).slice(2, 8)}`;
     {series.length > 1 && (
       <ul class="viz-legend">
         {series.map((s) => (
-          <li><i class="swatch" style={`background: var(${s.color})`}></i>{s.name}</li>
+          <li><i class="swatch" style={`background: ${s.color}`}></i>{s.name}</li>
         ))}
       </ul>
     )}
   </figcaption>
-  <div class="wb" style={`--h: ${height}px`}>
-    <div class="wb-y" aria-hidden="true">
+  <div class="db" style={`--h: ${height}px; --n: ${days.length}`}>
+    <div class="wb-y db-y" aria-hidden="true">
       {ticks.slice().reverse().map((t) => <span style={`bottom: ${(t / max) * 100}%`}>{t}</span>)}
     </div>
-    <div class="wb-plot">
-      {ticks.map((t) => <i class="wb-grid" style={`bottom: ${(t / max) * 100}%`}></i>)}
-      <div class="wb-cols">
-        {days.map((d, i) => {
-          const vals = values[i];
-          const parts = series.map((s, j) => (vals[j] ? `${vals[j]} ${s.name}` : '')).filter(Boolean);
-          const tip = [fmt(d, { weekday: 'short', month: 'short', day: 'numeric' }), ...(parts.length ? parts : ['no visits'])].join('\n');
-          return (
-            <div class="wb-col db-col" tabindex="0" data-tip={tip} aria-label={tip.replace(/\n/g, ', ')}>
-              <div class="wb-bar">
-                {vals.map((v, j) =>
-                  v > 0 ? <i class="wb-seg" style={`height: ${(v / max) * 100}%; background: var(${series[j].color})`}></i> : null,
-                )}
-              </div>
-            </div>
-          );
-        })}
+    <div class="db-scroll">
+      <div class="db-inner">
+        <div class="wb-plot db-plot">
+          {ticks.map((t) => <i class="wb-grid" style={`bottom: ${(t / max) * 100}%`}></i>)}
+          <div class="wb-cols">
+            {days.map((d, i) => {
+              const vals = values[i];
+              const parts = series.map((s, j) => (vals[j] ? `${vals[j]} ${s.name}` : '')).filter(Boolean);
+              const tip = [fmt(d, { weekday: 'short', month: 'short', day: 'numeric' }), ...(parts.length ? parts : ['no visits'])].join('\n');
+              return (
+                <div class="wb-col db-col" tabindex="0" data-tip={tip} aria-label={tip.replace(/\n/g, ', ')}>
+                  <div class="wb-bar">
+                    {vals.map((v, j) =>
+                      v > 0 ? <i class="wb-seg" style={`height: ${(v / max) * 100}%; background: ${series[j].color}`}></i> : null,
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div class="db-x" aria-hidden="true">
+          {days.map((d) => <span>{d12(d).getUTCDate()}</span>)}
+        </div>
+        <div class="db-x db-m" aria-hidden="true">
+          {months.map((m) => <span>{m}</span>)}
+        </div>
       </div>
-    </div>
-    <div class="wb-x" aria-hidden="true">
-      {labels.map((l) => <span>{l}</span>)}
     </div>
   </div>
 </figure>
 
+<style>
+  .db { display: grid; grid-template-columns: auto 1fr; column-gap: 0.6rem; }
+  .db-y { height: var(--h); }
+  .db-scroll { overflow-x: auto; min-width: 0; scrollbar-width: thin; }
+  .db-inner { min-width: calc(var(--n) * 1.4rem); }
+  .db-plot { height: var(--h); }
+  .db-x { display: flex; margin-top: 0.3rem; font-size: 0.6875rem; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .db-x span { flex: 1 1 0; min-width: 0; text-align: center; }
+  .db-m { margin-top: 0.1rem; margin-bottom: 0.3rem; }
+  .db-m span { text-align: left; white-space: nowrap; overflow: visible; font-weight: 600; color: var(--ink-2); }
+</style>
+
 <script>
+  // Open scrolled to the newest day.
+  document.querySelectorAll<HTMLElement>('.db-scroll').forEach((el) => (el.scrollLeft = el.scrollWidth));
+
   // Same shared floating tooltip as WeeklyBars; labels go in via textContent.
   let tip: HTMLDivElement | null = null;
   function show(el: HTMLElement) {
