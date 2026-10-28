@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+const updated = 'October 27, 2026';
+---
+
+<Base title="Yardwatch privacy policy" description="How Yardwatch, my personal camera project, uses Google Home data.">
+  <h1>Yardwatch privacy policy</h1>
+  <p class="meta">Last updated {updated}.</p>
+
+  <p>
+    Yardwatch is my personal, non-commercial project. I use it to keep an eye on the wildlife around my house with
+    my own Google Nest cameras. It is not offered to anyone else, and the only Google account that signs in to it
+    is mine. This page describes what it does with Google data, as required for its Google OAuth client.
+  </p>
+
+  <h2>What it accesses</h2>
+  <p>
+    With my permission, through the Google Home APIs (scope <code>home.platform.v2</code>), Yardwatch reads my
+    home's device list, device states such as camera battery level and connectivity, and camera event history,
+    including Google's event descriptions and the event video clips.
+  </p>
+
+  <h2>How I use that data</h2>
+  <ul>
+    <li>To keep a private archive of my cameras' event clips and their metadata, indefinitely, searchable by date,
+      camera and kind of animal.</li>
+    <li>To track camera batteries and plan when to recharge them.</li>
+    <li>To publish a <a href="/yard/">daily count of animal visits</a> on this site. Only per-day counts per kind of
+      animal are published: no times, no camera names or locations, no descriptions, no video, nothing about
+      people.</li>
+  </ul>
+  <p>
+    I do not use the data for advertising, I do not sell or transfer it to anyone, and I do not use it to train
+    general-purpose AI models.
+  </p>
+
+  <h2>Where it is stored</h2>
+  <p>
+    Clips and their metadata are kept in my own private Google Cloud project, readable only by me. Credentials are
+    kept in that project's Secret Manager.
+  </p>
+
+  <h2>People</h2>
+  <p>
+    My cameras also record people: my family, visitors, and people who work at the house. Those clips are kept in
+    the same private archive and are never published. If you visited and want a clip of you deleted, ask me and I
+    will delete it.
+  </p>
+
+  <h2>Google API Services User Data Policy</h2>
+  <p>
+    Yardwatch's use and transfer of information received from Google APIs adheres to
+    the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>,
+    including the Limited Use requirements.
+  </p>
+
+  <h2>Revoking access and contact</h2>
+  <p>
+    I can revoke Yardwatch's access at any time from the Google Home app
+    or <a href="https://myaccount.google.com/permissions">Google Account permissions</a>. Questions: contact me,
+    Andrew Brook, via <a href="https://github.com/AndyFooBlah">GitHub</a> or <a href="https://www.linkedin.com/in/andrewbrook/">LinkedIn</a>.
+  </p>
+</Base>

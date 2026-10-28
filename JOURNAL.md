@@ -46,3 +46,6 @@ one's timestamp. Synced daily to `andy-private-docs/journals/`.
   2026-10-16 journal rollout, independently, because the same command was used in each.
 - 2026-10-17T04:52Z [decision] Corrected by appending rather than editing the entries above, per the append-only
   rule.
+- 2026-10-28T04:46Z [step] Added /yard/privacy/, the privacy policy for Yardwatch's Google OAuth client (a private project that
+  reads the owner's Nest camera history). First person singular at the owner's request; it promises that only
+  per-day animal counts are published. The /yard/ sightings page follows once the 30-day archive backfill is done.
