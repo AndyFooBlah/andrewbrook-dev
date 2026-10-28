@@ -1,38 +1,75 @@
 {
  "generated": "2026-10-27",
  "first": "2026-09-25",
- "last": "2026-09-28",
+ "last": "2026-10-01",
  "visit_gap_min": 20,
  "species": [
   {
    "name": "cat",
-   "visits": 8,
-   "days": 4
+   "visits": 18,
+   "days": 6
   },
   {
    "name": "raccoon",
-   "visits": 3,
+   "visits": 5,
    "days": 2
   },
   {
    "name": "opossum",
+   "visits": 2,
+   "days": 2
+  },
+  {
+   "name": "squirrel",
+   "visits": 2,
+   "days": 2
+  },
+  {
+   "name": "dog",
+   "visits": 1,
+   "days": 1
+  },
+  {
+   "name": "unidentified animal",
    "visits": 1,
    "days": 1
   }
  ],
  "days": [
   {
+   "date": "2026-10-01",
+   "visits": {
+    "cat": 1
+   }
+  },
+  {
+   "date": "2026-09-30",
+   "visits": {
+    "opossum": 1,
+    "unidentified animal": 1
+   }
+  },
+  {
+   "date": "2026-09-29",
+   "visits": {
+    "cat": 5,
+    "squirrel": 1,
+    "dog": 1
+   }
+  },
+  {
    "date": "2026-09-28",
    "visits": {
-    "raccoon": 2,
-    "cat": 1
+    "raccoon": 4,
+    "cat": 4,
+    "squirrel": 1
    }
   },
   {
    "date": "2026-09-27",
    "visits": {
-    "opossum": 1,
-    "cat": 1
+    "cat": 2,
+    "opossum": 1
    }
   },
   {
