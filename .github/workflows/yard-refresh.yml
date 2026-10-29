@@ -1,0 +1,56 @@
+name: Yard data refresh
+
+# Yardwatch (a private project) exports the per-day animal visit counts behind /yard/ to a private GCS bucket
+# every morning at 05:15 Pacific. This reads that one file through GitHub OIDC (no stored keys: Google trusts
+# only this repository's main branch, and only to read that bucket), checks it holds nothing but dates, animal
+# names and counts, commits it when it changed, and dispatches the deploy. Pushes made with GITHUB_TOKEN do not
+# trigger other workflows; workflow_dispatch does.
+
+on:
+  schedule:
+    - cron: '45 13 * * *'   # daily, 06:45 PDT / 05:45 PST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+  id-token: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: projects/460244873814/locations/global/workloadIdentityPools/github/providers/andrewbrook-dev
+      - uses: google-github-actions/setup-gcloud@v3
+      - name: Fetch
+        run: gcloud storage cp gs://yardwatch-home-public/yard-sightings.json /tmp/yard-sightings.json
+      - name: Only dates, animal names and counts
+        run: |
+          python3 - <<'EOF'
+          import json, re
+          d = json.load(open("/tmp/yard-sightings.json"))
+          date, name = re.compile(r"^\d{4}-\d{2}-\d{2}$"), re.compile(r"^[a-z ]{1,30}$")
+          assert set(d) == {"generated", "first", "last", "visit_gap_min", "species", "days"}, sorted(d)
+          assert all(date.match(d[k]) for k in ("generated", "first", "last")) and isinstance(d["visit_gap_min"], int)
+          for s in d["species"]:
+              assert set(s) == {"name", "visits", "days"} and name.match(s["name"]), s
+              assert isinstance(s["visits"], int) and isinstance(s["days"], int), s
+          for day in d["days"]:
+              assert set(day) == {"date", "visits"} and date.match(day["date"]), day
+              assert all(name.match(k) and isinstance(v, int) for k, v in day["visits"].items()), day
+          print(f"ok: {d['first']} to {d['last']}, {len(d['days'])} days")
+          EOF
+          cp /tmp/yard-sightings.json src/data/yard-sightings.json
+      - name: Commit and deploy if changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet src/data/yard-sightings.json; then echo "unchanged"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Yard wildlife: daily data refresh" src/data/yard-sightings.json
+          git push
+          gh workflow run deploy.yml --ref main
