@@ -1,0 +1,35 @@
+---
+import Base from '../../layouts/Base.astro';
+import YardChart from '../../components/YardChart.astro';
+
+// Where Yardwatch's Sign out lands (owner, 2026-10-29: "a Yardwatch landing page which shows the animal stats (same
+// chart as on my blog) and a 'sign in with google' link"). The private app sits behind Google's Identity-Aware Proxy,
+// which guards every page it serves, so this page lives here. Unlisted: not linked from the site, not indexed.
+const APP = 'https://yardwatch-web-460244873814.us-west1.run.app/';
+---
+
+<Base title="Yardwatch" description="You are signed out of Yardwatch." noindex>
+  <h1>Yardwatch</h1>
+  <p>You're signed out.</p>
+  <p><a class="yard-signin" href={APP}>Sign in with Google</a></p>
+
+  <YardChart />
+
+  <p class="meta">
+    The public log of what the yard cameras see is at <a href="/yard/">Yard wildlife</a>.
+  </p>
+</Base>
+
+<style>
+  .yard-signin {
+    display: inline-block;
+    padding: 0.55rem 1.1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface, transparent);
+    color: var(--ink-1, inherit);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .yard-signin:hover { border-color: var(--accent, currentColor); }
+</style>

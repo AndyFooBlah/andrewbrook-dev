@@ -5,11 +5,12 @@ import { SITE } from '../consts';
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
   /** Set for article pages so social cards use the right type. */
   article?: { published: Date; modified?: Date };
 }
 
-const { title, description = SITE.description, article } = Astro.props;
+const { title, description = SITE.description, article, noindex } = Astro.props;
 const pageTitle = title ? `${title} — ${SITE.title}` : SITE.title;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const path = Astro.url.pathname;
@@ -22,6 +23,7 @@ const path = Astro.url.pathname;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
     <link rel="alternate" type="application/rss+xml" title={SITE.title} href="/rss.xml" />
     <meta property="og:type" content={article ? 'article' : 'website'} />
