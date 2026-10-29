@@ -21,18 +21,18 @@
   },
   {
    "name": "unidentified animal",
-   "visits": 13,
+   "visits": 14,
    "days": 9
-  },
-  {
-   "name": "dog",
-   "visits": 8,
-   "days": 7
   },
   {
    "name": "opossum",
    "visits": 7,
    "days": 7
+  },
+  {
+   "name": "dog",
+   "visits": 5,
+   "days": 5
   },
   {
    "name": "bird",
@@ -128,9 +128,8 @@
    "date": "2026-10-16",
    "visits": {
     "cat": 3,
+    "unidentified animal": 3,
     "squirrel": 2,
-    "unidentified animal": 2,
-    "dog": 1,
     "raccoon": 1
    }
   },
@@ -248,7 +247,6 @@
    "date": "2026-10-01",
    "visits": {
     "cat": 3,
-    "dog": 2,
     "unidentified animal": 1
    }
   },
