@@ -1,7 +1,7 @@
 {
  "generated": "2026-10-28",
  "first": "2026-09-25",
- "last": "2026-10-28",
+ "last": "2026-10-27",
  "visit_gap_min": 20,
  "species": [
   {
@@ -11,8 +11,8 @@
   },
   {
    "name": "raccoon",
-   "visits": 32,
-   "days": 17
+   "visits": 31,
+   "days": 16
   },
   {
    "name": "squirrel",
@@ -41,12 +41,6 @@
   }
  ],
  "days": [
-  {
-   "date": "2026-10-28",
-   "visits": {
-    "raccoon": 1
-   }
-  },
   {
    "date": "2026-10-27",
    "visits": {
