@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-28",
+ "generated": "2026-10-29",
  "models": [
   "claude-opus-5-5",
   "claude-opus-5",
@@ -2509,43 +2509,43 @@
   },
   {
    "week": "2026-10-26",
-   "ai_added": 14138,
-   "ai_deleted": 1301,
+   "ai_added": 15474,
+   "ai_deleted": 1413,
    "hand_added": 0,
    "hand_deleted": 0,
-   "ai_commits": 49,
+   "ai_commits": 59,
    "hand_commits": 0,
-   "claude_minutes": 695,
-   "sessions": 7,
+   "claude_minutes": 1033,
+   "sessions": 8,
    "web_sessions": 0,
    "chores": {
-    "terminal": 2,
+    "terminal": 3,
     "cloud-infra": 8,
-    "secrets-auth": 4,
+    "secrets-auth": 5,
     "accounts-billing": 2,
     "dns-deploy": 0,
     "manual-testing": 2,
     "other": 1
    },
-   "chore_minutes": 153,
+   "chore_minutes": 173,
    "spend": {
-    "claude": 19.35,
+    "claude": 25.81,
     "jev": 0.0,
-    "cloud": 66.26,
+    "cloud": 113.53,
     "other": 0.0
    },
    "tokens": {
     "claude-opus-5-5": {
-     "input": 6528,
-     "output": 3112876,
-     "cache_read": 781748779,
-     "cache_write": 9375864
+     "input": 7652,
+     "output": 3612234,
+     "cache_read": 937765094,
+     "cache_write": 10907089
     },
     "claude-haiku-5-5": {
-     "input": 100,
-     "output": 137655,
-     "cache_read": 327636,
-     "cache_write": 784471
+     "input": 106,
+     "output": 143100,
+     "cache_read": 356454,
+     "cache_write": 787598
     }
    }
   }
