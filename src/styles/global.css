@@ -205,6 +205,11 @@ img, svg, video { max-width: 100%; height: auto; }
 
 .table-scroll { overflow-x: auto; margin: 1.5rem 0; }
 
+/* Video embeds: full column width at the video's own shape (16:9 default). */
+.video { margin: 0.75rem 0 1.75rem; }
+.video iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 8px; background: #000; }
+.video.four-three iframe { aspect-ratio: 4 / 3; }
+
 table { border-collapse: collapse; width: 100%; font-size: 0.9375rem; }
 th, td { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); }
 th { font-weight: 650; color: var(--ink-2); white-space: nowrap; }
