@@ -36,6 +36,11 @@ export const THEMES = [
     blurb: 'Small worlds with rules, run long enough to see what the rules actually do.',
   },
   {
+    id: 'media',
+    title: 'Photo & video',
+    blurb: 'Making something from pictures that were never meant to be a project.',
+  },
+  {
     id: 'site',
     title: 'This site',
     blurb: '',
@@ -148,6 +153,14 @@ export const REPOS: Record<string, Project> = {
       'A civilization sandbox where every village is run by an AI chief and the player is a spirit who sees everything and can touch almost nothing. Deterministic weekly sim, headless balance harness first.',
     theme: 'simulation',
     lang: 'TypeScript',
+  },
+  'handheld-timelapse': {
+    name: 'handheld-timelapse',
+    url: 'https://github.com/AndyFooBlah/handheld-timelapse',
+    blurb:
+      'Timelapses from years of casual, handheld phone photos of one view: finds the shots, aligns them to a reference, removes people, picks one a day, evens out the exposure, and orders them by date or by the height of the sun. Can retime the result to a music track.',
+    theme: 'media',
+    lang: 'Python',
   },
   'andrewbrook-dev': {
     name: 'andrewbrook-dev',
