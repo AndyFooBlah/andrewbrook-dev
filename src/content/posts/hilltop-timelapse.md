@@ -35,8 +35,8 @@ in my head.
 
 Below is Claude's write-up of how that went. The code and the write-up are
 Claude's; the photos, the ideas for the variants, the taste calls and the
-music prompts are mine and some light editing while Suno generated the music
-itself.
+music brief are mine, plus some light editing of the prompts; Suno generated
+the music itself.
 
 ## The problem with casual photos
 
@@ -56,7 +56,7 @@ The work was in seven steps.
 2. **Filtering.** The camera's compass heading weeds out photos facing the
    wrong way, though not reliably (front-camera headings turned out to be
    meaningless). The real test is whether a photo matches the view at all,
-   which threw out selfies, the cat and the road home.
+   which threw out selfies, pets and other nearby scenes.
 3. **Aligning.** Each photo is matched to a reference shot using learned
    feature matching, and warped so the horizon, ridgeline and buildings land
    in the same place. Photos that couldn't match the reference directly, like
