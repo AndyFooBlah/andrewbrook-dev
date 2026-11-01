@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-30",
+ "generated": "2026-10-31",
  "models": [
   "claude-opus-5-5",
   "claude-opus-5",
@@ -2131,11 +2131,11 @@
   },
   {
    "week": "2026-08-31",
-   "ai_added": 6946,
+   "ai_added": 7314,
    "ai_deleted": 453,
    "hand_added": 0,
    "hand_deleted": 0,
-   "ai_commits": 17,
+   "ai_commits": 18,
    "hand_commits": 0,
    "claude_minutes": 501,
    "sessions": 2,
@@ -2185,11 +2185,11 @@
   },
   {
    "week": "2026-09-07",
-   "ai_added": 98178,
-   "ai_deleted": 7815,
+   "ai_added": 103932,
+   "ai_deleted": 7881,
    "hand_added": 32,
    "hand_deleted": 0,
-   "ai_commits": 108,
+   "ai_commits": 115,
    "hand_commits": 1,
    "claude_minutes": 1139,
    "sessions": 11,
@@ -2509,43 +2509,49 @@
   },
   {
    "week": "2026-10-26",
-   "ai_added": 15961,
-   "ai_deleted": 1423,
+   "ai_added": 21539,
+   "ai_deleted": 7806,
    "hand_added": 0,
    "hand_deleted": 0,
-   "ai_commits": 61,
+   "ai_commits": 86,
    "hand_commits": 0,
-   "claude_minutes": 1153,
-   "sessions": 11,
+   "claude_minutes": 1524,
+   "sessions": 16,
    "web_sessions": 0,
    "chores": {
-    "terminal": 7,
-    "cloud-infra": 10,
-    "secrets-auth": 7,
+    "terminal": 8,
+    "cloud-infra": 11,
+    "secrets-auth": 8,
     "accounts-billing": 2,
-    "dns-deploy": 0,
-    "manual-testing": 2,
-    "other": 1
+    "dns-deploy": 2,
+    "manual-testing": 5,
+    "other": 3
    },
-   "chore_minutes": 263,
+   "chore_minutes": 607,
    "spend": {
-    "claude": 32.26,
+    "claude": 38.71,
     "jev": 0.0,
-    "cloud": 143.66,
+    "cloud": 170.32,
     "other": 0.0
    },
    "tokens": {
     "claude-opus-5-5": {
-     "input": 8196,
-     "output": 3814268,
-     "cache_read": 974914474,
-     "cache_write": 13558628
+     "input": 10802,
+     "output": 5148768,
+     "cache_read": 1222776856,
+     "cache_write": 17494768
+    },
+    "claude-fable-5-1": {
+     "input": 1270,
+     "output": 98296,
+     "cache_read": 12069612,
+     "cache_write": 790129
     },
     "claude-haiku-5-5": {
-     "input": 106,
-     "output": 143100,
-     "cache_read": 356454,
-     "cache_write": 787598
+     "input": 128,
+     "output": 168367,
+     "cache_read": 435042,
+     "cache_write": 961706
     }
    }
   }
