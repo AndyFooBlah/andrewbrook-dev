@@ -1,13 +1,13 @@
 {
- "generated": "2026-11-01",
+ "generated": "2026-11-02",
  "first": "2026-09-25",
- "last": "2026-10-31",
+ "last": "2026-11-01",
  "visit_gap_min": 20,
  "species": [
   {
    "name": "cat",
-   "visits": 77,
-   "days": 32
+   "visits": 80,
+   "days": 33
   },
   {
    "name": "raccoon",
@@ -16,8 +16,8 @@
   },
   {
    "name": "squirrel",
-   "visits": 27,
-   "days": 21
+   "visits": 28,
+   "days": 22
   },
   {
    "name": "unidentified animal",
@@ -41,6 +41,13 @@
   }
  ],
  "days": [
+  {
+   "date": "2026-11-01",
+   "visits": {
+    "cat": 3,
+    "squirrel": 1
+   }
+  },
   {
    "date": "2026-10-31",
    "visits": {
