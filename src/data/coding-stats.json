@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-10",
+ "generated": "2026-11-11",
  "models": [
   "claude-opus-5-5",
   "claude-opus-5",
@@ -9,6 +9,7 @@
   "claude-opus-4-8",
   "claude-haiku-5-5",
   "gemini-3-flash-preview",
+  "claude-fable-5-2",
   "claude-sonnet-5",
   "claude-haiku-4-5-20251001"
  ],
@@ -2529,7 +2530,7 @@
    },
    "chore_minutes": 617,
    "spend": {
-    "claude": 54.37,
+    "claude": 54.91,
     "jev": 0.0,
     "cloud": 206.99,
     "other": 0.0
@@ -2577,7 +2578,7 @@
    },
    "chore_minutes": 155,
    "spend": {
-    "claude": 33.37,
+    "claude": 33.7,
     "jev": 0.0,
     "cloud": 206.45,
     "other": 0.0
@@ -2599,14 +2600,14 @@
   },
   {
    "week": "2026-11-09",
-   "ai_added": 26888,
-   "ai_deleted": 3623,
+   "ai_added": 26991,
+   "ai_deleted": 3627,
    "hand_added": 0,
    "hand_deleted": 0,
-   "ai_commits": 42,
+   "ai_commits": 48,
    "hand_commits": 0,
-   "claude_minutes": 457,
-   "sessions": 7,
+   "claude_minutes": 616,
+   "sessions": 10,
    "web_sessions": 0,
    "chores": {
     "terminal": 2,
@@ -2619,23 +2620,35 @@
    },
    "chore_minutes": 123,
    "spend": {
-    "claude": 15.48,
+    "claude": 21.07,
     "jev": 0.0,
-    "cloud": 62.69,
+    "cloud": 90.43,
     "other": 0.0
    },
    "tokens": {
     "claude-opus-5-5": {
-     "input": 6534,
-     "output": 3319383,
-     "cache_read": 842181622,
-     "cache_write": 8427820
+     "input": 7384,
+     "output": 3647708,
+     "cache_read": 1041295120,
+     "cache_write": 9378111
+    },
+    "claude-fable-5-2": {
+     "input": 190,
+     "output": 81899,
+     "cache_read": 28893931,
+     "cache_write": 1424262
+    },
+    "claude-opus-4-8": {
+     "input": 8,
+     "output": 4354,
+     "cache_read": 380384,
+     "cache_write": 163046
     },
     "claude-haiku-5-5": {
-     "input": 160,
-     "output": 239949,
-     "cache_read": 927283,
-     "cache_write": 1285096
+     "input": 180,
+     "output": 252975,
+     "cache_read": 973731,
+     "cache_write": 1324438
     }
    }
   }
