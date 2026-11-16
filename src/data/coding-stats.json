@@ -2600,11 +2600,11 @@
   },
   {
    "week": "2026-11-09",
-   "ai_added": 29968,
-   "ai_deleted": 4163,
+   "ai_added": 63270,
+   "ai_deleted": 7301,
    "hand_added": 0,
    "hand_deleted": 0,
-   "ai_commits": 71,
+   "ai_commits": 99,
    "hand_commits": 0,
    "claude_minutes": 1013,
    "sessions": 18,
@@ -2622,7 +2622,7 @@
    "spend": {
     "claude": 38.06,
     "jev": 0.0,
-    "cloud": 188.52,
+    "cloud": 197.34,
     "other": 0.0
    },
    "tokens": {
