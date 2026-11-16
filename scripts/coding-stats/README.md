@@ -67,14 +67,28 @@ file, so the collector can be run from any directory.
 
 ## Chores
 
-Most chores are found automatically. `detect_chores.py` takes the last
-assistant message of every turn in the local transcripts and asks a small
-Gemini model on Vertex AI (in your own project; run
-`gcloud auth application-default login` once and enable the Vertex AI API)
-whether the agent handed a task back to you: run this in your terminal,
-click through a console, paste a secret, test it on your phone. Each hit is
-appended to the auto ledger with an estimated duration and the message uuid,
-so nothing is classified twice. Run it before the collector:
+Most chores are found automatically. `detect_chores.py` reads the agent's
+last message before you next spoke (or before the session ended) in each
+local transcript. Messages followed by a background-task notification, a
+system reminder or another session's message are skipped, as are subagent
+transcripts: the agent restates anything still pending when it next reports
+to you. A chore is a hands-on task only you could do (run this in your
+terminal, click through a console, paste a secret, test it on your phone);
+decisions, approvals and requests for information are not chores.
+
+- If the message carries a ready-made `chore <category> <minutes> "<note>"`
+  line (see the CLAUDE.md snippet below), that is taken as written.
+- Otherwise a small Gemini model on Vertex AI (in your own project; run
+  `gcloud auth application-default login` once and enable the Vertex AI API)
+  lists each request in the message and labels its kind; only
+  `manual_action` requests are kept, capped at 60 minutes each.
+
+Every message read is recorded in the auto ledger by uuid, so nothing is
+read twice; a network failure leaves that batch for the next run. The
+collector then merges restatements: two detected chores from the same
+session within three days that share most of their words count once, and a
+chore you logged by hand replaces a detected one near the same date. Run the
+detector before the collector:
 
 ```sh
 python3 scripts/coding-stats/detect_chores.py     # --dry-run to preview, --limit N to sample

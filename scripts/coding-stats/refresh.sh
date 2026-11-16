@@ -17,7 +17,9 @@ cd "$REPO"
 git fetch -q origin main
 git checkout -q -B main origin/main      # this clone is disposable: always match origin
 
-python3 scripts/coding-stats/detect_chores.py
+# The chore detector calls a model over the network; a bad night there must
+# not stop the rest of the refresh. Whatever it missed is read on the next run.
+python3 scripts/coding-stats/detect_chores.py || log "chore detection failed; continuing with the ledger as it is"
 python3 scripts/coding-stats/collect.py
 
 if git diff --quiet -- src/data/coding-stats.json; then
