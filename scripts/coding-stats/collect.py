@@ -381,13 +381,50 @@ def read_jsonl(path: str) -> list[dict]:
     return rows
 
 
+AUTO_LEDGER_VERSION = 2     # detect_chores.py LEDGER_VERSION; older rows are ignored
+CHORE_STOP = frozenset("a an the to in on at of for and or with from into by is it this that "
+                       "your my via using then new".split())
+
+
+def chore_words(note: str) -> set[str]:
+    return {w for w in re.findall(r"[a-z0-9]+", note.lower()) if w not in CHORE_STOP}
+
+
+def dedupe_chores(manual: list[dict], auto: list[dict]) -> list[dict]:
+    """Count a hand-back once however often it was restated.
+
+    An agent repeats a pending request each time it reports back, in slightly
+    different words, so two detected chores are the same when they come from
+    the same session within three days and share most of their words. A
+    chore the owner logged by hand wins over a detected one near the same
+    date. Each kept chore stays on the date it was first asked.
+    """
+    kept = [{"row": r, "words": chore_words(r.get("note", "")), "session": None,
+             "last": dt.date.fromisoformat(r["date"])} for r in manual]
+    for r in sorted(auto, key=lambda r: r["date"]):
+        words, day = chore_words(r.get("note", "")), dt.date.fromisoformat(r["date"])
+        match = None
+        for k in kept:
+            if not words or not k["words"]:
+                continue
+            if k["session"] is None:
+                near = abs((day - k["last"]).days) <= 2
+            else:
+                near = k["session"] == r.get("session") and 0 <= (day - k["last"]).days <= 3
+            if near and len(words & k["words"]) / min(len(words), len(k["words"])) >= 0.6:
+                match = k
+                break
+        if match is None:
+            kept.append({"row": r, "words": words, "session": r.get("session") or r.get("uuid"), "last": day})
+        elif match["session"] is not None:
+            match["last"] = day          # still pending; keep the chain alive
+    return [k["row"] for k in kept]
+
+
 def collect_chores(cfg: dict, weeks: dict) -> int:
-    rows = [r for r in read_jsonl(cfg["ledger"]) + read_jsonl(cfg["auto_ledger"])
-            if not r.get("none")]   # the auto ledger marks chore-free messages too
-    # The same hand-back restated in consecutive messages should count once.
-    seen: set[tuple] = set()
-    rows = [r for r in rows
-            if (k := (r["date"], r.get("category"), r.get("note", ""))) not in seen and not seen.add(k)]
+    auto = [r for r in read_jsonl(cfg["auto_ledger"])   # also marks chore-free messages
+            if r.get("v") == AUTO_LEDGER_VERSION and not r.get("none")]
+    rows = dedupe_chores(read_jsonl(cfg["ledger"]), auto)
     for r in rows:
         cat = r.get("category", "other")
         if cat not in CHORE_CATEGORIES:
