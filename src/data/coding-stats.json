@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-17",
+ "generated": "2026-11-18",
  "models": [
   "claude-opus-5-5",
   "claude-opus-5",
@@ -2530,7 +2530,7 @@
    },
    "chore_minutes": 262,
    "spend": {
-    "claude": 61.37,
+    "claude": 62.68,
     "jev": 0.0,
     "cloud": 206.99,
     "other": 0.0
@@ -2578,7 +2578,7 @@
    },
    "chore_minutes": 50,
    "spend": {
-    "claude": 37.67,
+    "claude": 38.47,
     "jev": 0.0,
     "cloud": 206.46,
     "other": 0.0
@@ -2600,11 +2600,11 @@
   },
   {
    "week": "2026-11-09",
-   "ai_added": 63270,
-   "ai_deleted": 7301,
+   "ai_added": 63375,
+   "ai_deleted": 7333,
    "hand_added": 0,
    "hand_deleted": 0,
-   "ai_commits": 99,
+   "ai_commits": 100,
    "hand_commits": 0,
    "claude_minutes": 1013,
    "sessions": 18,
@@ -2620,7 +2620,7 @@
    },
    "chore_minutes": 91,
    "spend": {
-    "claude": 38.7,
+    "claude": 39.52,
     "jev": 0.0,
     "cloud": 198.93,
     "other": 0.0
@@ -2654,43 +2654,43 @@
   },
   {
    "week": "2026-11-16",
-   "ai_added": 0,
+   "ai_added": 2,
    "ai_deleted": 0,
    "hand_added": 0,
    "hand_deleted": 0,
-   "ai_commits": 0,
+   "ai_commits": 2,
    "hand_commits": 0,
-   "claude_minutes": 279,
-   "sessions": 7,
+   "claude_minutes": 363,
+   "sessions": 9,
    "web_sessions": 0,
    "chores": {
     "terminal": 2,
     "cloud-infra": 1,
     "secrets-auth": 8,
-    "accounts-billing": 5,
+    "accounts-billing": 6,
     "dns-deploy": 0,
     "manual-testing": 6,
     "other": 0
    },
-   "chore_minutes": 229,
+   "chore_minutes": 234,
    "spend": {
-    "claude": 10.65,
+    "claude": 14.18,
     "jev": 0.0,
-    "cloud": 58.33,
+    "cloud": 84.58,
     "other": 0.0
    },
    "tokens": {
     "claude-opus-5-5": {
-     "input": 544,
-     "output": 277402,
-     "cache_read": 63218463,
-     "cache_write": 9733093
+     "input": 754,
+     "output": 313274,
+     "cache_read": 74663664,
+     "cache_write": 10682343
     },
     "claude-fable-5-2": {
-     "input": 5890,
-     "output": 4414235,
-     "cache_read": 839142047,
-     "cache_write": 25222463
+     "input": 5992,
+     "output": 4452466,
+     "cache_read": 844725174,
+     "cache_write": 25527021
     },
     "claude-fable-5": {
      "input": 14,
