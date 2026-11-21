@@ -1,12 +1,12 @@
 {
- "generated": "2026-11-19",
+ "generated": "2026-11-20",
  "models": [
   "claude-opus-5-5",
   "claude-opus-5",
   "claude-fable-5-1",
   "claude-fable-5",
-  "claude-opus-4-7",
   "claude-fable-5-2",
+  "claude-opus-4-7",
   "claude-opus-4-8",
   "claude-haiku-5-5",
   "gemini-3-flash-preview",
@@ -2530,7 +2530,7 @@
    },
    "chore_minutes": 262,
    "spend": {
-    "claude": 62.72,
+    "claude": 63.91,
     "jev": 0.0,
     "cloud": 206.99,
     "other": 0.0
@@ -2578,7 +2578,7 @@
    },
    "chore_minutes": 50,
    "spend": {
-    "claude": 38.49,
+    "claude": 39.22,
     "jev": 0.0,
     "cloud": 206.46,
     "other": 0.0
@@ -2620,7 +2620,7 @@
    },
    "chore_minutes": 91,
    "spend": {
-    "claude": 39.54,
+    "claude": 40.29,
     "jev": 0.0,
     "cloud": 198.93,
     "other": 0.0
@@ -2654,43 +2654,43 @@
   },
   {
    "week": "2026-11-16",
-   "ai_added": 8729,
-   "ai_deleted": 680,
+   "ai_added": 8922,
+   "ai_deleted": 687,
    "hand_added": 0,
    "hand_deleted": 0,
-   "ai_commits": 16,
+   "ai_commits": 18,
    "hand_commits": 0,
-   "claude_minutes": 526,
-   "sessions": 11,
+   "claude_minutes": 611,
+   "sessions": 13,
    "web_sessions": 0,
    "chores": {
     "terminal": 4,
-    "cloud-infra": 3,
-    "secrets-auth": 17,
+    "cloud-infra": 7,
+    "secrets-auth": 19,
     "accounts-billing": 9,
     "dns-deploy": 0,
     "manual-testing": 6,
     "other": 1
    },
-   "chore_minutes": 340,
+   "chore_minutes": 370,
    "spend": {
-    "claude": 20.53,
+    "claude": 24.32,
     "jev": 0.0,
-    "cloud": 111.19,
+    "cloud": 138.06,
     "other": 0.0
    },
    "tokens": {
     "claude-opus-5-5": {
-     "input": 1192,
-     "output": 424442,
-     "cache_read": 112595046,
-     "cache_write": 11663962
+     "input": 1252,
+     "output": 434382,
+     "cache_read": 118551482,
+     "cache_write": 11681013
     },
     "claude-fable-5-2": {
-     "input": 6776,
-     "output": 4969442,
-     "cache_read": 1101991998,
-     "cache_write": 30810750
+     "input": 7058,
+     "output": 5107473,
+     "cache_read": 1160813438,
+     "cache_write": 31514693
     },
     "claude-fable-5": {
      "input": 14,
@@ -2699,10 +2699,10 @@
      "cache_write": 3499916
     },
     "claude-opus-5": {
-     "input": 644,
-     "output": 268281,
-     "cache_read": 100468513,
-     "cache_write": 5565963
+     "input": 706,
+     "output": 291217,
+     "cache_read": 115940077,
+     "cache_write": 5602750
     },
     "claude-haiku-5-5": {
      "input": 252,
