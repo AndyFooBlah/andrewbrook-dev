@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-20",
+ "generated": "2026-11-21",
  "models": [
   "claude-opus-5-5",
   "claude-opus-5",
@@ -2530,7 +2530,7 @@
    },
    "chore_minutes": 262,
    "spend": {
-    "claude": 63.91,
+    "claude": 64.41,
     "jev": 0.0,
     "cloud": 206.99,
     "other": 0.0
@@ -2578,7 +2578,7 @@
    },
    "chore_minutes": 50,
    "spend": {
-    "claude": 39.22,
+    "claude": 39.53,
     "jev": 0.0,
     "cloud": 206.46,
     "other": 0.0
@@ -2620,7 +2620,7 @@
    },
    "chore_minutes": 91,
    "spend": {
-    "claude": 40.29,
+    "claude": 40.61,
     "jev": 0.0,
     "cloud": 198.93,
     "other": 0.0
@@ -2660,37 +2660,37 @@
    "hand_deleted": 0,
    "ai_commits": 18,
    "hand_commits": 0,
-   "claude_minutes": 611,
-   "sessions": 13,
+   "claude_minutes": 739,
+   "sessions": 15,
    "web_sessions": 0,
    "chores": {
     "terminal": 4,
     "cloud-infra": 7,
-    "secrets-auth": 19,
+    "secrets-auth": 20,
     "accounts-billing": 9,
     "dns-deploy": 0,
     "manual-testing": 6,
     "other": 1
    },
-   "chore_minutes": 370,
+   "chore_minutes": 373,
    "spend": {
-    "claude": 24.32,
+    "claude": 29.63,
     "jev": 0.0,
-    "cloud": 138.06,
+    "cloud": 162.59,
     "other": 0.0
    },
    "tokens": {
     "claude-opus-5-5": {
-     "input": 1252,
-     "output": 434382,
-     "cache_read": 118551482,
-     "cache_write": 11681013
+     "input": 1328,
+     "output": 460610,
+     "cache_read": 129191571,
+     "cache_write": 12808245
     },
     "claude-fable-5-2": {
-     "input": 7058,
-     "output": 5107473,
-     "cache_read": 1160813438,
-     "cache_write": 31514693
+     "input": 7188,
+     "output": 5161296,
+     "cache_read": 1169813346,
+     "cache_write": 31843985
     },
     "claude-fable-5": {
      "input": 14,
@@ -2705,10 +2705,10 @@
      "cache_write": 5602750
     },
     "claude-haiku-5-5": {
-     "input": 252,
-     "output": 245253,
-     "cache_read": 1864601,
-     "cache_write": 1638482
+     "input": 272,
+     "output": 257328,
+     "cache_read": 1893341,
+     "cache_write": 1730996
     },
     "claude-opus-4-8": {
      "input": 8,
