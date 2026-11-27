@@ -85,3 +85,4 @@ one's timestamp. Synced daily to `andy-private-docs/journals/`.
 - 2026-11-27T21:20Z [step] Preview of the glyphbits explainer updated with the ladder of measures and hand-drawn bitmap fonts; two figure images added under /preview/how-small-can-writing-get/img/ so the Google Doc copy can insert them by URL.
 - 2026-11-27T21:42Z [step] glyphbits preview: new opening (symbol counts and bits per symbol before the pixel question), at Andrew's request.
 - 2026-11-27T22:36Z [step] glyphbits preview: new example sentence ("Or at least that is the plan."); sentence figure images added under img/ for the Google Doc copy.
+- 2026-11-27T22:57Z [step] glyphbits preview: example sentence changed to Andrew's "I woke up this morning and saw the sun rise."
