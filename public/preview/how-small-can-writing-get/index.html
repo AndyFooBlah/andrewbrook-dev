@@ -71,9 +71,32 @@ dl{display:grid;grid-template-columns:minmax(130px,220px) 1fr;gap:10px 22px;max-
 <div id="tip" hidden></div>
 <main>
 <h1>How small can writing get?</h1>
-<p class="lede">Chinese packs a whole word into one dense square. English spreads it over several simple letters. If you shrink both until they are only just readable, which one needs more dots to say the same thing?</p>
+<p class="lede">Every writing system makes a trade. English uses a few simple symbols and needs a lot of them. Chinese uses thousands of complex symbols and needs far fewer. Does the trade come out even when the symbols are drawn as dots on a screen?</p>
 <p class="meta">A plain-language account of the bitmap half of the glyphbits project, phase 1. No background needed. Idea and direction: Andrew Brook. Experiments, code and text: Claude (Anthropic). November 2026.</p>
 
+<h2>Many simple symbols, or a few complex ones</h2>
+<p>To say the same thing, English and Chinese use very different numbers of symbols. In our texts (960 passages, each in both languages), Chinese uses about <b>a third as many symbols</b> as English, counting letters, characters, digits, punctuation and spaces.</p>
+<p>The price is a much bigger set of symbols to choose from. A simple way to measure the size of a set is the number of <b>bits</b> needed to give every symbol its own number. A bit is one yes-or-no choice, so 6 bits number 64 symbols, 7 bits number 128, and each extra bit doubles the count.</p>
+<figure><div class="scroll"><table><thead><tr><th>Symbol set</th><th class="n">Symbols</th><th class="n">Bits to number them</th></tr></thead><tbody>
+<tr><td>English capitals, lowercase and digits</td><td class="n">62</td><td class="n">6</td></tr>
+<tr><td>The same with punctuation and signs; any one European language with its accented letters fits too</td><td class="n">95–128</td><td class="n">7</td></tr>
+<tr><td><i>Every symbol in our English texts</i></td><td class="n"><i>122</i></td><td class="n"><i>7</i></td></tr>
+<tr><td>Chinese characters for basic literacy (Japanese is similar)</td><td class="n">about 2,000</td><td class="n">11</td></tr>
+<tr><td><i>Every symbol in our Chinese texts</i></td><td class="n"><i>2,416</i></td><td class="n"><i>12</i></td></tr>
+<tr><td>The standard simplified character set (GB 2312)</td><td class="n">6,763</td><td class="n">13</td></tr>
+<tr><td>Large dictionaries, with rare names and older forms</td><td class="n">20,000 and more</td><td class="n">15 or more</td></tr>
+</tbody></table></div>
+<figcaption>Bits to number a set: the smallest whole number of yes-or-no choices that gives every symbol its own code. Chinese needs about twice as many bits per symbol as English, and more the more rare names and older characters it must cover.</figcaption></figure>
+<p>Symbols are not used equally often, so a fairer count weights each one by how often it appears. Named one at a time, a symbol in our English texts carries about <b>4.5 bits</b> and a Chinese character about <b>9.2</b>. Chinese uses a third as many symbols, each carrying about twice the information:</p>
+<figure><div class="scroll"><table><thead><tr><th></th><th class="n">Symbols</th><th class="n">Bits each</th><th class="n">Bits in total</th></tr></thead><tbody>
+<tr><td>English, all texts</td><td class="n">183,613</td><td class="n">4.5</td><td class="n">831,000</td></tr>
+<tr><td>Chinese, the same texts</td><td class="n">62,954</td><td class="n">9.2</td><td class="n">581,000</td></tr>
+<tr><td><b>Chinese ÷ English</b></td><td class="n"><b>0.34</b></td><td class="n"><b>2.0</b></td><td class="n"><b>0.70</b></td></tr>
+</tbody></table></div>
+<figcaption>One sentence as an example: “Got the messy stage out of the way.” is 35 symbols; 乱糟糟的阶段已经过去了。 is 12. Naming each symbol on its own overstates the information in both, since a reader also predicts from context; that comes <a href="#ladder">later</a>.</figcaption></figure>
+
+<h2>And the space they take</h2>
+<p>Packing more meaning into a symbol takes a more complex shape: more strokes, more detail, so more dots to draw it clearly. Counting symbols and bits says nothing about that. The question here is whether the extra detail costs about as much as the fewer symbols save. To find out, we shrank both scripts until they were only just readable and counted every pixel needed for the same texts, blank space included.</p>
 <figure><div id="f-sentence"></div>
 <figcaption>The same sentence, drawn at the smallest size one of our rules allows for each language. Each little square is one <b>pixel</b>. We count all of them, black and white, because blank space is part of writing too. Choose a rule and watch which language wins. One sentence is only an illustration, and it is drawn here at one fixed threshold; the results below use 960 text segments and the best settings for each script. Sentences: WMT24++ (Apache-2.0).</figcaption></figure>
 
@@ -137,7 +160,7 @@ dl{display:grid;grid-template-columns:minmax(130px,220px) 1fr;gap:10px 22px;max-
 <figcaption>Each tile shows the black-and-white bitmap and, below it, the ideal observer’s answer. <span style="color:var(--bad)">Red</span> means it answered wrong. This is one typeface, one threshold and one placement on the grid, so a few errors are bad luck and not a real limit. It must choose from every character in the texts, about 100 for English and 3,700 for Chinese.</figcaption></figure>
 
 <h2>Measuring what is lost</h2>
-<p>We do not count right and wrong answers alone. Losing one Chinese character in a hundred loses far more than losing one English letter, because a Chinese character carries about twice as much. Think of twenty questions: you need about <b>4.7</b> yes-or-no questions to pin down an English character in our texts, and <b>9.3</b> for a Chinese one. Each question is one <b>bit</b>.</p>
+<p>We do not count right and wrong answers alone. Losing one Chinese character in a hundred loses far more than losing one English letter, because a Chinese character carries about twice as much. Think of twenty questions: you need about <b>4.7</b> yes-or-no questions to pin down an English character in our texts, and <b>9.3</b> for a Chinese one (not counting spaces). Each question is one <b>bit</b>.</p>
 <p>So we ask what share of those bits has been lost. We set the limit at <b>2% lost</b>, and report others beside it, because the result depends on this choice too.</p>
 <figure><div class="seg" id="seg-curve"></div><div class="leg"><span><i style="background:var(--en)"></i>English</span><span><i style="background:var(--zh)"></i>Chinese</span></div><div class="scroll"><svg id="f-curve" viewBox="0 0 820 340" width="820" height="340" role="img" aria-label="Share of information lost against size"></svg></div>
 <figcaption>Information lost as size falls. The horizontal line is our 2% limit; where a curve meets it is that reader’s smallest size. With a familiar typeface the two curves cross close together. With an <b>unseen</b> typeface they flatten out above the limit and never reach it. Hover or tap a point for values.</figcaption></figure>
