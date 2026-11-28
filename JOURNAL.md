@@ -88,3 +88,4 @@ one's timestamp. Synced daily to `andy-private-docs/journals/`.
 - 2026-11-27T22:57Z [step] glyphbits preview: example sentence changed to Andrew's "I woke up this morning and saw the sun rise."
 - 2026-11-27T23:17Z [step] glyphbits preview: prose revised to full sentences and American spelling; three figure images added for the Google Doc copy.
 - 2026-11-28T00:11Z [step] glyphbits preview: full name on first mention only.
+- 2026-11-28T00:13Z [step] glyphbits preview: sentence figure gains the smallest hand-drawn fonts as a fifth option; its image added for the Google Doc copy.
